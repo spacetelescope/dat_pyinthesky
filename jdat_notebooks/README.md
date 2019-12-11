@@ -12,9 +12,8 @@ standard workflow:
 2. Notebook Draft
 3. Concept/Draft notebook-driven development
 4. Integrated Notebook
-4. Final/Public Notebook
-5. Revision based on Community feedback
-6. (Repeat 5 into infinity)
+5. Final/Public Notebook
+6. Revision based on Community feedback
 
 These stages and the process for moving from one to the other are described below.  
 
