@@ -108,11 +108,24 @@ That will ensure reviewers/testers can be sure that if they encounter problems, 
 
 ## Concept/Draft notebook-driven development
 
-Between the concept and draft, or draft and polished stages, there is potential for considerable development to be necessary.  A draft notebook may contain a large number of areas where more development is desired in data analysis tools, or it may only require a few minor adjustments (or none at all!).  This stage is therefore the most flexible and dependent on developer resources, etc.  In general the intent is for developers to be able to re-use bits of code from the notebook as tests for development, while occasionally (if necessary) asking the notebook author for guidance to ensure the implementation actually meets the notebook's needs.  There is not a formal process for this step, but it is intended that the JDAT planning process (currently on JIRA) keeps track of specific steps needed before a given notebook can proceed on to the next stage.
+Between the concept and draft, or draft and polished stages, there is potential for considerable development 
+to be necessary.  A draft notebook may contain a large number of areas where more development is desired in data 
+analysis tools, or it may only require a few minor adjustments (or none at all!).  This stage is therefore the most 
+flexible and dependent on developer resources, etc.  In general the intent is for developers to be able to re-use 
+bits of code from the notebook as tests for development, while occasionally (if necessary) asking the notebook 
+author for guidance to ensure the implementation actually meets the notebook's needs.  There is not a formal 
+process for this step, but it is intended that the JDAT planning process (currently on JIRA) keeps track of specific 
+steps needed before a given notebook can proceed on to the next stage.
 
 ## Integrated Notebook
 
-Once a draft notebook has been completed, the next stage is to build the draft into a notebook that uses the DAT's or associated community-developed software as consistently as possible.  This is typically done via a developer reviewing a draft notebook and working with the scientist to use DAT software where relevant, or developing additional DAT code when necessary (see the above section).  It is at the discretion of the notebook author and developer together which of them actually modifies the notebook and sources the Pull Request, but it is likely both will be involved to some degree. The default approach is for the developer to take the draft notebook, mark it up with comments like (using the example from above):
+Once a draft notebook has been completed, the next stage is to build the draft into a notebook that uses the DAT's 
+or associated community-developed software as consistently as possible.  This is typically done via a developer 
+reviewing a draft notebook and working with the scientist to use DAT software where relevant, or developing 
+additional DAT code when necessary (see the above section).  It is at the discretion of the notebook author 
+and developer together which of them actually modifies the notebook and sources the Pull Request, but it is 
+likely both will be involved to some degree. The default approach is for the developer to take the draft notebook, 
+mark it up with comments like (using the example from above):
 ```
 
 ...
@@ -122,24 +135,103 @@ Creating the spectrum above is a bit complicated, and it would improve the workf
 
 EJT: This has now been implemented as JWSTSimulator.make_spectrum(a, b, anotherparameterthatturnsouttobeimportant).  Can you try that and ensure it works here?
 ```
-and then create a git commit with these comments.  The original author would then address the comments in a follow-on commit, with implementation of all comments then being the step that allows both to declare the notebook ready to be called "Integrated".
+and then create a git commit with these comments.  The original author would then address the comments in a 
+follow-on commit, with implementation of all comments then being the step that allows both to declare the notebook 
+ready to be called "Integrated".
 
-Once the notebook authors (original author and developer/reviewer) have agreed it is ready, one of them follows the Pull Request workflow as described above, but with the notebook title now changed to be just the title itself (no "Concept:" or Draft:"). The Pull Request is then reviewed by one of the project scientists, and merged when there everyone is satisfied with the notebook.
+Once the notebook authors (original author and developer/reviewer) have agreed it is ready, one of them follows 
+the Pull Request workflow as described above, but with the notebook title now changed to be just the title itself 
+(no "Concept:" or Draft:"). The Pull Request is then reviewed by one of the project scientists, and merged when 
+everyone is satisfied with the notebook.
 
 ## Final/Public Notebook
 
-The final stage for the notebook is release on the [official STScI notebook repository](https://github.com/spacetelescope/notebooks). Specific documentation for this last stage is given in the repository itself.  However, that repository and the working repository here have very similar structure, so it is in principle simply a matter of copying the Integrated Notebook over to a form of the release repository and doing one final Pull Request.  Note, however, that other STScI reviewers may comment on this stage.  It is also important for the authors to do an additional check over the notebook to ensure that it uses *released* (not developer) versions of requirements where possible. It is also a good opportunity to fill in the scientific context of a given notebook - e.g. add a motivation section, or a final plot at the bottom that shows the final science result.  Once this is done, and the Pull Request merged, the Notebook can be declared complete.
+The final stage for the notebook is release on the 
+[official STScI notebook repository](https://github.com/spacetelescope/notebooks). 
+Specific documentation for this last stage is given in the repository itself.  However, that repository and the 
+working repository here have very similar structure, so it is in principle simply a matter of copying the Integrated 
+Notebook over to a form of the release repository and doing one final Pull Request.  Note, however, that other 
+STScI reviewers may comment on this stage.  It is also important for the authors to do an additional check over 
+the notebook to ensure that it uses *released* (not developer) versions of requirements where possible. It is also 
+a good opportunity to fill in the scientific context of a given notebook - e.g. add a motivation section, or a final 
+plot at the bottom that shows the final science result.  Once this is done, and the Pull Request merged, the Notebook 
+can be declared complete.
 
 
 ## Procedure to submit a notebook as a Pull Request
 
-Submission of a new notebook follows the git Pull Request workflow.  This is not described in detail here because more details are in the [STScI git workflow style guide](https://github.com/spacetelescope/style-guides/blob/master/guides/git-workflow.md).  But don't hesitate to reach out for help from other members of the team if you are stuck or aren't sure how it's supposed to work! 
+Submission of a new notebook follows the git Pull Request workflow.  All details are in the 
+[STScI git workflow style guide](https://github.com/spacetelescope/style-guides/blob/master/guides/git-workflow.md).
+Here we give a "cookbook" procedure,  
+but do not hesitate to reach out for help from other members of the team if you are stuck or are not sure how 
+it is supposed to work! 
 
-To submit a concept notebook, the author should first fork and clone the notebooks working space repository: https://github.com/spacetelescope/dat_pyinthesky . Then for a add the new notebook in a sub-directory of the ``jdat_notebooks`` directory with the name of the notebook (see the repo itself for examples).  IMPORTANT: for a concept notebook, also be sure to add the name of the notebook to the ``exclude_notebooks`` file, to prevent the tests from running on the notebook (since it isn't intended to be functional yet anyway).  Once you've added the notebook to git, push it up to your fork and create a Pull Request (see the procedures document linked above for more detail).
+1. Go to the github working space https://github.com/spacetelescope/dat_pyinthesky and fork the repository to your user account 
+(button "Fork" in the top right corner).
 
-One of the team members can then merge your Pull Request.  For concept notebook, nothing more than a cursory review (ensuring just that the notebook is readable and perhaps asking for clarification in a few areas) is necessary for merging.
+2. Clone the repository locally on your machine
+
+``git clone git@github.com:username/dat_pyinthesky.git``
+
+3. Make sure that your personal fork is pointing to the right upstream repository
+
+``git remote add upstream https://github.com/spacetelescope/dat_pyinthesky.git``
+
+4. Create a new branch where to start the development and move to that branch
+
+``git branch new_notebook_branch_name``
+
+``git checkout new_notebook_branch_name``
+
+5. Create a new folder where to develop the notebook
+
+``cd jdat_notebook``
+
+``mkdir new_notebook_name``
+
+6. Now start building your notebook (new_notebook_name.ipynb)!
+
+7. At any point in the development, save your work and push it up to your forked repository
+
+``git add new_notebook_name.ipynb``
+
+``git commit -m "Clear message to state the fix or improvement to the notebook"``
+
+``git push origin new_notebook_branch_name``
+
+(sometimes you have to reset the upstream, so in that case it is ``git push --set-upstream origin new_notebook_branch_name``)
+
+8. When you are happy with your notebook, double check that you have satisfied the thecnical requirements of the specific status
+of your notebook (see above).
+
+9. Now you can create a Pull Request from the spacetelescope/dat_pyinthesky repository. You do that
+by clicking on ``New pull request`` on the webpage, then the link ``compare across forks``. Then set the base repository 
+to ``spacetelescope/dat_pyinthesky`` and branch ``master`` and the head fork to
+the branch on your personal fork, so repository ``username/dat_pyinthesky`` and branch ``new_notebook_branch_name``. You
+set a title and you click on ``Create pull request``.
+
+One of the team members can then merge your Pull Request. 
 
 
 ## Future Improvements
 
-Of course, science does not stand still!  As time passes some of the completed notebooks may have enhancements or changes necessary.  In general these follow the standard Pull Request workflow and can be submitted by anyone once the notebook is public (both in and out of STScI).  While the repo maintainers manage this process, the notebook authors may be called in from time to time to provide opinions or perspectives on any proposed changes.
+Of course, science does not stand still!  As time passes some of the completed notebooks may have enhancements 
+or changes necessary.  In general these follow the standard Pull Request workflow and can be submitted by anyone 
+once the notebook is public (both in and out of STScI).  While the repo maintainers manage this process, the notebook 
+authors may be called in from time to time to provide opinions or perspectives on any proposed changes.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
