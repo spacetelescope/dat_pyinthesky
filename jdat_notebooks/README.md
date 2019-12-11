@@ -204,7 +204,7 @@ it is supposed to work!
 8. When you are happy with your notebook, double check that you have satisfied the thecnical requirements of the specific status
 of your notebook (see above).
 
-9. Now you can create a Pull Request from the spacetelescope/dat_pyinthesky repository. You do that
+9. Now you can create a Pull Request from the ``spacetelescope/dat_pyinthesky`` repository. You do that
 by clicking on ``New pull request`` on the webpage, then the link ``compare across forks``. Then set the base repository 
 to ``spacetelescope/dat_pyinthesky`` and branch ``master`` and the head fork to
 the branch on your personal fork, so repository ``username/dat_pyinthesky`` and branch ``new_notebook_branch_name``. You
