@@ -165,7 +165,7 @@ or changes necessary.  In general these follow the standard Pull Request workflo
 once the notebook is public (both in and out of STScI).  While the repo maintainers manage this process, the notebook 
 authors may be called in from time to time to provide opinions or perspectives on any proposed changes.
 
-### Procedure to submit a notebook as a Pull Request
+# Procedure to submit a notebook as a Pull Request
 
 Submission of a new notebook follows the git Pull Request workflow.  All details are in the 
 [STScI git workflow style guide](https://github.com/spacetelescope/style-guides/blob/master/guides/git-workflow.md).
