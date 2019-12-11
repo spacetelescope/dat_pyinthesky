@@ -10,9 +10,10 @@ standard workflow:
 
 1. Notebook Concept
 2. Notebook Draft
-3. Integrated Notebook
-4. Public/Released Notebook
-5. Revised based on Community feedback
+3. Concept/Draft notebook-driven development
+4. Integrated Notebook
+4. Final/Public Notebook
+5. Revision based on Community feedback
 6. (Repeat 5 into infinity)
 
 These stages and the process for moving from one to the other are described below.  
@@ -157,8 +158,14 @@ a good opportunity to fill in the scientific context of a given notebook - e.g. 
 plot at the bottom that shows the final science result.  Once this is done, and the Pull Request merged, the Notebook 
 can be declared complete.
 
+## Revision based on Community feedback
 
-## Procedure to submit a notebook as a Pull Request
+Of course, science does not stand still!  As time passes some of the completed notebooks may have enhancements 
+or changes necessary.  In general these follow the standard Pull Request workflow and can be submitted by anyone 
+once the notebook is public (both in and out of STScI).  While the repo maintainers manage this process, the notebook 
+authors may be called in from time to time to provide opinions or perspectives on any proposed changes.
+
+### Procedure to submit a notebook as a Pull Request
 
 Submission of a new notebook follows the git Pull Request workflow.  All details are in the 
 [STScI git workflow style guide](https://github.com/spacetelescope/style-guides/blob/master/guides/git-workflow.md).
@@ -211,14 +218,6 @@ the branch on your personal fork, so repository ``username/dat_pyinthesky`` and 
 set a title and you click on ``Create pull request``.
 
 One of the team members can then merge your Pull Request. 
-
-
-## Future Improvements
-
-Of course, science does not stand still!  As time passes some of the completed notebooks may have enhancements 
-or changes necessary.  In general these follow the standard Pull Request workflow and can be submitted by anyone 
-once the notebook is public (both in and out of STScI).  While the repo maintainers manage this process, the notebook 
-authors may be called in from time to time to provide opinions or perspectives on any proposed changes.
 
 
 
