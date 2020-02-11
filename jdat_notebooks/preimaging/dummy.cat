@@ -1,0 +1,7 @@
+# position_RA_Dec
+# abmag
+# 
+# 
+index x_or_RA y_or_Dec nircam_f070w_magnitude nircam_f150w_magnitude nircam_f200w_magnitude nircam_f277w_magnitude nircam_f356w_magnitude nircam_f444w_magnitude
+1 80.386396453731 -69.468909240644 21.63889 21.59946 21.93288 22.51786 22.99632 23.4255
+
