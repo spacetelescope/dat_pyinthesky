@@ -8,11 +8,11 @@ that can be "live" on the spacetelescope notebooks repository.
 These notebooks can have many varied science cases, but follow a relatively
 standard workflow:
 
-1. Notebook Concept
-2. Notebook Draft
+1. Draft Stage
+2. Baseline Stage
 3. Notebook-driven development
-4. Integrated Notebook
-5. Final/Public Notebook
+4. Advanced Stage
+5. Final Notebook - Maintenance Stage
 6. Revision based on Community feedback
 
 These stages and the process for moving from one to the other are described below.  
@@ -26,7 +26,7 @@ and similar guideance for Python code at the
 [STScI Python style guide](https://github.com/spacetelescope/style-guides/blob/master/guides/python.md).  
 These guidelines are in place to make review steps easier 
 
-## Notebook Concept
+## Draft Stage
 
 The primary purpose of this stage is to record a scientific workflow, but without including actual code. 
 This stage is generally done primarily by a scientist. Reasonably often, notebooks can skip this stage 
@@ -45,20 +45,20 @@ found using a derivative-based line-finder.
 ``` 
 even if the ``find_line`` function doesn't yet exist anywhere.
 
-The top-level header of the notebook (i.e., the title) should have "Concept: " at the start 
-to make it clear this is a concept notebook.  The filename should *not* have `concept` in it, 
+The top-level header of the notebook (i.e., the title) should have "Draft: " at the start 
+to make it clear this is a draft notebook.  The filename should *not* have `draft` in it, 
 however, as the filename will generally remain the same throughout the later stages.
 
-Once they have the concept ready, the author should create a pull request with the concept notebook's content (see
+Once they have the draft ready, the author should create a pull request with the draft notebook's content (see
 instructions at the end of this document).
 
 
-## Notebook Draft
+## Baseline Stage
 
 The primary purpose of this stage is to get a functioning notebook to record a workflow. 
 This stage is also typically done by a scientist (although with developers available to ask questions).  
 It is also frequently the *first* step of development.  That is, if the workflow is already reasonable 
-to implement with existing tools, the concept notebook is not necessary.
+to implement with existing tools, the draft notebook is not necessary.
 
 In this stage the notebook should actually execute from beginning to end, but it is fine to be 
 "rough around the edges".  E.g., the notebook might have several cells that say things like:
@@ -72,17 +72,17 @@ simple function that just did ``spec = simulate_jwst_spectrum(a, b)``
 thereby providing guidance for where specific development would simplify the workflow.
 
 If a notebook is freshly created in this form, the author can follow the "Procedure to submit a notebook as a Pull Request"
-(found at the end of this document), skipping the Notebook Concept step.  
+(found at the end of this document), skipping the Draft Stage step.  
 
-If the notebook was already created in the Concept Notebook step and the "Procedure to submit a notebook as a Pull Request"
+If the notebook was already created in the Draft Stage step and the "Procedure to submit a notebook as a Pull Request"
 has already been followed, the author should just create a new branch to modify the existing code and then create 
 a new Pull Request with the changes once they are ready.
 
-In either case, the title (but not filename) of the notebook should begin with "Draft:" to indicate the 
-notebook is in the draft stage.
+In either case, the title (but not filename) of the notebook should begin with 
+"Baseline:" to indicate the notebook is in the Baseline Stage.
 
 Once the Pull Request has been created, the notebook will automatically be built in the repository 
-so that reviewers can view it.  Reviewers can then comment on the notebook in Github.  At the draft stage 
+so that reviewers can view it. Reviewers can then comment on the notebook in Github.  At this stage 
 the bar is still relatively low for review - primarily things like ensuring the notebook does run from 
 beginning-to-end and that data files or the like were not accidentally committed to the repository.
 
@@ -98,18 +98,20 @@ The [STScI guidelines on data storage for notebooks](https://github.com/spacetel
 should be followed here.  The specific addition for the JWST Notebooks is that notebook data should be 
 in the `DMD_Managed_Data/JWST/jwst-data_analysis_tools` Box folder (or subfolders thereof).  
 If you do not have access to this box folder already, ask a Project Scientist and they should be able to get you added. 
-Note that if a draft notebook is using data that should not yet be public, the easiest choice is probably central store, 
+Note that if a baseline notebook is using data that should not yet be public, the easiest choice is probably central store, 
 but in that case it is critical that the notebook state prominently that it must be run inside the STScI network.
 3. A notebook should state clearly what version of various dependencies were used to generate the notebook. 
 These versions should be placed in a `requirements` file in the same directory as the notebook itself. An example of this file
 is in the``example_notebook`` folder.
 That will ensure reviewers/testers can be sure that if they encounter problems, it is not due to software version mis-matches.
 
+The notebook will undergo a scientific and a technical review and it will be merged into the repository
+once the review comments have been addressed. This concludes the Baseline Stage.
 
-## Concept/Draft notebook-driven development
+## Notebook-driven development
 
-Between the concept and draft, or draft and polished stages, there is potential for considerable development 
-to be necessary.  A draft notebook may contain a large number of areas where more development is desired in data 
+Along and after the Draft and Baseline stages, there is potential for considerable development 
+to be necessary.  A baseline notebook may contain a large number of areas where more development is desired in data 
 analysis tools, or it may only require a few minor adjustments (or none at all!).  This stage is therefore the most 
 flexible and dependent on developer resources, etc.  In general the intent is for developers to be able to re-use 
 bits of code from the notebook as tests for development, while occasionally (if necessary) asking the notebook 
@@ -117,14 +119,14 @@ author for guidance to ensure the implementation actually meets the notebook's n
 process for this step, but it is intended that the JDAT planning process (currently on JIRA) keeps track of specific 
 steps needed before a given notebook can proceed on to the next stage.
 
-## Integrated Notebook
+## Advanced Stage
 
-Once a draft notebook has been completed, the next stage is to build the draft into a notebook that uses the DAT's 
+Once a baseline notebook has been completed, the next stage is to build the baseline into a notebook that uses the DAT's 
 or associated community-developed software as consistently as possible.  This is typically done via a developer 
-reviewing a draft notebook and working with the scientist to use DAT software where relevant, or developing 
-additional DAT code when necessary (see the above section).  It is at the discretion of the notebook author 
+reviewing a baseline notebook and working with the scientist to develop 
+additional DAT code.  It is at the discretion of the notebook author 
 and developer together which of them actually modifies the notebook and sources the Pull Request, but it is 
-likely both will be involved to some degree. The default approach is for the developer to take the draft notebook, 
+likely both will be involved to some degree. The default approach is for the developer to take the baseline notebook, 
 mark it up with comments like (using the example from above):
 ```
 
@@ -140,21 +142,21 @@ follow-on commit, with implementation of all comments then being the step that a
 ready to be called "Integrated".
 
 Once the notebook authors (original author and developer/reviewer) have agreed it is ready, one of them follows 
-the Pull Request workflow as described above, but with the notebook title now changed to be just the title itself 
-(no "Concept:" or Draft:"). The Pull Request is then reviewed by one of the project scientists, and merged when 
+the Pull Request workflow as described above, but with the notebook title now changed to be just 
+the title itself (no "Draft:" or Baseline:"). The Pull Request is then reviewed by one of the project scientists, and merged when 
 everyone is satisfied with the notebook.
 
-## Final/Public Notebook
+## Final Notebook - Maintenance Stage
 
 The final stage for the notebook is release on the 
 [official STScI notebook repository](https://github.com/spacetelescope/notebooks). 
 Specific documentation for this last stage is given in the repository itself.  However, that repository and the 
-working repository here have very similar structure, so it is in principle simply a matter of copying the Integrated 
-Notebook over to a form of the release repository and doing one final Pull Request.  Note, however, that other 
+working repository here have very similar structure, so it is in principle simply a matter of copying the advanced 
+notebook over to a form of the release repository and doing one final Pull Request.  Note, however, that other 
 STScI reviewers may comment on this stage.  It is also important for the authors to do an additional check over 
 the notebook to ensure that it uses *released* (not developer) versions of requirements where possible. It is also 
 a good opportunity to fill in the scientific context of a given notebook - e.g. add a motivation section, or a final 
-plot at the bottom that shows the final science result.  Once this is done, and the Pull Request merged, the Notebook 
+plot at the bottom that shows the final science result.  Once this is done, and the Pull Request merged, the notebook 
 can be declared complete.
 
 ## Revision based on Community feedback
