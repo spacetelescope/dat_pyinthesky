@@ -32,3 +32,4 @@ dependencies:
     - k2flix
     - junit_xml
     - git+https://github.com/eteq/nbpages.git
+    - astrocut>=0.5
