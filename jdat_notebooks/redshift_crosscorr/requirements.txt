@@ -1,2 +1,0 @@
-specutils==1.0
-astropy==4.0
