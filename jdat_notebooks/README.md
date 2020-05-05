@@ -116,7 +116,7 @@ analysis tools, or it may only require a few minor adjustments (or none at all!)
 flexible and dependent on developer resources, etc.  In general the intent is for developers to be able to re-use
 bits of code from the notebook as tests for development, while occasionally (if necessary) asking the notebook
 author for guidance to ensure the implementation actually meets the notebook's needs.  There is not a formal
-process for this step, but it is intended that the JDAT planning process (currently on JIRA) keeps track of specific
+process for this step, but it is intended that the JDAT planning process (currently on Jira) keeps track of specific
 steps needed before a given notebook can proceed on to the next stage.
 
 ## Advanced Stage
