@@ -65,9 +65,18 @@ In this stage the notebook should actually execute from beginning to end, but it
 ```
 ...
 In [ ]: spec = Spectrum(np.linspace(a, b, 1000)*u.angstrom, some_complex_function(...))
+```
 
+the scientist might think this is too complicated, and so to communicate their desire for an improved
+workflow, they create a "Developer Note". A developer note should be a part of the notebook itself and should be a
+single markdown cell (not code cell - code examples in a dev note can be done as literal markdown blocks - i.e.
+surrounded by `\`\`\`` for blocks or \` for inline code). That cell should begin with the text ``*Developer Note:*``.
+E.g., a markdown cell might be added below the above cell in a notebook, which would say:
+
+```
+*Developer Note:*
 Creating the spectrum above is a bit complicated, and it would improve the workflow if there was a single
-simple function that just did ``spec = simulate_jwst_spectrum(a, b)``
+simple function that just did `spec = simulate_jwst_spectrum(a, b)`.
 ```
 thereby providing guidance for where specific development would simplify the workflow.
 
@@ -105,8 +114,8 @@ These versions should be placed in a `requirements` file in the same directory a
 is in the``example_notebook`` folder.
 That will ensure reviewers/testers can be sure that if they encounter problems, it is not due to software version mis-matches.
 
-The notebook will undergo a scientific and a technical review and it will be merged into the repository
-once the review comments have been addressed. This concludes the Baseline Stage.
+The notebook will undergo a scientific and a technical review, which might also yield additional developer notes.  It will then
+be merged into the repository once the review comments have been addressed. This concludes the Baseline Stage.
 
 ## Notebook-driven development
 
@@ -124,22 +133,24 @@ steps needed before a given notebook can proceed on to the next stage.
 Once a baseline notebook has been completed, the next stage is to build the baseline into a notebook that uses the DAT's
 or associated community-developed software as consistently as possible.  This is typically done via a developer
 reviewing a baseline notebook and working with the scientist to develop
-additional DAT code.  It is at the discretion of the notebook author
-and developer together which of them actually modifies the notebook and sources the Pull Request, but it is
-likely both will be involved to some degree. The default approach is for the developer to take the baseline notebook,
+additional DAT code, particularly focused on resolving the "developer notes".  It is at the discretion of the notebook
+author and developer together which of them actually modifies the notebook and sources the Pull Request, but it is
+likely both will be involved to some degree. An example approach is for the developer to take the baseline notebook,
 mark it up with comments like (using the example from above):
 ```
-
+*Developer Note:*
 ...
 In [ ]: spec = Spectrum(np.linspace(a, b, 1000)*u.angstrom, some_complex_function(...))
 
 Creating the spectrum above is a bit complicated, and it would improve the workflow if there was a single simple function that just did ``spec = simulate_jwst_spectrum(a, b)``
 
-EJT: This has now been implemented as JWSTSimulator.make_spectrum(a, b, anotherparameterthatturnsouttobeimportant).  Can you try that and ensure it works here?
+*Development:*
+This has now been implemented as JWSTSimulator.make_spectrum(a, b, anotherparameterthatturnsouttobeimportant).  Can you try that and ensure it works here?
 ```
 and then create a git commit with these comments.  The original author would then address the comments in a
-follow-on commit, with implementation of all comments then being the step that allows both to declare the notebook
-ready to be called "Integrated".
+follow-on commit.  There might be multiple pull requests of this sort as the notebook driven development
+continues.  But once all developer notes have been addressed, the developer and author can declare the notebook
+ready to be called "Advanced".
 
 Once the notebook authors (original author and developer/reviewer) have agreed it is ready, one of them follows
 the Pull Request workflow as described above, but with the notebook title now changed to be just
