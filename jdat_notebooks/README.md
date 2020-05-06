@@ -105,8 +105,13 @@ These versions should be placed in a `requirements` file in the same directory a
 is in the``example_notebook`` folder.
 That will ensure reviewers/testers can be sure that if they encounter problems, it is not due to software version mis-matches.
 
-The notebook will undergo a scientific and a technical review and it will be merged into the repository
-once the review comments have been addressed. This concludes the Baseline Stage.
+At the end of the baseline stage, the notebook will undergo a
+scientific and a technical review.
+
+It will then be merged into the jdat_notebook repository once the
+review comments have been addressed.
+
+This concludes the Baseline Stage.
 
 ## Notebook-driven development
 
