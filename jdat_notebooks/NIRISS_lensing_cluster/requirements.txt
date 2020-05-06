@@ -2,3 +2,4 @@ astropy==4.0
 jwst==0.14.2
 python==3.6.7
 mirage==1.2.3.dev10+geb23408
+(See here for Mirage installation: https://mirage-data-simulator.readthedocs.io/en/latest/install.html)
