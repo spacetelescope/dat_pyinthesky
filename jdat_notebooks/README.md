@@ -1,6 +1,6 @@
-# Development Procedure for JDAT Notebooks
+# User Guide for Developing JDAT Notebooks
 
-This document is a description of the JWST Data Analysis Tools Approach to
+This document is a description of the JWST Data Analysis Tools (JDAT) Approach to
 "Notebook-Driven Development".  The procedures here outline the process for
 getting a notebook through successive development stages to become something
 that can be "live" on the spacetelescope notebooks repository.
