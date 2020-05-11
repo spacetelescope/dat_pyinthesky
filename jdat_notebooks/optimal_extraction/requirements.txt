@@ -1,0 +1,7 @@
+numpy
+astropy
+matplotlib
+scipy
+ipywidgets
+jwst
+webbpsf
