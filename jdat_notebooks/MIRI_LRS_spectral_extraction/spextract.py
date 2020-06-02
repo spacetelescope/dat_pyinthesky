@@ -144,4 +144,4 @@ def extract_1dspec(jdatamodel, center, width, bkg_offset, bkg_width, wavescale=N
     #   wavelengths account for any tiled spectra this way
     waves = np.average(lam_image, weights=wimage, axis=0)
 
-    return (waves, ext1d)
+    return (waves, ext1d, data_bkgsub)
