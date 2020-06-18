@@ -19,6 +19,8 @@ This describes a transition plan to move `spectral-cube` functionality to `specu
 * Spectral extraction (based on astropy regions/photutils?)
 * `with_mask` convenience method (not mandatory, but spectral-cube demonstrates it's use as syntactic sugar?)
 * Lazy masking (may not be a requirement?)
+* Automatic (?) parallel processing of analysis functions across multiple spaxels.  If possible should depend on dask or similar wider ecosystem tools.
+* Automatic (?) parallel processing of fitting across multiple spaxels.  (May or may not be best implemented via Dask as the above, but less clear because models are sometimes inherently 3d.)
 
 
 # Problems/incompatibilities and solutions
@@ -43,7 +45,7 @@ Run side-by-side tests of `spectral-cube` operations and the equivalent `specuti
 
 ## Incompatibility: masking convention
 
-The `spectral-cube` masking convention is the opposite of that used in specutils (which is the one used in numpy), and instead matches "indexing" convention.  This means code written for `spectral-cube` is subtle different.
+The `spectral-cube` masking convention is the opposite of that used in specutils (which is the one used in numpy), and instead matches "indexing" convention.  This means code written for `spectral-cube` is subtly different. Relatedly: JWST cubes by default also have a different on-disk dimensionality convention (although that may not present an *API* concern if the loader auto-transposes appropriately).
 
 ### Solution
 
