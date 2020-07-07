@@ -3,5 +3,5 @@ astropy
 matplotlib
 scipy
 ipywidgets
-jwst
+git+git://github.com/spacetelescope/jwst@0.16.1#egg=jwst
 webbpsf
