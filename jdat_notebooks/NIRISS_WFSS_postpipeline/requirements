@@ -1,4 +1,3 @@
 astropy==4.0.1
 specutils==1.0
-h5py
-git+git://github.com/mtakahiro/gsf@v1.2.1
+git+git://github.com/mtakahiro/gsf@v1.2
