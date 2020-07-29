@@ -1,1 +1,0 @@
-git+https://github.com/mtakahiro/gsf@v1.2.1#egg=gsf
