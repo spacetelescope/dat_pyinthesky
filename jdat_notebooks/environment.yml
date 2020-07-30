@@ -5,6 +5,8 @@ channels:
   - astropy
   - http://ssb.stsci.edu/astroconda
   - defaults
+  - glueviz/label/dev
+  - glueviz
 
 dependencies:
   - pip
@@ -28,6 +30,7 @@ dependencies:
   - specutils
   - dill
   - dust_extinction
+  - glue
   
   - pip:
     - k2flix
