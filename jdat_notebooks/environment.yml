@@ -30,7 +30,7 @@ dependencies:
   - specutils
   - dill
   - dust_extinction
-  - glue-core
+  - https://github.com/glue-viz/glue.git
   
   - pip:
     - k2flix
