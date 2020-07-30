@@ -13,10 +13,6 @@ jobs:
 
       - checkout
 
-      - restore_cache:
-          keys:
-            - v1-env-{{ checksum "jdat_notebooks/environment.yml" }}
-
       - run:
           name: Setup Environment
           command: |
