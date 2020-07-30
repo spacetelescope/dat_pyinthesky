@@ -38,4 +38,4 @@ dependencies:
     - multiprocess
     - corner
     - emcee
-    - git+https://github.com/mtakahiro/gsf@v1.2.2#egg=gsf
+    - git+https://github.com/mtakahiro/gsf@v1.2.3#egg=gsf
