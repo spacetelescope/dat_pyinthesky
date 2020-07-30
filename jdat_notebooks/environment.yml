@@ -28,6 +28,7 @@ dependencies:
   - specutils
   - dill
   - dust_extinction
+  - drizzle
   
   - pip:
     - k2flix
