@@ -30,6 +30,7 @@ dependencies:
   - specutils
   - dill
   - dust_extinction
+  - bottleneck
  
   - pip:
     - k2flix
