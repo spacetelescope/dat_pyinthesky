@@ -33,6 +33,7 @@ dependencies:
   - bottleneck
   - drizzle
   - h5py
+  - ipyvuetify==1.5.0
   
   - pip:
     - k2flix
