@@ -1,0 +1,6 @@
+astropy == 4.0.1.post1
+matplotlib == 3.3.0
+aplpy == 2.0.3
+spectral-cube == 0.4.5
+photutils == 0.7.2
+specutils == 1.0
