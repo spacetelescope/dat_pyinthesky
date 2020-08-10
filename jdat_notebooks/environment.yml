@@ -33,7 +33,6 @@ dependencies:
   - bottleneck
   - drizzle
   - h5py
-  - ipyvuetify==1.5.0
   
   - pip:
     - k2flix
@@ -47,4 +46,5 @@ dependencies:
     - git+https://github.com/spacetelescope/jwst.git
     - git+https://github.com/glue-viz/glue.git
     - git+https://github.com/glue-viz/glue-jupyter.git
+    - git+https://github.com/mariobuikhuizen/ipyvuetify.git
     - git+https://github.com/spacetelescope/jdaviz.git
