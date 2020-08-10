@@ -31,13 +31,19 @@ dependencies:
   - dill
   - dust_extinction
   - bottleneck
- 
+  - drizzle
+  - h5py
+  
   - pip:
     - k2flix
     - junit_xml
     - git+https://github.com/eteq/nbpages.git
     - astrocut>=0.5
+    - multiprocess
+    - corner
+    - emcee
+    - git+https://github.com/mtakahiro/gsf@v1.2.3#egg=gsf
+    - git+https://github.com/spacetelescope/jwst.git
     - git+https://github.com/glue-viz/glue.git
     - git+https://github.com/glue-viz/glue-jupyter.git
     - git+https://github.com/spacetelescope/jdaviz.git
-
