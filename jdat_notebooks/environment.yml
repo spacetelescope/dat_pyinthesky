@@ -33,6 +33,7 @@ dependencies:
   - bottleneck
   - drizzle
   - h5py
+  - nodejs
   
   - pip:
     - k2flix
@@ -42,7 +43,6 @@ dependencies:
     - multiprocess
     - corner
     - emcee
-    - astrocut
     - git+https://github.com/mtakahiro/gsf@v1.2.3#egg=gsf
     - git+https://github.com/spacetelescope/jwst.git
     - git+https://github.com/glue-viz/glue.git
