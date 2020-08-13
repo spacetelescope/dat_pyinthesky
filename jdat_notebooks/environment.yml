@@ -36,6 +36,7 @@ dependencies:
   
   
   - pip:
+    - npm
     - nodejs
     - k2flix
     - junit_xml
