@@ -33,7 +33,6 @@ dependencies:
   - bottleneck
   - drizzle
   - h5py
-  - nodejs
   
   - pip:
     - k2flix
