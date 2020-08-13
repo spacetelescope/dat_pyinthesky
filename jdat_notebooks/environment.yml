@@ -43,7 +43,7 @@ dependencies:
     - multiprocess
     - corner
     - emcee
-    - ipyvuetify==1.5.0
+    - ipyvuetify==1.4.1
     - git+https://github.com/mtakahiro/gsf@v1.2.3#egg=gsf
     - git+https://github.com/spacetelescope/jwst.git
     - git+https://github.com/glue-viz/glue.git
