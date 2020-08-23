@@ -28,9 +28,13 @@ dependencies:
   - specutils
   - dill
   - dust_extinction
+  - seaborn>=0.9.0
   
   - pip:
     - k2flix
     - junit_xml
     - git+https://github.com/eteq/nbpages.git
     - astrocut>=0.5
+    - jwst>=0.16.1
+    - corner>=2.0.1
+    - juliet >= 2.0.25
