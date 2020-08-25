@@ -58,6 +58,12 @@ def main():
             raise NotImplementedError('Support for building more than one .ipynb file at a time is not yet supported')
 
         notebook_filepath: str = paths[0]
+        # jwst_nb_viz
+        # concept_APIs
+        # jupyter_platform
+        # jdat_notebooks
+        # hst_nb_viz
+        print('rel-path', os.path.relpath(notebook_path))
         notebook_groups: str = os.path.relpath(notebook_path).split('notebooks')[1].strip('/')
         shutil.copyfile('.circleci/extract_metadata_from_notebook.py', f'{build_path}/extract_metadata_from_notebook.py')
         setup_script: str = f"""#!/usr/bin/env bash
