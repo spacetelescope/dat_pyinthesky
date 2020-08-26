@@ -17,27 +17,24 @@ jobs:
             ./.circleci/setup_env.sh
 
       - run:
-          name: Create Artifacts
+          name: Build Notebooks
           command: |
-            python ./.circleci/create_artifacts.py
+            python ./.circleci/build-notebooks.py
 
-      - store_artifacts:
-          path: /tmp/artifacts
+            # - run:
+            #     name: Build Artifacts
+            #     command: |
+            #       source activate notebooks_env
+            #       python ./.circleci/build_artifacts.py
 
-      - run:
-          name: Build Artifacts
-          command: |
-            source activate notebooks_env
-            python ./.circleci/build_artifacts.py
+            # - store_test_results:
+            #     path: /tmp/test-results
 
-      - store_test_results:
-          path: /tmp/test-results
-
-      - run:
-          name: Consolidate Pages
-          command: |
-            source activate notebooks_env
-            python ./.circleci/consolidate_pages.py
+            # - run:
+            #     name: Consolidate Pages
+            #     command: |
+            #       source activate notebooks_env
+            #       python ./.circleci/consolidate_pages.py
 
       - add_ssh_keys
       - run:
