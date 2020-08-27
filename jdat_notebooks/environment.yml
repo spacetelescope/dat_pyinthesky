@@ -28,7 +28,7 @@ dependencies:
   - specutils
   - dill
   - dust_extinction
-  - spectral_cube
+  - spectral-cube
   
   - pip:
     - k2flix
