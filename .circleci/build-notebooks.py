@@ -182,14 +182,17 @@ def build_artifact(cmd: typing.Union[str, typing.List[str]]) -> None:
         raise BuildError(f'Process Exit Code[{proc.poll()}]')
 
 def main() -> None:
-    pass_names = ['preimaging_01_mirage.ipynb-builder.sh']
+    pass_names = [
+        'preimaging_01_mirage.ipynb-builder.sh',
+        'Spectral Extraction.ipynb-builder.sh'
+    ]
     for build_job in find_build_jobs():
         for script in build_job.scripts:
             name = os.path.basename(script)
             if name in pass_names:
                 continue
 
-            command = f'bash {script}'
+            command = f'bash "{script}"'
             try:
                 build_artifact(command)
             except BuildError as err:
