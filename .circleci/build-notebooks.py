@@ -31,14 +31,59 @@ if os.path.exists(ARTIFACT_DEST_DIR):
 
 os.makedirs(ARTIFACT_DEST_DIR)
 
+class FilepathMapping(typing.NamedTuple):
+    rel_filepath: str
+    source_filepath: str
+    build_filepath: str
+    gitignore_data: typing.List[str]
+
+def load_gitignore_data(filepath: str) -> typing.List[str]:
+    if not os.path.exists(filepath):
+        return []
+
+    with open(filepath, 'rb') as stream:
+        data = [line for line in stream.read().decode(ENCODING).split('\n') if line]
+
+    data.extend(['venv', 'env', 'virtual-env', 'virtualenv'])
+    return data
+
+def filter_gitignore_entry(mapping: FilepathMapping) -> bool:
+    for line in mapping.gitignore_data:
+        if line == mapping.rel_filepath:
+            return os.path.isfile(mapping.rel_filepath) or os.path.isdir(mapping.rel_filepath)
+
+        # elif mapping.rel_filepath.startswith(line):
+        #     return False
+
+        if '*' in line:
+            raise NotImplementedError
+
+    return True
+
+def extract_files_and_directories_from_folder_with_gitignore_filepath(folder_path: str, deep_search: bool = False) -> types.GeneratorType:
+    gitignore_filepath = os.path.join(folder_path, '.gitignore')
+    for root, dirnames, filenames in os.walk(folder_path):
+        for dirname in dirnames:
+            yield dirname
+            # for entry in extract_files_and_directories_from_folder_with_gitignore_filepath(dirpath, True):
+            #     yield entry
+
+        for filename in filenames:
+            filepath = os.path.join(root, filename)
+            if deep_search is False:
+                rel_path = filepath.split(root, 1)[1].strip('/')
+                yield rel_path
+
+            else:
+                import pdb; pdb.set_trace()
+                yield filepath
+        break
+
 class Notebook(typing.NamedTuple):
     name: str
     filename: str
     filepath: str
-
-    def inject_notebook(self: PWN, build_dir: str) -> None:
-        build_path = os.path.join(build_dir, self.filename)
-        shutil.copyfile(self.filepath, build_path)
+    position: int = 0
 
     def create_build_script(self: PWN, categories: typing.List[str], build_dir: str, artifact_dir: str) -> None:
         build_script_filepath = os.path.join(build_dir, f'{self.filename}-builder.sh')
@@ -70,11 +115,26 @@ class Category(typing.NamedTuple):
     build_dir: str
     artifact_dir: str
 
+    def inject_extra_files(self: PWN) -> None:
+        filepath_mappings = []
+        gitignore_data = load_gitignore_data(os.path.join(self.source_dir, '.gitignore'))
+        for rel_filepath in extract_files_and_directories_from_folder_with_gitignore_filepath(self.source_dir):
+            source_filepath = os.path.join(self.source_dir, rel_filepath)
+            build_filepath = os.path.join(self.build_dir, rel_filepath)
+            filepath_mappings.append(FilepathMapping(rel_filepath, source_filepath, build_filepath, gitignore_data))
+
+        # if self.source_dir.endswith('NIRISS_WFSS_postpipeline'):
+        #     import pdb; pdb.set_trace()
+        #     pass
+        for mapping in filter(filter_gitignore_entry, filepath_mappings):
+            shutil.copyfile(mapping.source_filepath, mapping.build_filepath)
+
     def setup_build_env(self: PWN) -> None:
         env_setup_script: str = f"""#!/usr/bin/env bash
 set -e
 cd {self.build_dir}
-virtualenv -p $(which python3) env
+virtualenv -p /home/jbcurtin/.pyenv/shims/python env
+# virtualenv -p $(which python) env
 source env/bin/activate
 pip install -U pip setuptools
 if [ -f "pre-install.sh" ]; then
@@ -91,17 +151,23 @@ pip install jupyter
 mkdir -p {self.artifact_dir}
 cd -
 """
+        if os.path.exists(self.build_dir):
+            shutil.rmtree(self.build_dir)
+
+        if os.path.exists(self.artifact_dir):
+            shutil.rmtree(self.artifact_dir)
+
         os.makedirs(self.build_dir)
         os.makedirs(self.artifact_dir)
         build_script_path = os.path.join(self.build_dir, 'setup-build-env.sh')
         with open(build_script_path, 'w') as stream:
             stream.write(env_setup_script)
 
-        for filename in ['environment.sh', 'pre-install.sh', 'pre-requirements.txt', 'requirements.txt']:
-            build_filepath = os.path.join(self.build_dir, filename)
-            source_filepath = os.path.join(self.source_dir, filename)
-            if os.path.exists(source_filepath):
-                shutil.copyfile(source_filepath, build_filepath)
+        # for filename in ['environment.sh', 'pre-install.sh', 'pre-requirements.txt', 'requirements.txt']:
+        #     build_filepath = os.path.join(self.build_dir, filename)
+        #     source_filepath = os.path.join(self.source_dir, filename)
+        #     if os.path.exists(source_filepath):
+        #         shutil.copyfile(source_filepath, build_filepath)
 
         for filename in ['extract_metadata_from_notebook.py']:
             build_filepath = os.path.join(self.build_dir, filename)
@@ -114,19 +180,25 @@ class Collection(typing.NamedTuple):
     categories: typing.List[Category]
 
 class BuildJob(typing.NamedTuple):
-    name: Category
+    category: Category
     scripts: typing.List[str]
 
 def build_categories(start_path: str) -> types.GeneratorType:
     for root, dirnames, filenames in os.walk(start_path):
         for dirname in dirnames:
             dirpath = os.path.join(root, dirname)
-            notebooks = []
+            books = []
             for filepath in glob.glob(f'{dirpath}/*.ipynb'):
                 name = os.path.basename(filepath).rsplit('.', 1)[0]
                 rel_filepath = os.path.relpath(filepath)
                 filename = os.path.basename(filepath)
-                notebooks.append(Notebook(name, filename, rel_filepath))
+
+                books.append([name, filename, rel_filepath])
+
+
+            notebooks = []
+            for idx, (name, filename, rel_filepath) in enumerate(sorted(books, key=lambda x: x[1])):
+                notebooks.append(Notebook(name, filename, rel_filepath, idx))
 
             if notebooks:
                 requirements_path = os.path.relpath(os.path.join(dirpath, 'requirements.txt'))
@@ -157,10 +229,10 @@ def find_build_jobs():
     for collection in build_collections():
         for category in collection.categories:
             category.setup_build_env()
+            category.inject_extra_files()
             build_scripts = []
             for notebook in category.notebooks:
                 notebook.create_build_script([collection.name, category.name], category.build_dir, category.artifact_dir)
-                notebook.inject_notebook(category.build_dir)
                 build_scripts.append(os.path.join(category.build_dir, f'{notebook.filename}-builder.sh'))
 
             yield BuildJob(category, build_scripts)
@@ -182,23 +254,14 @@ def build_artifact(cmd: typing.Union[str, typing.List[str]]) -> None:
         raise BuildError(f'Process Exit Code[{proc.poll()}]')
 
 def main() -> None:
-    pass_names = [
-        'preimaging_01_mirage.ipynb-builder.sh',
-        'Spectral Extraction.ipynb-builder.sh'
-    ]
     for build_job in find_build_jobs():
         for script in build_job.scripts:
-            name = os.path.basename(script)
-            if name in pass_names:
-                continue
-
             command = f'bash "{script}"'
+            logger.info(f'Building Category[{build_job.category.name}]')
             try:
                 build_artifact(command)
             except BuildError as err:
                 logger.error(f'Unable to build {script}')
-                import pdb; pdb.set_trace()
-                pass
 
 
 if __name__ in ['__main__']:
