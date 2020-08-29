@@ -44,21 +44,28 @@ def load_gitignore_data(filepath: str) -> typing.List[str]:
     with open(filepath, 'rb') as stream:
         data = [line for line in stream.read().decode(ENCODING).split('\n') if line]
 
-    data.extend(['venv', 'env', 'virtual-env', 'virtualenv'])
+    data.extend(['.gitignore', 'venv', 'env', 'virtual-env', 'virtualenv', '.ipynb_checkpoints'])
     return data
 
-def filter_gitignore_entry(mapping: FilepathMapping) -> bool:
-    for line in mapping.gitignore_data:
-        if line == mapping.rel_filepath:
-            return os.path.isfile(mapping.rel_filepath) or os.path.isdir(mapping.rel_filepath)
+FILTER_STRIP = '/'
+def filter_gitignore_entry__as_string(entry: str, gitignore_data: typing.List[str], filepath: str = None) -> bool:
+    entry = entry.strip(FILTER_STRIP)
+    for line in gitignore_data:
+        line = line.strip(FILTER_STRIP)
+        if line == entry:
+            if filepath:
+                return os.path.isfile(filepath) or os.path.isdir(filepath)
 
-        # elif mapping.rel_filepath.startswith(line):
-        #     return False
+            return os.path.isfile(entry) or os.path.isidr(entry)
 
-        if '*' in line:
+        elif '*' in line and entry.startswith(line):
+            import pdb; pdb.set_trace()
             raise NotImplementedError
 
-    return True
+    return False
+
+def filter_gitignore_entry(mapping: FilepathMapping) -> bool:
+    return not filter_gitignore_entry__as_string(mapping.rel_filepath, mapping.gitignore_data, mapping.source_filepath)
 
 def extract_files_and_directories_from_folder_with_gitignore_filepath(folder_path: str, deep_search: bool = False) -> types.GeneratorType:
     gitignore_filepath = os.path.join(folder_path, '.gitignore')
@@ -123,11 +130,12 @@ class Category(typing.NamedTuple):
             build_filepath = os.path.join(self.build_dir, rel_filepath)
             filepath_mappings.append(FilepathMapping(rel_filepath, source_filepath, build_filepath, gitignore_data))
 
-        # if self.source_dir.endswith('NIRISS_WFSS_postpipeline'):
-        #     import pdb; pdb.set_trace()
-        #     pass
         for mapping in filter(filter_gitignore_entry, filepath_mappings):
-            shutil.copyfile(mapping.source_filepath, mapping.build_filepath)
+            if os.path.isdir(mapping.source_filepath):
+                shutil.copytree(mapping.source_filepath, mapping.build_filepath)
+
+            else:
+                shutil.copyfile(mapping.source_filepath, mapping.build_filepath)
 
     def setup_build_env(self: PWN) -> None:
         env_setup_script: str = f"""#!/usr/bin/env bash
@@ -143,7 +151,9 @@ fi
 if [ -f "pre-requirements.txt" ]; then
     pip install -U -r pre-requirements.txt
 fi
-pip install -U -r requirements.txt
+if [ -f "requirements.txt" ]; then
+    pip install -U -r requirements.txt
+fi
 if [ -f "environment.sh" ]; then
     source environment.sh
 fi
@@ -163,12 +173,6 @@ cd -
         with open(build_script_path, 'w') as stream:
             stream.write(env_setup_script)
 
-        # for filename in ['environment.sh', 'pre-install.sh', 'pre-requirements.txt', 'requirements.txt']:
-        #     build_filepath = os.path.join(self.build_dir, filename)
-        #     source_filepath = os.path.join(self.source_dir, filename)
-        #     if os.path.exists(source_filepath):
-        #         shutil.copyfile(source_filepath, build_filepath)
-
         for filename in ['extract_metadata_from_notebook.py']:
             build_filepath = os.path.join(self.build_dir, filename)
             source_filepath = os.path.join(os.getcwd(), '.circleci', filename)
@@ -183,10 +187,16 @@ class BuildJob(typing.NamedTuple):
     category: Category
     scripts: typing.List[str]
 
-def build_categories(start_path: str) -> types.GeneratorType:
+def build_categories(start_path: str, begin_path: str = None) -> types.GeneratorType:
+    gitignore_data = load_gitignore_data(os.path.join(start_path, '.gitignore'))
     for root, dirnames, filenames in os.walk(start_path):
         for dirname in dirnames:
             dirpath = os.path.join(root, dirname)
+            if filter_gitignore_entry__as_string(dirname, gitignore_data, dirpath):
+                # Reassigning dirnames[:] removes the dir from being scaned
+                dirnames[:] = [dname for dname in dirnames if dname == dirname]
+                continue
+
             books = []
             for filepath in glob.glob(f'{dirpath}/*.ipynb'):
                 name = os.path.basename(filepath).rsplit('.', 1)[0]
@@ -217,7 +227,7 @@ def build_categories(start_path: str) -> types.GeneratorType:
                 yield Category(dirname, notebooks, dirpath, build_dir, artifact_dir)
 
             else:
-                for category in build_categories(dirpath):
+                for category in build_categories(dirpath, start_path):
                     yield category
 
 def build_collections() -> types.GeneratorType:

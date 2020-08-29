@@ -37,10 +37,10 @@ jobs:
             #       python ./.circleci/consolidate_pages.py
 
       - add_ssh_keys
-      - run:
-          name: Deploy Pages
-          command: |
-            bash ./.circleci/deploy-notebooks.sh
+      # - run:
+      #     name: Deploy Pages
+      #     command: |
+      #       bash ./.circleci/deploy-notebooks.sh
 
 
 workflows:
