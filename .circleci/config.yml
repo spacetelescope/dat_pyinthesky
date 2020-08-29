@@ -68,45 +68,14 @@ jobs:
             - run:
                 name: Build Notebooks
                 command: ./.circleci/builder/factory.py -c concept_APIs
-  Build_Notebooks:
-    executor: notebook-executor
-    steps:
-      - checkout
-      - run:
-          name: Setup Environment
-          command: |
-            ./.circleci/setup_env.sh
-
-      - run:
-          name: Build Notebooks
-          command: |
-            python ./.circleci/builder/factory.py -c jdat_notebooks
-
-            # - run:
-            #     name: Build Artifacts
-            #     command: |
-            #       source activate notebooks_env
-            #       python ./.circleci/build_artifacts.py
-
-            # - store_test_results:
-            #     path: /tmp/test-results
-
-            # - run:
-            #     name: Consolidate Pages
-            #     command: |
-            #       source activate notebooks_env
-            #       python ./.circleci/consolidate_pages.py
-
-      - add_ssh_keys
-      # - run:
-      #     name: Deploy Pages
-      #     command: |
-      #       bash ./.circleci/deploy-notebooks.sh
-
 
 workflows:
   version: 2.1
 
   build-deploy:
     jobs:
-      - Build_Notebooks
+        - Build_JDAT_Notebooks
+        - Build_HST_NB_VIZ_Notebooks
+        - Build_Jupyter_Platform_Notebooks
+        - Build_JWST_NB_VIZ_Notebooks
+        - Build_Concept_APIS
