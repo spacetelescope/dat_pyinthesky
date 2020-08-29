@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import argparse
+
 from builder.service import find_build_jobs, run_build, setup_build
 
 def obtain_options() -> argparse.Namespace:

@@ -15,10 +15,10 @@ jobs:
             - checkout
             - run:
                 name: Setup Environment
-                command: ./.circleci/setup_env.sh
+                command: bash ./.circleci/setup_env.sh
             - run:
                 name: Build Notebooks
-                command: ./.circleci/builder/factory.py -c jdat_notebooks
+                command: python ./.circleci/builder/factory.py -c jdat_notebooks
 
     Build_HST_NB_VIZ_Notebooks:
         executor: notebook-executor
@@ -28,10 +28,10 @@ jobs:
             - checkout
             - run:
                 name: Setup Environment
-                command: ./.circleci/setup_env.sh
+                command: bash ./.circleci/setup_env.sh
             - run:
                 name: Build Notebooks
-                command: ./.circleci/builder/factory.py -c hst_nb_viz
+                command: python ./.circleci/builder/factory.py -c hst_nb_viz
     Build_Jupyter_Platform_Notebooks:
         executor: notebook-executor
         environment:
@@ -40,10 +40,10 @@ jobs:
             - checkout
             - run:
                 name: Setup Environment
-                command: ./.circleci/setup_env.sh
+                command: bash ./.circleci/setup_env.sh
             - run:
                 name: Build Notebooks
-                command: ./.circleci/builder/factory.py -c jupyter_platform
+                command: python ./.circleci/builder/factory.py -c jupyter_platform
     Build_JWST_NB_VIZ_Notebooks:
         executor: notebook-executor
         environment:
@@ -52,10 +52,10 @@ jobs:
             - checkout
             - run:
                 name: Setup Environment
-                command: ./.circleci/setup_env.sh
+                command: bash ./.circleci/setup_env.sh
             - run:
                 name: Build Notebooks
-                command: ./.circleci/builder/factory.py -c jwst_nb_viz
+                command: python ./.circleci/builder/factory.py -c jwst_nb_viz
     Build_Concept_APIS:
         executor: notebook-executor
         environment:
@@ -64,10 +64,10 @@ jobs:
             - checkout
             - run:
                 name: Setup Environment
-                command: ./.circleci/setup_env.sh
+                command: bash ./.circleci/setup_env.sh
             - run:
                 name: Build Notebooks
-                command: ./.circleci/builder/factory.py -c concept_APIs
+                command: python ./.circleci/builder/factory.py -c concept_APIs
 
 workflows:
   version: 2.1
