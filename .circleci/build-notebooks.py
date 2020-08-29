@@ -141,8 +141,7 @@ class Category(typing.NamedTuple):
         env_setup_script: str = f"""#!/usr/bin/env bash
 set -e
 cd {self.build_dir}
-virtualenv -p /home/jbcurtin/.pyenv/shims/python env
-# virtualenv -p $(which python) env
+virtualenv -p $(which python) env
 source env/bin/activate
 pip install -U pip setuptools
 if [ -f "pre-install.sh" ]; then
