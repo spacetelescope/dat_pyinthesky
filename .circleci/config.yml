@@ -18,8 +18,10 @@ jobs:
 
       - run:
           name: Build Notebooks
+          environment:
+            PYTHONPATH: ./.circleci
           command: |
-            python ./.circleci/build-notebooks.py
+            python ./.circleci/builder/factory.py -c jdat_notebooks
 
             # - run:
             #     name: Build Artifacts
