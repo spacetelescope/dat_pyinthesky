@@ -36,3 +36,4 @@ dependencies:
     - astrocut>=0.5
     - spectral-cube
     - astropy
+    - aplpy
