@@ -1,0 +1,11 @@
+notebook
+jupyter_client==5.3.5
+numpy
+scipy
+specutils
+git+https://github.com/spacetelescope/jdaviz
+regions
+photutils
+astropy
+matplotlib
+time
