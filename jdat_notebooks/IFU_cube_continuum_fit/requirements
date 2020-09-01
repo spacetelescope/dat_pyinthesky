@@ -1,0 +1,7 @@
+astropy==4.0.1
+specutils==1.0
+matplotlib==3.1.3
+bottleneck
+git+https://github.com/glue-viz/glue.git
+git+https://github.com/glue-viz/glue-jupyter.git
+git+https://github.com/spacetelescope/jdaviz.git

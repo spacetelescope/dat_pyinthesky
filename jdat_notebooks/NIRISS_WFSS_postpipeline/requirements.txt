@@ -1,0 +1,4 @@
+lmfit==1.0.0
+emcee==3.0.2
+corner==2.0.1
+pandas==1.0.3
