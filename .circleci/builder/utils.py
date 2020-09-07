@@ -1,11 +1,12 @@
 import os
 import shutil
 import subprocess
+import tempfile
 import time
 import types
 import typing
 
-from builder.constants import FILTER_STRIP, ENCODING, ARTIFACT_DEST_DIR
+from builder.constants import FILTER_STRIP, ENCODING, ARTIFACT_DEST_DIR, BUILD_LOG_DIR
 from builder.exceptions import BuildError
 
 PWN = typing.TypeVar('PWN')
@@ -135,13 +136,31 @@ def filter_gitignore_entry__as_string(entry: str, gitignore_data: typing.List[st
 def filter_gitignore_entry(mapping: FilepathMapping) -> bool:
     return not filter_gitignore_entry__as_string(mapping.rel_filepath, mapping.gitignore_data, mapping.source_filepath)
 
-def run_command(cmd: typing.Union[str, typing.List[str]]) -> None:
+def run_command(cmd: typing.Union[str, typing.List[str]], log_filename: str) -> None:
     if isinstance(cmd, str):
         cmd = [cmd]
 
-    proc = subprocess.Popen(cmd, shell=True)
+    if os.environ.get('CHANNEL_BUILD', None) is None:
+        proc = subprocess.Popen(cmd, shell=True)
+
+    else:
+        log_filename = log_filename or os.path.basename(tempfile.NamedTemporaryFile().name)
+
+        stdout_filepath = f'{BUILD_LOG_DIR}/{log_filename}.stdout.log'
+        with open(stdout_filepath, 'w') as stream:
+            stream.write('')
+        stdout_file_like_object = open(stdout_filepath, 'w')
+
+        stderr_filepath = f'{BUILD_LOG_DIR}/{log_filename}.stderr.log'
+        with open(stderr_filepath, 'w') as stream:
+            stream.write('')
+        stderr_file_like_object = open(stderr_filepath, 'w')
+
+        proc = subprocess.Popen(cmd, shell=True, stdout=stdout_file_like_object, stderr=stderr_file_like_object)
+
     while proc.poll() is None:
         time.sleep(.1)
+
 
     if proc.poll() > 0:
         raise BuildError(f'Process Exit Code[{proc.poll()}]')

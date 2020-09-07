@@ -71,22 +71,8 @@ def setup_build(job: BuildJob) -> None:
     for notebook in job.category.notebooks:
         notebook.create_build_script([job.collection.name, job.category.name], job.category.build_dir, job.category.artifact_dir)
 
-def build_website(job: BuildJob) -> None:
-    import pdb; pdb.set_trace()
-# def consolidate_artifacts(job: BuildJob) -> None:
-#     dest_dir = os.path.join(ARTIFACT_DEST_DIR, 'html-files')
-#     if not os.path.exists(dest_dir):
-#         os.makedirs(dest_dir)
-# 
-#     for notebook in job.category.notebooks:
-#         filename = notebook.filename.rsplit('.', 1)[0]
-#         filename = f'{filename}.html'
-#         filepath = f'{ARTIFACT_DEST_DIR}/{job.collection.name}/{job.category.name}/{filename}'
-#         dest_filepath = os.path.join(dest_dir, filename)
-#         shutil.copyfile(filepath, dest_filepath)
-
 def run_build(job: BuildJob) -> None:
     for script in job.scripts:
         command = f'bash "{script}"'
-        run_command(command)
-
+        log_name = f'{job.collection.name}-{job.category.name}'
+        run_command(command, log_name)

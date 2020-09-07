@@ -2,19 +2,22 @@
 
 import argparse
 import enum
+import logging
 import os
 import json
 import shutil
 
-from builder.constants import ARTIFACT_DEST_DIR, ENCODING
+from builder.constants import ARTIFACT_DEST_DIR, ENCODING, BUILD_LOG_DIR
 from builder.github import scan_pull_requests_for_failures
 from builder.service import find_build_jobs, run_build, setup_build
 
 from nbpages import make_html_index
 
+logger = logging.getLogger(__file__)
 class Operation(enum.Enum):
     BuildNotebooks = 'build-notebooks'
     BuildWebsite = 'build-website'
+    MultiBuild = 'multi-build'
     ScanGithub = 'scan-github'
 
 def obtain_options() -> argparse.Namespace:
@@ -53,6 +56,48 @@ def main(options: argparse.Namespace) -> None:
 
             setup_build(build_job)
             run_build(build_job)
+
+    elif options.operation is Operation.MultiBuild:
+        import multiprocessing, time
+
+        if os.path.exists(BUILD_LOG_DIR):
+            shutil.rmtree(BUILD_LOG_DIR)
+
+        os.makedirs(BUILD_LOG_DIR)
+        def _build_category(collection_name: str, category_name: str) -> None:
+            os.environ['CHANNEL_BUILD'] = 'true'
+            for build_job in find_build_jobs([collection_name], False):
+                if category_name != build_job.category.name:
+                    continue
+
+                setup_build(build_job)
+                run_build(build_job)
+            del os.environ['CHANNEL_BUILD']
+
+        job_list = []
+        for build_job in find_build_jobs(options.notebook_collection_paths):
+            job_list.append([build_job.collection.name, build_job.category.name])
+
+        processes = []
+        max_workers = 10
+        while len(job_list) > 0 or len(processes) > 0:
+            for proc_idx, proc in enumerate([proc for proc in processes if not proc.is_alive()]):
+                processes.remove(proc)
+
+            if len(processes) >= max_workers:
+                time.sleep(1)
+                continue
+
+            try:
+                collection_name, category_name = job_list.pop(0)
+            except IndexError:
+                continue
+
+            logger.info(f'Starting new Build[{collection_name}, {category_name}]')
+            proc = multiprocessing.Process(target=_build_category, args=(collection_name, category_name))
+            proc.daemon = True
+            proc.start()
+            processes.append(proc)
 
     elif options.operation is Operation.BuildWebsite:
         artifact_dest_dir = 'pages'
