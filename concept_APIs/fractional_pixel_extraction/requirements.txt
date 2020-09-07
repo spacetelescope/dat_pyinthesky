@@ -1,0 +1,8 @@
+git+https://github.com/glue-viz/glue-jupyter
+git+https://github.com/glue-viz/glue-astronomy
+regions
+specutils
+photutils
+astropy
+numpy
+matplotlib
