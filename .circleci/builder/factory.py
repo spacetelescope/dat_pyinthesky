@@ -22,6 +22,7 @@ def obtain_options() -> argparse.Namespace:
     parser.add_argument('-o', '--operation', type=Operation, default=Operation.BuildNotebooks, required=True)
     # Build Notebooks
     parser.add_argument('-c', '--notebook-collection-paths', type=str, default='')
+    parser.add_argument('-n', '--notebook-category', type=str, default=None)
     parser.add_argument('-r', '--remote-names', type=str, default='master')
     # Build Website
     options = parser.parse_args()
