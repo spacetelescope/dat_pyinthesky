@@ -19,7 +19,7 @@ class Operation(enum.Enum):
 
 def obtain_options() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
-    parser.add_argument('-o', '--operation', type=Operation, default=Operation.BuildNotebooks, required=True)
+    parser.add_argument('-o', '--operation', type=Operation, default=Operation.BuildNotebooks)
     # Build Notebooks
     parser.add_argument('-c', '--notebook-collection-paths', type=str, default='')
     parser.add_argument('-n', '--notebook-category', type=str, default=None)
@@ -28,6 +28,11 @@ def obtain_options() -> argparse.Namespace:
     options = parser.parse_args()
     options.notebook_collection_paths = [nb_path for nb_path in options.notebook_collection_paths.split(',')]
     return options
+
+def validate(options: argparse.Namespace) -> None:
+    operation_members = [member.value for member in Operation.__members__.values()]
+    if not options.operation.value in operation_members:
+        raise NotImplementedError(f'Operation[{options.operation.value}] does not exist. Available Operations: {",".join(operation_members)}')
 
 def main(options: argparse.Namespace) -> None:
     if options.operation is Operation.ScanGithub:
@@ -90,4 +95,5 @@ def main(options: argparse.Namespace) -> None:
 
 if __name__ == '__main__':
     options = obtain_options()
+    validate(options)
     main(options)
