@@ -8,6 +8,7 @@ from builder.service import find_build_jobs, run_build, setup_build
 def obtain_options() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument('-c', '--notebook-collection-paths', type=str, default='')
+    parser.add_argument('-n', '--notebook-category', type=str, default=None)
     parser.add_argument('-s', '--scan-for-failures', default=False, action='store_true')
     parser.add_argument('-r', '--remote-names', type=str, default='master')
     options = parser.parse_args()
@@ -28,6 +29,9 @@ def main(options: argparse.Namespace) -> None:
             raise NotImplementedError
 
         for build_job in find_build_jobs(options.notebook_collection_paths):
+            if not options.notebook_category is None and options.notebook_category != build_job.category.name:
+                continue
+
             setup_build(build_job)
             run_build(build_job)
 
