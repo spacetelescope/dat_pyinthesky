@@ -9,7 +9,3 @@ IPYDB_REQUIRED_FILES: typing.List[str] = ['requirements.txt']
 REQUIREMENTS_FILE_NAMES = ['requirements.txt', 'requirements']
 ENCODING: str = 'utf-8'
 FILTER_STRIP = '/'
-if os.path.exists(ARTIFACT_DEST_DIR):
-    shutil.rmtree(ARTIFACT_DEST_DIR)
-
-os.makedirs(ARTIFACT_DEST_DIR)

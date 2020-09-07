@@ -5,7 +5,7 @@ import time
 import types
 import typing
 
-from builder.constants import FILTER_STRIP, ENCODING
+from builder.constants import FILTER_STRIP, ENCODING, ARTIFACT_DEST_DIR
 from builder.exceptions import BuildError
 
 PWN = typing.TypeVar('PWN')
@@ -24,10 +24,10 @@ class Notebook(typing.NamedTuple):
 
     def create_build_script(self: PWN, categories: typing.List[str], build_dir: str, artifact_dir: str) -> None:
         build_script_filepath = os.path.join(build_dir, f'{self.filename}-builder.sh')
-        categories_formatted = '/'.join(categories)
-        metadata_path = f'{artifact_dir}/{categories_formatted}/{self.filename}.metadata.json'
-        html_path = f'{artifact_dir}/{categories_formatted}/{self.filename}.html'
-        output_dir = os.path.dirname(html_path)
+        output_dir = os.path.join(ARTIFACT_DEST_DIR, *categories)
+        filename = self.filename.rsplit('.', 1)[0]
+        metadata_path = f'{output_dir}/{filename}.metadata.json'
+        html_path = f'{output_dir}/{filename}.html'
         build_script = f"""#!/usr/bin/env bash
 set -e
 cd {build_dir}
@@ -39,7 +39,7 @@ fi
 
 mkdir -p {output_dir}
 python extract_metadata_from_notebook.py --input "{self.filename}" --output "{metadata_path}"
-jupyter nbconvert --debug --to html --execute "{self.filename}" --output "{html_path}" --ExecutePreprocessor.timeout=600
+jupyter nbconvert --debug --to html --execute "{self.filename}" --output "{html_path}" --ExecutePreprocessor.timeout=3600
 cd -
 """
         with open(build_script_filepath, 'w') as stream:

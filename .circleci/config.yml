@@ -11,71 +11,30 @@ jobs:
         executor: notebook-executor
         environment:
             PYTHONPATH: ./.circleci
-        steps:
-            - checkout
-            - run:
-                name: Setup Environment
-                command: bash ./.circleci/setup_env.sh
-            - run:
-                name: Build Notebooks
-                command: python ./.circleci/builder/factory.py -c jdat_notebooks
 
-    Build_HST_NB_VIZ_Notebooks:
-        executor: notebook-executor
-        environment:
-            PYTHONPATH: ./.circleci
         steps:
             - checkout
             - run:
                 name: Setup Environment
                 command: bash ./.circleci/setup_env.sh
+
             - run:
                 name: Build Notebooks
-                command: python ./.circleci/builder/factory.py -c hst_nb_viz
-    Build_Jupyter_Platform_Notebooks:
-        executor: notebook-executor
-        environment:
-            PYTHONPATH: ./.circleci
-        steps:
-            - checkout
+                command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
+
             - run:
-                name: Setup Environment
-                command: bash ./.circleci/setup_env.sh
+                name: Build Website
+                command: python ./.circleci/builder/factory.py -o build-website -c jdat_notebooks
+
+            - store_artifacts:
+                path: ./pages
+
             - run:
-                name: Build Notebooks
-                command: python ./.circleci/builder/factory.py -c jupyter_platform
-    Build_JWST_NB_VIZ_Notebooks:
-        executor: notebook-executor
-        environment:
-            PYTHONPATH: ./.circleci
-        steps:
-            - checkout
-            - run:
-                name: Setup Environment
-                command: bash ./.circleci/setup_env.sh
-            - run:
-                name: Build Notebooks
-                command: python ./.circleci/builder/factory.py -c jwst_nb_viz
-    Build_Concept_APIS:
-        executor: notebook-executor
-        environment:
-            PYTHONPATH: ./.circleci
-        steps:
-            - checkout
-            - run:
-                name: Setup Environment
-                command: bash ./.circleci/setup_env.sh
-            - run:
-                name: Build Notebooks
-                command: python ./.circleci/builder/factory.py -c concept_APIs
+                name: "Built Notebooks are available at:"
+                command: NB_URL="${CIRCLE_BUILD_URL}/artifacts/${CIRCLE_NODE_INDEX}/pages/index.html"; echo $NB_URL
 
 workflows:
   version: 2.1
-
   build-deploy:
-    jobs:
-        - Build_JDAT_Notebooks
-        - Build_HST_NB_VIZ_Notebooks
-        - Build_Jupyter_Platform_Notebooks
-        - Build_JWST_NB_VIZ_Notebooks
-        - Build_Concept_APIS
+      jobs:
+          - Build_JDAT_Notebooks
