@@ -51,6 +51,7 @@ def main(options: argparse.Namespace) -> None:
             raise NotImplementedError
 
         for build_job in find_build_jobs(options.notebook_collection_paths):
+            logger.info(f'Building Notebook: {build_job.collection.name}: {build_job.category.name}')
             if not options.notebook_category is None and options.notebook_category != build_job.category.name:
                 continue
 

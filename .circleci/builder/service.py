@@ -1,11 +1,14 @@
 import glob
+import logging
 import os
 import shutil
 import types
 import typing
 
-from builder.constants import BUILD_BASE_DIR, ARTIFACT_DEST_DIR
+from builder.constants import BUILD_BASE_DIR, ARTIFACT_DEST_DIR, ENCODING
 from builder.utils import filter_gitignore_entry__as_string, Collection, BuildJob, Category, Notebook, load_gitignore_data, run_command
+
+logger = logging.getLogger(__name__)
 
 def build_categories(start_path: str, rebuild: bool = True) -> types.GeneratorType:
     gitignore_data = load_gitignore_data(os.path.join(start_path, '.gitignore'))
@@ -56,14 +59,41 @@ def find_collections(notebook_collection_paths: typing.List[str], rebuild: bool 
 def find_build_jobs(notebook_collection_paths: typing.List[str], rebuild: bool = True):
     for collection in find_collections(notebook_collection_paths, rebuild):
         for category in collection.categories:
-            # category.setup_build_env()
-            # category.inject_extra_files()
+            if any([True for ex_notebook in find_excluded_notebooks() if ex_notebook.collection == collection.name and ex_notebook.category == category.name]):
+                logger.info(f'Skipping Notebook[{collection.name}]: [{category.name}]')
+                continue
+
             build_scripts = []
             for notebook in category.notebooks:
-            #     notebook.create_build_script([collection.name, category.name], category.build_dir, category.artifact_dir)
                 build_scripts.append(os.path.join(category.build_dir, f'{notebook.filename}-builder.sh'))
 
             yield BuildJob(collection, category, build_scripts)
+
+EXCLUDED_NOTEBOOKS = None
+class ExcludedNotebook(typing.NamedTuple):
+    collection: str
+    category: str
+
+def find_excluded_notebooks() -> typing.List[ExcludedNotebook]:
+    entries = []
+    global EXCLUDED_NOTEBOOKS
+    if EXCLUDED_NOTEBOOKS is None:
+        filepath = os.path.join(os.getcwd(), 'excluded_notebooks')
+        if not os.path.exists(filepath):
+            return []
+
+        with open(filepath, 'rb') as stream:
+            entries = [entry for entry in stream.read().decode(ENCODING).split('\n') if entry]
+
+    if EXCLUDED_NOTEBOOKS:
+        return EXCLUDED_NOTEBOOKS
+
+    EXCLUDED_NOTEBOOKS = []
+    for entry in entries:
+        collection, category = entry.split(':')
+        EXCLUDED_NOTEBOOKS.append(ExcludedNotebook(collection, category))
+
+    return EXCLUDED_NOTEBOOKS 
 
 def setup_build(job: BuildJob) -> None:
     job.category.setup_build_env()
