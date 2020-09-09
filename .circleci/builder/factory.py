@@ -124,8 +124,9 @@ def main(options: argparse.Namespace) -> None:
 
                 rel_filepath = f'{group_dirpath}/{filename}.html'
                 shutil.copyfile(html_filepath, rel_filepath)
+                html_rel_filepath = f'{job.collection.name}/{job.category.name}/{filename}.html'
                 converted_pages.append({
-                    'output_file_path': rel_filepath,
+                    'output_file_path': html_rel_filepath,
                     'name': metadata['title'],
                     'title': metadata['title'],
                 })
