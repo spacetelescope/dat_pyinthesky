@@ -1,1 +1,3 @@
 jdat_notebooks:preimaging
+jdat_notebooks:background_estimation_imaging
+jdat_notebooks:composite_model_fitting
