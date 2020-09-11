@@ -1,4 +1,3 @@
-numpy==1.19.1
 astropy==4.0
 matplotlib==3.1.2
 mirage==1.3.3
