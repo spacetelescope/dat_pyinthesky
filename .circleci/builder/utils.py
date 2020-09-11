@@ -74,12 +74,13 @@ set -e
 cd {self.build_dir}
 virtualenv -p $(which python) env
 source env/bin/activate
-pip install -U pip setuptools
+pip install -U pip setuptools --use-feature=2020-resolver
+pip install -U jupyter --use-feature=2020-resolver
 if [ -f "pre-install.sh" ]; then
     bash pre-install.sh
 fi
 if [ -f "pre-requirements.txt" ]; then
-    pip install -U -r pre-requirements.txt
+    pip install -r pre-requirements.txt
 fi
 if [ -f "requirements.txt" ]; then
     pip install -U -r requirements.txt
@@ -87,7 +88,6 @@ fi
 if [ -f "environment.sh" ]; then
     source environment.sh
 fi
-pip install jupyter
 mkdir -p {self.artifact_dir}
 cd -
 """
