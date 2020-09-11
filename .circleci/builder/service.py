@@ -60,7 +60,6 @@ def find_build_jobs(notebook_collection_paths: typing.List[str], rebuild: bool =
     for collection in find_collections(notebook_collection_paths, rebuild):
         for category in collection.categories:
             if any([True for ex_notebook in find_excluded_notebooks() if ex_notebook.collection == collection.name and ex_notebook.category == category.name]):
-                logger.info(f'Skipping Notebook[{collection.name}]: [{category.name}]')
                 continue
 
             build_scripts = []

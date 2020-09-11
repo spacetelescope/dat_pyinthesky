@@ -40,7 +40,7 @@ fi
 
 mkdir -p {output_dir}
 python extract_metadata_from_notebook.py --input "{self.filename}" --output "{metadata_path}"
-jupyter nbconvert --debug --to html --execute "{self.filename}" --output "{html_path}" --ExecutePreprocessor.timeout=3600
+jupyter nbconvert --debug --to html --execute "{self.filename}" --output "{html_path}" --ExecutePreprocessor.timeout=14400
 cd -
 """
         with open(build_script_filepath, 'w') as stream:
