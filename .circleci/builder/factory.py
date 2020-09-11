@@ -57,7 +57,7 @@ def main(options: argparse.Namespace) -> None:
                 run_build(build_job)
         else:
             for build_job in find_build_jobs(options.notebook_collection_paths):
-                if options.notebook_category == build_job.category.name:
+                if options.notebook_category != build_job.category.name:
                     continue
 
                 logger.info(f'Building Notebook: {build_job.collection.name}: {build_job.category.name}')
