@@ -9,7 +9,7 @@ import shutil
 
 from builder.constants import ARTIFACT_DEST_DIR, ENCODING, BUILD_LOG_DIR
 from builder.github import scan_pull_requests_for_failures
-from builder.service import find_build_jobs, run_build, setup_build
+from builder.service import find_build_jobs, run_build, setup_build, find_excluded_notebooks, is_excluded
 
 from nbpages import make_html_index
 
@@ -50,13 +50,19 @@ def main(options: argparse.Namespace) -> None:
         if options.notebook_collection_paths == '':
             raise NotImplementedError
 
-        for build_job in find_build_jobs(options.notebook_collection_paths):
-            logger.info(f'Building Notebook: {build_job.collection.name}: {build_job.category.name}')
-            if not options.notebook_category is None and options.notebook_category != build_job.category.name:
-                continue
+        if options.notebook_category is None:
+            for build_job in filter(is_excluded, find_build_jobs(options.notebook_collection_paths)):
+                logger.info(f'Building Notebook: {build_job.collection.name}: {build_job.category.name}')
+                setup_build(build_job)
+                run_build(build_job)
+        else:
+            for build_job in find_build_jobs(options.notebook_collection_paths):
+                if options.notebook_category != build_job.category.name:
+                    continue
 
-            setup_build(build_job)
-            run_build(build_job)
+                logger.info(f'Building Notebook: {build_job.collection.name}: {build_job.category.name}')
+                setup_build(build_job)
+                run_build(build_job)
 
     elif options.operation is Operation.MultiBuild:
         import multiprocessing, time
@@ -67,7 +73,7 @@ def main(options: argparse.Namespace) -> None:
         os.makedirs(BUILD_LOG_DIR)
         def _build_category(collection_name: str, category_name: str) -> None:
             os.environ['CHANNEL_BUILD'] = 'true'
-            for build_job in find_build_jobs([collection_name], False):
+            for build_job in filter(is_excluded, find_build_jobs(options.notebook_collection_paths, False)):
                 if category_name != build_job.category.name:
                     continue
 
@@ -76,7 +82,7 @@ def main(options: argparse.Namespace) -> None:
             del os.environ['CHANNEL_BUILD']
 
         job_list = []
-        for build_job in find_build_jobs(options.notebook_collection_paths):
+        for build_job in filter(is_excluded, find_build_jobs(options.notebook_collection_paths)):
             job_list.append([build_job.collection.name, build_job.category.name])
 
         processes = []
@@ -108,7 +114,7 @@ def main(options: argparse.Namespace) -> None:
         os.makedirs(artifact_dest_dir)
 
         converted_pages = []
-        for job in find_build_jobs(options.notebook_collection_paths, False):
+        for job in filter(is_excluded, find_build_jobs(options.notebook_collection_paths, False)):
             for notebook in job.category.notebooks:
                 filename = notebook.filename.rsplit('.', 1)[0]
                 html_filename = f'{filename}.html'

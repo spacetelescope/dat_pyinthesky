@@ -59,9 +59,9 @@ def find_collections(notebook_collection_paths: typing.List[str], rebuild: bool 
 def find_build_jobs(notebook_collection_paths: typing.List[str], rebuild: bool = True):
     for collection in find_collections(notebook_collection_paths, rebuild):
         for category in collection.categories:
-            if any([True for ex_notebook in find_excluded_notebooks() if ex_notebook.collection == collection.name and ex_notebook.category == category.name]):
-                logger.info(f'Skipping Notebook[{collection.name}]: [{category.name}]')
-                continue
+            # if any([True for ex_notebook in find_excluded_notebooks() if ex_notebook.collection == collection.name and ex_notebook.category == category.name]):
+            #     import pdb; pdb.set_trace()
+            #     continue
 
             build_scripts = []
             for notebook in category.notebooks:
@@ -73,6 +73,9 @@ EXCLUDED_NOTEBOOKS = None
 class ExcludedNotebook(typing.NamedTuple):
     collection: str
     category: str
+
+def is_excluded(job: BuildJob) -> bool:
+    return not any([True for ex_notebook in find_excluded_notebooks() if ex_notebook.collection == job.collection.name and ex_notebook.category == job.category.name])
 
 def find_excluded_notebooks() -> typing.List[ExcludedNotebook]:
     entries = []
