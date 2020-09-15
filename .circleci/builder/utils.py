@@ -193,3 +193,14 @@ def extract_files_and_directories_from_folder_with_gitignore_filepath(folder_pat
                 yield filepath
         break
 
+def extract_files_and_directories_from_folder(folder_path: str) -> types.GeneratorType:
+    for root, dirnames, filenames in os.walk(folder_path):
+        for dirname in dirnames:
+            dirpath = os.path.join(root, dirname)
+            yield dirname, dirpath
+
+        for filename in filenames:
+            filepath = os.path.join(root, filename)
+            yield filename, filepath
+
+        break

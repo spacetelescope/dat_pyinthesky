@@ -10,6 +10,7 @@ import shutil
 from builder.constants import ARTIFACT_DEST_DIR, ENCODING, BUILD_LOG_DIR
 from builder.github import scan_pull_requests_for_failures
 from builder.service import find_build_jobs, run_build, setup_build, find_excluded_notebooks, is_excluded
+from builder.notebook_sync import move_notebook
 
 from nbpages import make_html_index
 
@@ -18,6 +19,7 @@ class Operation(enum.Enum):
     BuildNotebooks = 'build-notebooks'
     BuildWebsite = 'build-website'
     MultiBuild = 'multi-build'
+    SyncNotebooks = 'sync-notebooks'
     ScanGithub = 'scan-github'
 
 def obtain_options() -> argparse.Namespace:
@@ -28,6 +30,10 @@ def obtain_options() -> argparse.Namespace:
     parser.add_argument('-n', '--notebook-category', type=str, default=None)
     parser.add_argument('-r', '--remote-names', type=str, default='master')
     # Build Website
+
+    # Sync Notebooks
+    parser.add_argument('-d', '--destination-path', type=str, default=None)
+
     options = parser.parse_args()
     options.notebook_collection_paths = [nb_path for nb_path in options.notebook_collection_paths.split(',')]
     return options
@@ -45,6 +51,16 @@ def main(options: argparse.Namespace) -> None:
         options.remote_names == [name for name in options.remote_names.split(',')]
         for failure in scan_pull_requests_for_failures(options.remote_names):
             print(failure)
+
+    elif options.operation is Operation.SyncNotebooks:
+        if options.destination_path is None:
+            raise NotImplementedError('Missing --destination-path input')
+
+        formatted_collection_paths = ','.join(options.notebook_collection_paths)
+        logger.info(f'Syncing Notebooks Collections to[{formatted_collection_paths}] to Destination[{options.destination_path}]')
+        for build_job in filter(is_excluded, find_build_jobs(options.notebook_collection_paths)):
+            logger.info(f'Syncing Notebook: {build_job.category.name}')
+            move_notebook(build_job, options.destination_path)
 
     elif options.operation is Operation.BuildNotebooks:
         if options.notebook_collection_paths == '':
