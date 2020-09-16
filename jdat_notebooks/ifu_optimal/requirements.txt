@@ -3,6 +3,8 @@ jupyter_client==5.3.5
 numpy
 scipy
 specutils
+git+https://github.com/glue-viz/glue.git
+git+https://github.com/glue-viz/glue-jupyter.git
 git+https://github.com/spacetelescope/jdaviz
 regions
 photutils
