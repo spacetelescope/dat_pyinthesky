@@ -75,7 +75,6 @@ cd {self.build_dir}
 virtualenv -p $(which python) env
 source env/bin/activate
 pip install -U pip setuptools --use-feature=2020-resolver
-pip install -U jupyter --use-feature=2020-resolver
 if [ -f "pre-install.sh" ]; then
     bash pre-install.sh
 fi
@@ -87,6 +86,11 @@ if [ -f "requirements.txt" ]; then
 fi
 if [ -f "environment.sh" ]; then
     source environment.sh
+fi
+# Allow the engineers to specify thier own rendering environment, only expect for nbconvert to exist. If it doesn't,
+#  install it via jupyter
+if ! pip freeze |grep jupyter== >/dev/null 2>/dev/null; then
+    pip install -U jupyter --use-feature=2020-resolver
 fi
 mkdir -p {self.artifact_dir}
 cd -
