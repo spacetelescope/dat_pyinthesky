@@ -5,4 +5,4 @@ matplotlib>=3.1.1
 corner>=2.1.0
 tqdm>=4.48.2
 emcee>=3.0.2
-amical>=0.5dev
+git+git://github.com/SydneyAstrophotonicInstrumentationLab/AMICAL@0.5dev#egg=amical
