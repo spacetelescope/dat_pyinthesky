@@ -7,3 +7,4 @@ ipyvuetify==1.4.1
 git+https://github.com/jbcurtin/glue.git@9e47dae27dda589c29864f27fd75edf283aaece1#egg=glue-core
 git+https://github.com/jbcurtin/glue-jupyter.git@2f5958f6aa0b49fc07283716813851fad17e781b#egg=glue-jupyter
 git+https://github.com/jbcurtin/jdaviz.git@482d36eb892e8d7c2ed6e2ba95d6ca1ebcc8c6ec#egg=jdaviz
+git+https://github.com/jbcurtin/glue-vispy-viewers.git@3bfb6f8f3922f793a6e5f91ad0fc4c1e08760692#egg=jdaviz
