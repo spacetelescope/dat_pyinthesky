@@ -21,7 +21,7 @@ jobs:
 
             - run:
                 name: Build Notebooks
-                no_output_timeout: 30m
+                no_output_timeout: 60m
                 command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
 
             - run:
