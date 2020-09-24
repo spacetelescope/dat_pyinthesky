@@ -7,7 +7,7 @@ import os
 import json
 import shutil
 
-from builder.constants import ARTIFACT_DEST_DIR, ENCODING, BUILD_LOG_DIR
+from builder.constants import ARTIFACT_DEST_DIR, ENCODING, BUILD_LOG_DIR, CIRCLE_CI_CONFIG_PATH
 from builder.github import scan_pull_requests_for_failures
 from builder.service import find_build_jobs, run_build, setup_build, find_excluded_notebooks, is_excluded
 from builder.notebook_sync import move_notebook
@@ -21,6 +21,7 @@ class Operation(enum.Enum):
     MultiBuild = 'multi-build'
     SyncNotebooks = 'sync-notebooks'
     ScanGithub = 'scan-github'
+    MapNotebooks = 'map-notebooks'
 
 def obtain_options() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
@@ -33,6 +34,8 @@ def obtain_options() -> argparse.Namespace:
 
     # Sync Notebooks
     parser.add_argument('-d', '--destination-path', type=str, default=None)
+
+    # Map Notebooks
 
     options = parser.parse_args()
     options.notebook_collection_paths = [nb_path for nb_path in options.notebook_collection_paths.split(',')]
@@ -158,6 +161,74 @@ def main(options: argparse.Namespace) -> None:
         output = make_html_index(converted_pages, index_template_path, outfn=None, relpaths=True)
         with open(index_path, 'wb') as stream:
             stream.write(output.encode(ENCODING))
+
+    elif options.operation is Operation.MapNotebooks:
+        import copy
+        import yaml
+        config = {
+            'version': 2.1,
+            'executors': {
+                'notebook-executor': {
+                    'docker': [
+                        {'image': 'continuumio/miniconda3'}
+                    ],
+                    'resource_class': 'medium',
+                    'working_directory': '~/repo'
+                }
+            },
+            'jobs': {},
+            'workflows': {
+                'version': '2.1',
+                'Branch Build': {
+                    'jobs': []
+                },
+                'PR Build': {
+                    'jobs': []
+                }
+            }
+
+        }
+        job_template = {
+            'executor': 'notebook-executor',
+            'environment': {
+                'PYTHONPATH': '.circleci',
+            },
+            'steps': [
+                'checkout',
+                {
+                    'run': {
+                        'name': 'Setup Environment',
+                        'command': 'bash ./.circleci/setup_env.sh'
+                    },
+                    'run': {
+                        'name': 'Build Notebook',
+                        'no_output_timeout': '60m',
+                        'command': None,
+                    }
+                },
+                {
+                    'store_artifacts': {
+                        'path': './pages'
+                    }
+                }
+            ]
+        }
+        for build_job in filter(is_excluded, find_build_jobs(options.notebook_collection_paths)):
+            formatted_cat_name = ' '.join(build_job.category.name.split('_'))
+            formatted_cat_name = formatted_cat_name.title()
+            formatted_col_name = ' '.join(build_job.collection.name.split('_'))
+            formatted_col_name = formatted_col_name.title()
+            job_name = '-'.join([formatted_col_name, formatted_cat_name])
+            job = copy.deepcopy(job_template)
+            job['steps'][1]['run']['command'] = f'python ./.circleci/builder/factory.sh -o build-notebooks -c {build_job.collection.name} -n {build_job.category.name}'
+            config['jobs'][job_name] = job
+            config['workflows']['Branch Build']['jobs'].append(job_name)
+
+            # import pdb; pdb.set_trace()
+            pass
+
+        with open(CIRCLE_CI_CONFIG_PATH, 'wb') as stream:
+            stream.write(yaml.dump(config).encode('utf-8'))
 
     else:
         raise NotImplementedError

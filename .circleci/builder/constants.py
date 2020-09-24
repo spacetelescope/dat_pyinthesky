@@ -2,6 +2,7 @@ import os
 import shutil
 import typing
 
+CIRCLE_CI_CONFIG_PATH = os.path.join(os.getcwd(), '.circleci/config.yml')
 BUILD_LOG_DIR = '/tmp/nbcollection-ci-build-logs'
 BUILD_BASE_DIR = '/tmp/nbcollection-ci-build-base-dir'
 ARTIFACT_DEST_DIR: str = '/tmp/artifacts'
