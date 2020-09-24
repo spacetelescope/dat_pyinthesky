@@ -220,7 +220,7 @@ def main(options: argparse.Namespace) -> None:
             formatted_col_name = formatted_col_name.title()
             job_name = '-'.join([formatted_col_name, formatted_cat_name])
             job = copy.deepcopy(job_template)
-            job['steps'][1]['run']['command'] = f'python ./.circleci/builder/factory.sh -o build-notebooks -c {build_job.collection.name} -n {build_job.category.name}'
+            job['steps'][1]['run']['command'] = f'python ./.circleci/builder/factory.py -o build-notebooks -c {build_job.collection.name} -n {build_job.category.name}'
             config['jobs'][job_name] = job
             config['workflows']['Branch Build']['jobs'].append(job_name)
 
