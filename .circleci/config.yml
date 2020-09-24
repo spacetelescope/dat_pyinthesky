@@ -12,11 +12,11 @@ jobs:
     steps:
     - checkout
     - run:
-        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
-          -n asdf_example
+        command: bash ./.circleci/setup_env.sh
         name: Setup Environment
     - run:
-        command: null
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
+          -n asdf_example
         name: Build Notebook
         no_output_timeout: 60m
     - store_artifacts:
@@ -28,11 +28,11 @@ jobs:
     steps:
     - checkout
     - run:
-        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
-          -n background_estimation_imaging
+        command: bash ./.circleci/setup_env.sh
         name: Setup Environment
     - run:
-        command: null
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
+          -n background_estimation_imaging
         name: Build Notebook
         no_output_timeout: 60m
     - store_artifacts:
@@ -44,11 +44,11 @@ jobs:
     steps:
     - checkout
     - run:
-        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
-          -n cube_fitting
+        command: bash ./.circleci/setup_env.sh
         name: Setup Environment
     - run:
-        command: null
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
+          -n cube_fitting
         name: Build Notebook
         no_output_timeout: 60m
     - store_artifacts:
@@ -60,11 +60,11 @@ jobs:
     steps:
     - checkout
     - run:
-        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
-          -n MIRI_LRS_spectral_extraction
+        command: bash ./.circleci/setup_env.sh
         name: Setup Environment
     - run:
-        command: null
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
+          -n MIRI_LRS_spectral_extraction
         name: Build Notebook
         no_output_timeout: 60m
     - store_artifacts:
@@ -76,11 +76,11 @@ jobs:
     steps:
     - checkout
     - run:
-        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
-          -n mos-spectroscopy
+        command: bash ./.circleci/setup_env.sh
         name: Setup Environment
     - run:
-        command: null
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
+          -n mos-spectroscopy
         name: Build Notebook
         no_output_timeout: 60m
     - store_artifacts:
@@ -92,11 +92,11 @@ jobs:
     steps:
     - checkout
     - run:
-        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
-          -n MRS_Mstar_analysis
+        command: bash ./.circleci/setup_env.sh
         name: Setup Environment
     - run:
-        command: null
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
+          -n MRS_Mstar_analysis
         name: Build Notebook
         no_output_timeout: 60m
     - store_artifacts:
@@ -108,11 +108,11 @@ jobs:
     steps:
     - checkout
     - run:
-        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
-          -n NIRCam_photometry
+        command: bash ./.circleci/setup_env.sh
         name: Setup Environment
     - run:
-        command: null
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
+          -n NIRCam_photometry
         name: Build Notebook
         no_output_timeout: 60m
     - store_artifacts:
@@ -124,11 +124,11 @@ jobs:
     steps:
     - checkout
     - run:
-        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
-          -n NIRISS_WFSS_postpipeline
+        command: bash ./.circleci/setup_env.sh
         name: Setup Environment
     - run:
-        command: null
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
+          -n NIRISS_WFSS_postpipeline
         name: Build Notebook
         no_output_timeout: 60m
     - store_artifacts:
@@ -140,11 +140,11 @@ jobs:
     steps:
     - checkout
     - run:
-        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
-          -n optimal_extraction
+        command: bash ./.circleci/setup_env.sh
         name: Setup Environment
     - run:
-        command: null
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
+          -n optimal_extraction
         name: Build Notebook
         no_output_timeout: 60m
     - store_artifacts:
@@ -156,11 +156,11 @@ jobs:
     steps:
     - checkout
     - run:
-        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
-          -n psf_photometry
+        command: bash ./.circleci/setup_env.sh
         name: Setup Environment
     - run:
-        command: null
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
+          -n psf_photometry
         name: Build Notebook
         no_output_timeout: 60m
     - store_artifacts:
@@ -172,11 +172,11 @@ jobs:
     steps:
     - checkout
     - run:
-        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
-          -n transit_spectroscopy_notebook
+        command: bash ./.circleci/setup_env.sh
         name: Setup Environment
     - run:
-        command: null
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
+          -n transit_spectroscopy_notebook
         name: Build Notebook
         no_output_timeout: 60m
     - store_artifacts:
