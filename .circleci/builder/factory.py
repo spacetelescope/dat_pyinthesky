@@ -182,9 +182,9 @@ def main(options: argparse.Namespace) -> None:
                 'Branch Build': {
                     'jobs': []
                 },
-                'PR Build': {
-                    'jobs': []
-                }
+                # 'PR Build': {
+                #     'jobs': []
+                # }
             }
 
         }
@@ -223,9 +223,6 @@ def main(options: argparse.Namespace) -> None:
             job['steps'][1]['run']['command'] = f'python ./.circleci/builder/factory.sh -o build-notebooks -c {build_job.collection.name} -n {build_job.category.name}'
             config['jobs'][job_name] = job
             config['workflows']['Branch Build']['jobs'].append(job_name)
-
-            # import pdb; pdb.set_trace()
-            pass
 
         with open(CIRCLE_CI_CONFIG_PATH, 'wb') as stream:
             stream.write(yaml.dump(config).encode('utf-8'))

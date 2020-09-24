@@ -163,6 +163,4 @@ workflows:
     - Jdat Notebooks-Mrs Mstar Analysis
     - Jdat Notebooks-Niriss Wfss Postpipeline
     - Jdat Notebooks-Mos-Spectroscopy
-  PR Build:
-    jobs: []
   version: '2.1'
