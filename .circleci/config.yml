@@ -14,6 +14,9 @@ jobs:
     - run:
         command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
           -n asdf_example
+        name: Setup Environment
+    - run:
+        command: null
         name: Build Notebook
         no_output_timeout: 60m
     - store_artifacts:
@@ -27,6 +30,9 @@ jobs:
     - run:
         command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
           -n background_estimation_imaging
+        name: Setup Environment
+    - run:
+        command: null
         name: Build Notebook
         no_output_timeout: 60m
     - store_artifacts:
@@ -40,6 +46,9 @@ jobs:
     - run:
         command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
           -n cube_fitting
+        name: Setup Environment
+    - run:
+        command: null
         name: Build Notebook
         no_output_timeout: 60m
     - store_artifacts:
@@ -53,6 +62,9 @@ jobs:
     - run:
         command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
           -n MIRI_LRS_spectral_extraction
+        name: Setup Environment
+    - run:
+        command: null
         name: Build Notebook
         no_output_timeout: 60m
     - store_artifacts:
@@ -66,6 +78,9 @@ jobs:
     - run:
         command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
           -n mos-spectroscopy
+        name: Setup Environment
+    - run:
+        command: null
         name: Build Notebook
         no_output_timeout: 60m
     - store_artifacts:
@@ -79,6 +94,9 @@ jobs:
     - run:
         command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
           -n MRS_Mstar_analysis
+        name: Setup Environment
+    - run:
+        command: null
         name: Build Notebook
         no_output_timeout: 60m
     - store_artifacts:
@@ -92,6 +110,9 @@ jobs:
     - run:
         command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
           -n NIRCam_photometry
+        name: Setup Environment
+    - run:
+        command: null
         name: Build Notebook
         no_output_timeout: 60m
     - store_artifacts:
@@ -105,6 +126,9 @@ jobs:
     - run:
         command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
           -n NIRISS_WFSS_postpipeline
+        name: Setup Environment
+    - run:
+        command: null
         name: Build Notebook
         no_output_timeout: 60m
     - store_artifacts:
@@ -118,6 +142,9 @@ jobs:
     - run:
         command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
           -n optimal_extraction
+        name: Setup Environment
+    - run:
+        command: null
         name: Build Notebook
         no_output_timeout: 60m
     - store_artifacts:
@@ -131,6 +158,9 @@ jobs:
     - run:
         command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
           -n psf_photometry
+        name: Setup Environment
+    - run:
+        command: null
         name: Build Notebook
         no_output_timeout: 60m
     - store_artifacts:
@@ -144,6 +174,9 @@ jobs:
     - run:
         command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
           -n transit_spectroscopy_notebook
+        name: Setup Environment
+    - run:
+        command: null
         name: Build Notebook
         no_output_timeout: 60m
     - store_artifacts:

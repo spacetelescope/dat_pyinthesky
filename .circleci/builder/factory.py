@@ -200,6 +200,8 @@ def main(options: argparse.Namespace) -> None:
                         'name': 'Setup Environment',
                         'command': 'bash ./.circleci/setup_env.sh'
                     },
+                },
+                {
                     'run': {
                         'name': 'Build Notebook',
                         'no_output_timeout': '60m',
