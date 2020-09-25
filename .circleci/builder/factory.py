@@ -132,6 +132,7 @@ def main(options: argparse.Namespace) -> None:
 
         os.makedirs(artifact_dest_dir)
 
+        # if options.notebook_category is None:
         converted_pages = []
         for job in filter(is_excluded, find_build_jobs(options.notebook_collection_paths, False)):
             for notebook in job.category.notebooks:
@@ -209,10 +210,16 @@ def main(options: argparse.Namespace) -> None:
                     }
                 },
                 {
+                    'run': {
+                        'name': 'Build Website',
+                        'command': None,
+                    }
+                },
+                {
                     'store_artifacts': {
                         'path': './pages'
                     }
-                }
+                },
             ]
         }
         for build_job in filter(is_excluded, find_build_jobs(options.notebook_collection_paths)):
@@ -223,6 +230,7 @@ def main(options: argparse.Namespace) -> None:
             job_name = '-'.join([formatted_col_name, formatted_cat_name])
             job = copy.deepcopy(job_template)
             job['steps'][2]['run']['command'] = f'python ./.circleci/builder/factory.py -o build-notebooks -c {build_job.collection.name} -n {build_job.category.name}'
+            job['steps'][3]['run']['command'] = f'python ./.circleci/builder/factory.py -o build-website -c {build_job.collection.name}'
             config['jobs'][job_name] = job
             config['workflows']['Branch Build']['jobs'].append(job_name)
 
