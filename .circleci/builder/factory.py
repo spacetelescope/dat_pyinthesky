@@ -135,7 +135,7 @@ def main(options: argparse.Namespace) -> None:
         # if options.notebook_category is None:
         converted_pages = []
         for job in filter(is_excluded, find_build_jobs(options.notebook_collection_paths, False)):
-            if options.category_name and job.category.name != options.category_name:
+            if options.notebook_category and options.notebook_category != build_job.category.name:
                 continue
 
             for notebook in job.category.notebooks:
