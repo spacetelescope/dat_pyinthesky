@@ -22,6 +22,7 @@ class Operation(enum.Enum):
     SyncNotebooks = 'sync-notebooks'
     ScanGithub = 'scan-github'
     MapNotebooks = 'map-notebooks'
+    MergeArtifacts = 'merge-artifacts'
 
 def obtain_options() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
@@ -135,7 +136,7 @@ def main(options: argparse.Namespace) -> None:
         # if options.notebook_category is None:
         converted_pages = []
         for job in filter(is_excluded, find_build_jobs(options.notebook_collection_paths, False)):
-            if options.notebook_category and options.notebook_category != build_job.category.name:
+            if options.notebook_category and options.notebook_category != job.category.name:
                 continue
 
             for notebook in job.category.notebooks:
@@ -160,11 +161,12 @@ def main(options: argparse.Namespace) -> None:
                     'title': metadata['title'],
                 })
 
-        index_path = f'{artifact_dest_dir}/index.html'
-        index_template_path = os.path.join(os.getcwd(), 'index.tpl')
-        output = make_html_index(converted_pages, index_template_path, outfn=None, relpaths=True)
-        with open(index_path, 'wb') as stream:
-            stream.write(output.encode(ENCODING))
+        if len(converted_pages) > 0:
+            index_path = f'{artifact_dest_dir}/index.html'
+            index_template_path = os.path.join(os.getcwd(), 'index.tpl')
+            output = make_html_index(converted_pages, index_template_path, outfn=None, relpaths=True)
+            with open(index_path, 'wb') as stream:
+                stream.write(output.encode(ENCODING))
 
     elif options.operation is Operation.MapNotebooks:
         import copy
@@ -237,7 +239,7 @@ def main(options: argparse.Namespace) -> None:
                 {
                     'run': {
                         'name': 'Collect Artifacts',
-                        'command': 'python ./.circleci/builder/factory.py -o collect-circle-ci-artifacts',
+                        'command': 'python ./.circleci/builder/factory.py -o merge-artifacts',
                     }
                 }
             ]
@@ -256,6 +258,9 @@ def main(options: argparse.Namespace) -> None:
 
         with open(CIRCLE_CI_CONFIG_PATH, 'wb') as stream:
             stream.write(yaml.dump(config).encode('utf-8'))
+
+    elif options.operation is Operation.MergeArtifacts:
+        pass
 
     else:
         raise NotImplementedError

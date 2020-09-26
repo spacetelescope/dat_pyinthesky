@@ -21,6 +21,7 @@ jobs:
         no_output_timeout: 60m
     - run:
         command: python ./.circleci/builder/factory.py -o build-website -c jdat_notebooks
+          -n asdf_example
         name: Build Website
     - store_artifacts:
         path: ./pages
@@ -40,6 +41,7 @@ jobs:
         no_output_timeout: 60m
     - run:
         command: python ./.circleci/builder/factory.py -o build-website -c jdat_notebooks
+          -n background_estimation_imaging
         name: Build Website
     - store_artifacts:
         path: ./pages
@@ -59,6 +61,7 @@ jobs:
         no_output_timeout: 60m
     - run:
         command: python ./.circleci/builder/factory.py -o build-website -c jdat_notebooks
+          -n cube_fitting
         name: Build Website
     - store_artifacts:
         path: ./pages
@@ -78,6 +81,7 @@ jobs:
         no_output_timeout: 60m
     - run:
         command: python ./.circleci/builder/factory.py -o build-website -c jdat_notebooks
+          -n MIRI_LRS_spectral_extraction
         name: Build Website
     - store_artifacts:
         path: ./pages
@@ -97,6 +101,7 @@ jobs:
         no_output_timeout: 60m
     - run:
         command: python ./.circleci/builder/factory.py -o build-website -c jdat_notebooks
+          -n mos-spectroscopy
         name: Build Website
     - store_artifacts:
         path: ./pages
@@ -116,6 +121,7 @@ jobs:
         no_output_timeout: 60m
     - run:
         command: python ./.circleci/builder/factory.py -o build-website -c jdat_notebooks
+          -n MRS_Mstar_analysis
         name: Build Website
     - store_artifacts:
         path: ./pages
@@ -135,6 +141,7 @@ jobs:
         no_output_timeout: 60m
     - run:
         command: python ./.circleci/builder/factory.py -o build-website -c jdat_notebooks
+          -n NIRCam_photometry
         name: Build Website
     - store_artifacts:
         path: ./pages
@@ -154,6 +161,7 @@ jobs:
         no_output_timeout: 60m
     - run:
         command: python ./.circleci/builder/factory.py -o build-website -c jdat_notebooks
+          -n NIRISS_WFSS_postpipeline
         name: Build Website
     - store_artifacts:
         path: ./pages
@@ -173,6 +181,7 @@ jobs:
         no_output_timeout: 60m
     - run:
         command: python ./.circleci/builder/factory.py -o build-website -c jdat_notebooks
+          -n optimal_extraction
         name: Build Website
     - store_artifacts:
         path: ./pages
@@ -192,6 +201,7 @@ jobs:
         no_output_timeout: 60m
     - run:
         command: python ./.circleci/builder/factory.py -o build-website -c jdat_notebooks
+          -n psf_photometry
         name: Build Website
     - store_artifacts:
         path: ./pages
@@ -211,6 +221,7 @@ jobs:
         no_output_timeout: 60m
     - run:
         command: python ./.circleci/builder/factory.py -o build-website -c jdat_notebooks
+          -n transit_spectroscopy_notebook
         name: Build Website
     - store_artifacts:
         path: ./pages
@@ -229,4 +240,6 @@ workflows:
     - Jdat Notebooks-Mrs Mstar Analysis
     - Jdat Notebooks-Niriss Wfss Postpipeline
     - Jdat Notebooks-Mos-Spectroscopy
+  Deploy Website:
+    jobs: []
   version: '2.1'
