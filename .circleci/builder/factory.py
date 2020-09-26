@@ -155,6 +155,9 @@ def main(options: argparse.Namespace) -> None:
                 rel_filepath = f'{group_dirpath}/{filename}.html'
                 shutil.copyfile(html_filepath, rel_filepath)
                 html_rel_filepath = f'{job.collection.name}/{job.category.name}/{filename}.html'
+                rel_filepath_meta = f'{group_dirpath}/{filename}.metadata.json'
+                shutil.copyfile(meta_filepath, rel_filepath_meta)
+                meta_rel_filepath = f'{job.collection.name}/{job.category.name}/{filename}.metadata.json'
                 converted_pages.append({
                     'output_file_path': html_rel_filepath,
                     'name': metadata['title'],
@@ -260,6 +263,48 @@ def main(options: argparse.Namespace) -> None:
             stream.write(yaml.dump(config).encode('utf-8'))
 
     elif options.operation is Operation.MergeArtifacts:
+        import requests
+        artifact_dest_dir = './pages'
+        if os.path.exists(artifact_dest_dir):
+            shutil.rmtree(artifact_dest_dir)
+
+        os.makedirs(artifact_dest_dir)
+        token = 'e0b5094a0f0d94b084d105f9cbbc452515f20223'
+        base_url = 'https://circleci.com/api/v1.1'
+        recent_builds = f'{base_url}/recent-builds'
+        class CircleAuth(requests.auth.AuthBase):
+            def __call__(self, request):
+                request.headers['Circle-Token'] = token
+                return request
+
+        workspace_id = None
+        ci_jobs = []
+        artifact_urls = []
+        for idx, recent_job in enumerate(requests.get(recent_builds, auth=CircleAuth()).json()):
+            if idx == 0:
+                workspace_id = recent_job['workflows']['workspace_id']
+                ci_jobs.append(recent_job)
+                continue
+
+            if workspace_id == recent_job['workflows']['workspace_id']:
+                ci_jobs.append(recent_job)
+
+        for ci_job in ci_jobs:
+            url = f'{base_url}/project/{ci_job["vcs_type"]}/{ci_job["username"]}/{ci_job["reponame"]}/{ci_job["build_num"]}/artifacts'
+            resp = requests.get(url, auth=CircleAuth())
+            artifact_urls.extend([a['url'] for a in resp.json() if not a['url'].endswith('index.html')])
+
+        for url in artifact_urls:
+            filename = os.path.basename(url)
+            filepath = os.path.join(artifact_dest_dir, filename)
+            resp = requests.get(url, auth=CircleAuth(), stream=True)
+            logger.info(f'Storing File[{filepath}]')
+            with open(filepath, 'wb') as stream:
+                for content in resp.iter_content(chunk_size=1024):
+                    stream.write(content)
+
+
+        import pdb; pdb.set_trace()
         pass
 
     else:
