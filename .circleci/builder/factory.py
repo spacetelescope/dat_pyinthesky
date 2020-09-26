@@ -135,6 +135,9 @@ def main(options: argparse.Namespace) -> None:
         # if options.notebook_category is None:
         converted_pages = []
         for job in filter(is_excluded, find_build_jobs(options.notebook_collection_paths, False)):
+            if options.category_name and job.category.name != options.category_name:
+                continue
+
             for notebook in job.category.notebooks:
                 filename = notebook.filename.rsplit('.', 1)[0]
                 html_filename = f'{filename}.html'
@@ -183,6 +186,9 @@ def main(options: argparse.Namespace) -> None:
                 'Branch Build': {
                     'jobs': []
                 },
+                'Deploy Website': {
+                    'jobs': []
+                },
                 # 'PR Build': {
                 #     'jobs': []
                 # }
@@ -222,6 +228,20 @@ def main(options: argparse.Namespace) -> None:
                 },
             ]
         }
+        deploy_website_job = {
+            'executor': 'notebook-executor',
+            'environment': {
+                'PYTHONPATH': '.circleci',
+            },
+            'steps': [
+                {
+                    'run': {
+                        'name': 'Collect Artifacts',
+                        'command': 'python ./.circleci/builder/factory.py -o collect-circle-ci-artifacts',
+                    }
+                }
+            ]
+        }
         for build_job in filter(is_excluded, find_build_jobs(options.notebook_collection_paths)):
             formatted_cat_name = ' '.join(build_job.category.name.split('_'))
             formatted_cat_name = formatted_cat_name.title()
@@ -230,7 +250,7 @@ def main(options: argparse.Namespace) -> None:
             job_name = '-'.join([formatted_col_name, formatted_cat_name])
             job = copy.deepcopy(job_template)
             job['steps'][2]['run']['command'] = f'python ./.circleci/builder/factory.py -o build-notebooks -c {build_job.collection.name} -n {build_job.category.name}'
-            job['steps'][3]['run']['command'] = f'python ./.circleci/builder/factory.py -o build-website -c {build_job.collection.name}'
+            job['steps'][3]['run']['command'] = f'python ./.circleci/builder/factory.py -o build-website -c {build_job.collection.name} -n {build_job.category.name}'
             config['jobs'][job_name] = job
             config['workflows']['Branch Build']['jobs'].append(job_name)
 
