@@ -264,11 +264,12 @@ def main(options: argparse.Namespace) -> None:
             config['jobs'][job_name] = job
             config['workflows']['Branch Build']['jobs'].append(job_name)
 
+        depend_job_names = [k for k in config['jobs'].keys()]
         deploy_job_name = 'Deploy JDAT Notebooks'
         deploy_job = copy.deepcopy(deploy_website_job)
         config['jobs'][deploy_job_name] = deploy_job
         # config['workflows']['Branch Build']['jobs'].append(deploy_job_name)
-        config['workflows']['Branch Build']['jobs'].append({deploy_job_name: {'requires': [k for k in config['jobs'].keys()]}})
+        config['workflows']['Branch Build']['jobs'].append({deploy_job_name: {'requires': depend_job_names}})
 
         with open(CIRCLE_CI_CONFIG_PATH, 'wb') as stream:
             stream.write(yaml.dump(config).encode('utf-8'))

@@ -261,5 +261,4 @@ workflows:
         - Jdat Notebooks-Mrs Mstar Analysis
         - Jdat Notebooks-Niriss Wfss Postpipeline
         - Jdat Notebooks-Mos-Spectroscopy
-        - Deploy JDAT Notebooks
   version: '2.1'
