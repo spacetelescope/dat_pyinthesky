@@ -195,9 +195,9 @@ def main(options: argparse.Namespace) -> None:
                 'Branch Build': {
                     'jobs': []
                 },
-                'Deploy Website': {
-                    'jobs': []
-                },
+                # 'Deploy Website': {
+                #     'jobs': []
+                # },
                 # 'PR Build': {
                 #     'jobs': []
                 # }

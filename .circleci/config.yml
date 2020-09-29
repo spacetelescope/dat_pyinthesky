@@ -262,6 +262,4 @@ workflows:
         - Jdat Notebooks-Niriss Wfss Postpipeline
         - Jdat Notebooks-Mos-Spectroscopy
         - Deploy JDAT Notebooks
-  Deploy Website:
-    jobs: []
   version: '2.1'
