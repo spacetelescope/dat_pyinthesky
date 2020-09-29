@@ -39,6 +39,9 @@ def obtain_options() -> argparse.Namespace:
 
     # Map Notebooks
 
+    # MergeArtifacts
+    parser.add_argument('-e', '--external-categories', type=str, default='')
+
     options = parser.parse_args()
     options.notebook_collection_paths = [nb_path for nb_path in options.notebook_collection_paths.split(',')]
     return options
@@ -296,7 +299,10 @@ def main(options: argparse.Namespace) -> None:
         ci_jobs = []
         artifact_urls = []
         for idx, recent_job in enumerate(requests.get(recent_builds, auth=CircleAuth()).json()):
-            if idx == 0:
+            if workspace_id is None and recent_job['workflows']['workflow_name'] != 'Branch Build':
+                continue
+
+            if workspace_id is None:
                 workspace_id = recent_job['workflows']['workspace_id']
                 ci_jobs.append(recent_job)
                 continue
@@ -333,14 +339,22 @@ def main(options: argparse.Namespace) -> None:
             notebook_sources.append(NotebookSource(filename, filepath, file_category, file_collection, url, meta_file))
 
         # Find local-files
+        # extrenal_dirpaths = options.external_categories.split(',')
         existing_categories = [item for item in set(['.'.join([nb.collection, nb.category]) for nb in notebook_sources])]
         for job in filter(is_excluded, find_build_jobs(options.notebook_collection_paths, False)):
             namespace = '.'.join([job.collection.name, job.category.name])
             if namespace in existing_categories:
                 continue
 
-            import pdb; pdb.set_trace()
-            import sys; sys.exit(1)
+            for notebook in job.category.notebooks:
+                html_filepath = f'{ARTIFACT_DEST_DIR}/{job.collection.name}/{job.category.name}/{notebook.name}.html'
+                meta_filepath = f'{ARTIFACT_DEST_DIR}/{job.collection.name}/{job.category.name}/{notebook.name}.metadata.json'
+
+                html_filename = os.path.basename(html_filepath)
+                notebook_sources.append(NotebookSource(html_filename, html_filepath, job.category.name, job.collection.name, 'local-file', meta_filepath))
+
+                meta_filename = os.path.basename(meta_filepath)
+                notebook_sources.append(NotebookSource(meta_filename, meta_filepath, job.category.name, job.collection.name, 'local-file', meta_filepath))
 
         collections = {}
         for notebook in notebook_sources:

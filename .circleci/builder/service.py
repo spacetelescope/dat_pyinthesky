@@ -75,7 +75,10 @@ class ExcludedNotebook(typing.NamedTuple):
     category: str
 
 def is_excluded(job: BuildJob) -> bool:
-    return not any([True for ex_notebook in find_excluded_notebooks() if ex_notebook.collection == job.collection.name and ex_notebook.category == job.category.name])
+    return not any([
+        True
+        for ex_notebook in find_excluded_notebooks()
+        if ex_notebook.collection == job.collection.name and ex_notebook.category == job.category.name])
 
 def find_excluded_notebooks() -> typing.List[ExcludedNotebook]:
     entries = []
@@ -95,6 +98,18 @@ def find_excluded_notebooks() -> typing.List[ExcludedNotebook]:
     for entry in entries:
         collection, category = entry.split(':')
         EXCLUDED_NOTEBOOKS.append(ExcludedNotebook(collection, category))
+
+    # Local Builds may want to include specific notebooks, lets exclude the excludes list if running locally
+    lbe_filepath = os.path.join(os.getcwd(), 'local_notebooks')
+    if os.environ.get('LOCAL_BUILD', '').lower() in ['t', 'true', 'yes'] and os.path.exists(lbe_filepath):
+        with open(lbe_filepath, 'rb') as stream:
+            lbe_entries = [entry for entry in stream.read().decode(ENCODING).split('\n') if entry]
+
+        for notebook in EXCLUDED_NOTEBOOKS[:]:
+            for lbe_entry in lbe_entries:
+                head, tail = lbe_entry.split(':', 1)
+                if head == notebook.collection and tail == notebook.category:
+                    EXCLUDED_NOTEBOOKS.remove(notebook)
 
     return EXCLUDED_NOTEBOOKS 
 
