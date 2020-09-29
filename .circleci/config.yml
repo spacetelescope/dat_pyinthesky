@@ -5,7 +5,7 @@ executors:
     resource_class: medium
     working_directory: ~/repo
 jobs:
-  Jdat Notebooks-Asdf Example:
+  -Asdf:
     environment:
       PYTHONPATH: .circleci
     executor: notebook-executor
@@ -15,17 +15,15 @@ jobs:
         command: bash ./.circleci/setup_env.sh
         name: Setup Environment
     - run:
-        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
-          -n asdf_example
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c  -n asdf
         name: Build Notebook
         no_output_timeout: 60m
     - run:
-        command: python ./.circleci/builder/factory.py -o build-website -c jdat_notebooks
-          -n asdf_example
+        command: python ./.circleci/builder/factory.py -o build-website -c  -n asdf
         name: Build Website
     - store_artifacts:
         path: ./pages
-  Jdat Notebooks-Background Estimation Imaging:
+  -Asdf Example:
     environment:
       PYTHONPATH: .circleci
     executor: notebook-executor
@@ -35,17 +33,15 @@ jobs:
         command: bash ./.circleci/setup_env.sh
         name: Setup Environment
     - run:
-        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
-          -n background_estimation_imaging
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c  -n asdf_example
         name: Build Notebook
         no_output_timeout: 60m
     - run:
-        command: python ./.circleci/builder/factory.py -o build-website -c jdat_notebooks
-          -n background_estimation_imaging
+        command: python ./.circleci/builder/factory.py -o build-website -c  -n asdf_example
         name: Build Website
     - store_artifacts:
         path: ./pages
-  Jdat Notebooks-Cube Fitting:
+  -Background Estimation Imaging:
     environment:
       PYTHONPATH: .circleci
     executor: notebook-executor
@@ -55,17 +51,15 @@ jobs:
         command: bash ./.circleci/setup_env.sh
         name: Setup Environment
     - run:
-        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
-          -n cube_fitting
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c  -n background_estimation_imaging
         name: Build Notebook
         no_output_timeout: 60m
     - run:
-        command: python ./.circleci/builder/factory.py -o build-website -c jdat_notebooks
-          -n cube_fitting
+        command: python ./.circleci/builder/factory.py -o build-website -c  -n background_estimation_imaging
         name: Build Website
     - store_artifacts:
         path: ./pages
-  Jdat Notebooks-Miri Lrs Spectral Extraction:
+  -Build Psf Api Concept:
     environment:
       PYTHONPATH: .circleci
     executor: notebook-executor
@@ -75,17 +69,15 @@ jobs:
         command: bash ./.circleci/setup_env.sh
         name: Setup Environment
     - run:
-        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
-          -n MIRI_LRS_spectral_extraction
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c  -n build_PSF_API_concept
         name: Build Notebook
         no_output_timeout: 60m
     - run:
-        command: python ./.circleci/builder/factory.py -o build-website -c jdat_notebooks
-          -n MIRI_LRS_spectral_extraction
+        command: python ./.circleci/builder/factory.py -o build-website -c  -n build_PSF_API_concept
         name: Build Website
     - store_artifacts:
         path: ./pages
-  Jdat Notebooks-Mos-Spectroscopy:
+  -Calspec:
     environment:
       PYTHONPATH: .circleci
     executor: notebook-executor
@@ -95,17 +87,15 @@ jobs:
         command: bash ./.circleci/setup_env.sh
         name: Setup Environment
     - run:
-        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
-          -n mos-spectroscopy
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c  -n calspec
         name: Build Notebook
         no_output_timeout: 60m
     - run:
-        command: python ./.circleci/builder/factory.py -o build-website -c jdat_notebooks
-          -n mos-spectroscopy
+        command: python ./.circleci/builder/factory.py -o build-website -c  -n calspec
         name: Build Website
     - store_artifacts:
         path: ./pages
-  Jdat Notebooks-Mrs Mstar Analysis:
+  -Composite Model Fitting:
     environment:
       PYTHONPATH: .circleci
     executor: notebook-executor
@@ -115,17 +105,15 @@ jobs:
         command: bash ./.circleci/setup_env.sh
         name: Setup Environment
     - run:
-        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
-          -n MRS_Mstar_analysis
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c  -n composite_model_fitting
         name: Build Notebook
         no_output_timeout: 60m
     - run:
-        command: python ./.circleci/builder/factory.py -o build-website -c jdat_notebooks
-          -n MRS_Mstar_analysis
+        command: python ./.circleci/builder/factory.py -o build-website -c  -n composite_model_fitting
         name: Build Website
     - store_artifacts:
         path: ./pages
-  Jdat Notebooks-Nircam Photometry:
+  -Cube Fitting:
     environment:
       PYTHONPATH: .circleci
     executor: notebook-executor
@@ -135,17 +123,15 @@ jobs:
         command: bash ./.circleci/setup_env.sh
         name: Setup Environment
     - run:
-        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
-          -n NIRCam_photometry
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c  -n cube_fitting
         name: Build Notebook
         no_output_timeout: 60m
     - run:
-        command: python ./.circleci/builder/factory.py -o build-website -c jdat_notebooks
-          -n NIRCam_photometry
+        command: python ./.circleci/builder/factory.py -o build-website -c  -n cube_fitting
         name: Build Website
     - store_artifacts:
         path: ./pages
-  Jdat Notebooks-Niriss Wfss Postpipeline:
+  -Cubehack-Ipywidgets:
     environment:
       PYTHONPATH: .circleci
     executor: notebook-executor
@@ -155,17 +141,15 @@ jobs:
         command: bash ./.circleci/setup_env.sh
         name: Setup Environment
     - run:
-        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
-          -n NIRISS_WFSS_postpipeline
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c  -n cubehack-ipywidgets
         name: Build Notebook
         no_output_timeout: 60m
     - run:
-        command: python ./.circleci/builder/factory.py -o build-website -c jdat_notebooks
-          -n NIRISS_WFSS_postpipeline
+        command: python ./.circleci/builder/factory.py -o build-website -c  -n cubehack-ipywidgets
         name: Build Website
     - store_artifacts:
         path: ./pages
-  Jdat Notebooks-Optimal Extraction:
+  -Example:
     environment:
       PYTHONPATH: .circleci
     executor: notebook-executor
@@ -175,17 +159,15 @@ jobs:
         command: bash ./.circleci/setup_env.sh
         name: Setup Environment
     - run:
-        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
-          -n optimal_extraction
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c  -n example
         name: Build Notebook
         no_output_timeout: 60m
     - run:
-        command: python ./.circleci/builder/factory.py -o build-website -c jdat_notebooks
-          -n optimal_extraction
+        command: python ./.circleci/builder/factory.py -o build-website -c  -n example
         name: Build Website
     - store_artifacts:
         path: ./pages
-  Jdat Notebooks-Psf Photometry:
+  -Example Notebook:
     environment:
       PYTHONPATH: .circleci
     executor: notebook-executor
@@ -195,17 +177,15 @@ jobs:
         command: bash ./.circleci/setup_env.sh
         name: Setup Environment
     - run:
-        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
-          -n psf_photometry
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c  -n example_notebook
         name: Build Notebook
         no_output_timeout: 60m
     - run:
-        command: python ./.circleci/builder/factory.py -o build-website -c jdat_notebooks
-          -n psf_photometry
+        command: python ./.circleci/builder/factory.py -o build-website -c  -n example_notebook
         name: Build Website
     - store_artifacts:
         path: ./pages
-  Jdat Notebooks-Transit Spectroscopy Notebook:
+  -Fractional Pixel Extraction:
     environment:
       PYTHONPATH: .circleci
     executor: notebook-executor
@@ -215,13 +195,415 @@ jobs:
         command: bash ./.circleci/setup_env.sh
         name: Setup Environment
     - run:
-        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
-          -n transit_spectroscopy_notebook
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c  -n fractional_pixel_extraction
         name: Build Notebook
         no_output_timeout: 60m
     - run:
-        command: python ./.circleci/builder/factory.py -o build-website -c jdat_notebooks
-          -n transit_spectroscopy_notebook
+        command: python ./.circleci/builder/factory.py -o build-website -c  -n fractional_pixel_extraction
+        name: Build Website
+    - store_artifacts:
+        path: ./pages
+  -Holoviews:
+    environment:
+      PYTHONPATH: .circleci
+    executor: notebook-executor
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup_env.sh
+        name: Setup Environment
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c  -n holoviews
+        name: Build Notebook
+        no_output_timeout: 60m
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-website -c  -n holoviews
+        name: Build Website
+    - store_artifacts:
+        path: ./pages
+  -Ifu Cube Continuum Fit:
+    environment:
+      PYTHONPATH: .circleci
+    executor: notebook-executor
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup_env.sh
+        name: Setup Environment
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c  -n IFU_cube_continuum_fit
+        name: Build Notebook
+        no_output_timeout: 60m
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-website -c  -n IFU_cube_continuum_fit
+        name: Build Website
+    - store_artifacts:
+        path: ./pages
+  -Leaflet Image Viewer:
+    environment:
+      PYTHONPATH: .circleci
+    executor: notebook-executor
+    steps:
+    - run:
+        command: python ./.circleci/builder/factory.py -o merge-artifacts -c jdat_notebooks
+        name: Collect Artifacts
+  -Miri Lrs Spectral Extraction:
+    environment:
+      PYTHONPATH: .circleci
+    executor: notebook-executor
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup_env.sh
+        name: Setup Environment
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c  -n MIRI_LRS_spectral_extraction
+        name: Build Notebook
+        no_output_timeout: 60m
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-website -c  -n MIRI_LRS_spectral_extraction
+        name: Build Website
+    - store_artifacts:
+        path: ./pages
+  -Modeling Use Case:
+    environment:
+      PYTHONPATH: .circleci
+    executor: notebook-executor
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup_env.sh
+        name: Setup Environment
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c  -n modeling_use_case
+        name: Build Notebook
+        no_output_timeout: 60m
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-website -c  -n modeling_use_case
+        name: Build Website
+    - store_artifacts:
+        path: ./pages
+  -Mos:
+    environment:
+      PYTHONPATH: .circleci
+    executor: notebook-executor
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup_env.sh
+        name: Setup Environment
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c  -n mos
+        name: Build Notebook
+        no_output_timeout: 60m
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-website -c  -n mos
+        name: Build Website
+    - store_artifacts:
+        path: ./pages
+  -Mos-Spectroscopy:
+    environment:
+      PYTHONPATH: .circleci
+    executor: notebook-executor
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup_env.sh
+        name: Setup Environment
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c  -n mos-spectroscopy
+        name: Build Notebook
+        no_output_timeout: 60m
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-website -c  -n mos-spectroscopy
+        name: Build Website
+    - store_artifacts:
+        path: ./pages
+  -Mrs Mstar Analysis:
+    environment:
+      PYTHONPATH: .circleci
+    executor: notebook-executor
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup_env.sh
+        name: Setup Environment
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c  -n MRS_Mstar_analysis
+        name: Build Notebook
+        no_output_timeout: 60m
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-website -c  -n MRS_Mstar_analysis
+        name: Build Website
+    - store_artifacts:
+        path: ./pages
+  -Nircam:
+    environment:
+      PYTHONPATH: .circleci
+    executor: notebook-executor
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup_env.sh
+        name: Setup Environment
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c  -n NIRCam
+        name: Build Notebook
+        no_output_timeout: 60m
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-website -c  -n NIRCam
+        name: Build Website
+    - store_artifacts:
+        path: ./pages
+  -Nircam Photometry:
+    environment:
+      PYTHONPATH: .circleci
+    executor: notebook-executor
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup_env.sh
+        name: Setup Environment
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c  -n NIRCam_photometry
+        name: Build Notebook
+        no_output_timeout: 60m
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-website -c  -n NIRCam_photometry
+        name: Build Website
+    - store_artifacts:
+        path: ./pages
+  -Niriss Wfss Postpipeline:
+    environment:
+      PYTHONPATH: .circleci
+    executor: notebook-executor
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup_env.sh
+        name: Setup Environment
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c  -n NIRISS_WFSS_postpipeline
+        name: Build Notebook
+        no_output_timeout: 60m
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-website -c  -n NIRISS_WFSS_postpipeline
+        name: Build Website
+    - store_artifacts:
+        path: ./pages
+  -Nirspec Masterbackground:
+    environment:
+      PYTHONPATH: .circleci
+    executor: notebook-executor
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup_env.sh
+        name: Setup Environment
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c  -n nirspec_masterbackground
+        name: Build Notebook
+        no_output_timeout: 60m
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-website -c  -n nirspec_masterbackground
+        name: Build Website
+    - store_artifacts:
+        path: ./pages
+  -Notebook-Examples-Of-Use-Cases:
+    environment:
+      PYTHONPATH: .circleci
+    executor: notebook-executor
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup_env.sh
+        name: Setup Environment
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c  -n Notebook-Examples-of-Use-Cases
+        name: Build Notebook
+        no_output_timeout: 60m
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-website -c  -n Notebook-Examples-of-Use-Cases
+        name: Build Website
+    - store_artifacts:
+        path: ./pages
+  -Optimal Extraction:
+    environment:
+      PYTHONPATH: .circleci
+    executor: notebook-executor
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup_env.sh
+        name: Setup Environment
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c  -n optimal_extraction
+        name: Build Notebook
+        no_output_timeout: 60m
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-website -c  -n optimal_extraction
+        name: Build Website
+    - store_artifacts:
+        path: ./pages
+  -Plotly Floatview:
+    environment:
+      PYTHONPATH: .circleci
+    executor: notebook-executor
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup_env.sh
+        name: Setup Environment
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c  -n plotly_floatview
+        name: Build Notebook
+        no_output_timeout: 60m
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-website -c  -n plotly_floatview
+        name: Build Website
+    - store_artifacts:
+        path: ./pages
+  -Plotly Ipywidgets:
+    environment:
+      PYTHONPATH: .circleci
+    executor: notebook-executor
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup_env.sh
+        name: Setup Environment
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c  -n plotly_ipywidgets
+        name: Build Notebook
+        no_output_timeout: 60m
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-website -c  -n plotly_ipywidgets
+        name: Build Website
+    - store_artifacts:
+        path: ./pages
+  -Preimaging:
+    environment:
+      PYTHONPATH: .circleci
+    executor: notebook-executor
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup_env.sh
+        name: Setup Environment
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c  -n preimaging
+        name: Build Notebook
+        no_output_timeout: 60m
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-website -c  -n preimaging
+        name: Build Website
+    - store_artifacts:
+        path: ./pages
+  -Psf Photometry:
+    environment:
+      PYTHONPATH: .circleci
+    executor: notebook-executor
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup_env.sh
+        name: Setup Environment
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c  -n psf_photometry
+        name: Build Notebook
+        no_output_timeout: 60m
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-website -c  -n psf_photometry
+        name: Build Website
+    - store_artifacts:
+        path: ./pages
+  -Psf Pyinthesky Api:
+    environment:
+      PYTHONPATH: .circleci
+    executor: notebook-executor
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup_env.sh
+        name: Setup Environment
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c  -n PSF_pyinthesky_API
+        name: Build Notebook
+        no_output_timeout: 60m
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-website -c  -n PSF_pyinthesky_API
+        name: Build Website
+    - store_artifacts:
+        path: ./pages
+  -Pyinthesky Imagecomb 2D:
+    environment:
+      PYTHONPATH: .circleci
+    executor: notebook-executor
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup_env.sh
+        name: Setup Environment
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c  -n pyinthesky_imagecomb_2d
+        name: Build Notebook
+        no_output_timeout: 60m
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-website -c  -n pyinthesky_imagecomb_2d
+        name: Build Website
+    - store_artifacts:
+        path: ./pages
+  -Pyinthesky Specutils Fitting:
+    environment:
+      PYTHONPATH: .circleci
+    executor: notebook-executor
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup_env.sh
+        name: Setup Environment
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c  -n pyinthesky_specutils_fitting
+        name: Build Notebook
+        no_output_timeout: 60m
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-website -c  -n pyinthesky_specutils_fitting
+        name: Build Website
+    - store_artifacts:
+        path: ./pages
+  -Soss-Transit-Spectroscopy:
+    environment:
+      PYTHONPATH: .circleci
+    executor: notebook-executor
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup_env.sh
+        name: Setup Environment
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c  -n soss-transit-spectroscopy
+        name: Build Notebook
+        no_output_timeout: 60m
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-website -c  -n soss-transit-spectroscopy
+        name: Build Website
+    - store_artifacts:
+        path: ./pages
+  -Transit Spectroscopy Notebook:
+    environment:
+      PYTHONPATH: .circleci
+    executor: notebook-executor
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup_env.sh
+        name: Setup Environment
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c  -n transit_spectroscopy_notebook
+        name: Build Notebook
+        no_output_timeout: 60m
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-website -c  -n transit_spectroscopy_notebook
         name: Build Website
     - store_artifacts:
         path: ./pages
@@ -229,15 +611,76 @@ version: 2.1
 workflows:
   Branch Build:
     jobs:
-    - Jdat Notebooks-Psf Photometry
-    - Jdat Notebooks-Nircam Photometry
-    - Jdat Notebooks-Asdf Example
-    - Jdat Notebooks-Transit Spectroscopy Notebook
-    - Jdat Notebooks-Background Estimation Imaging
-    - Jdat Notebooks-Cube Fitting
-    - Jdat Notebooks-Optimal Extraction
-    - Jdat Notebooks-Miri Lrs Spectral Extraction
-    - Jdat Notebooks-Mrs Mstar Analysis
-    - Jdat Notebooks-Niriss Wfss Postpipeline
-    - Jdat Notebooks-Mos-Spectroscopy
+    - -Preimaging
+    - -Soss-Transit-Spectroscopy
+    - -Psf Photometry
+    - -Nircam Photometry
+    - -Asdf Example
+    - -Transit Spectroscopy Notebook
+    - -Background Estimation Imaging
+    - -Cube Fitting
+    - -Optimal Extraction
+    - -Miri Lrs Spectral Extraction
+    - -Example Notebook
+    - -Composite Model Fitting
+    - -Mrs Mstar Analysis
+    - -Niriss Wfss Postpipeline
+    - -Ifu Cube Continuum Fit
+    - -Mos-Spectroscopy
+    - -Nirspec Masterbackground
+    - -Example
+    - -Nircam
+    - -Asdf
+    - -Plotly Ipywidgets
+    - -Holoviews
+    - -Mos
+    - -Plotly Floatview
+    - -Calspec
+    - -Cubehack-Ipywidgets
+    - -Pyinthesky Specutils Fitting
+    - -Fractional Pixel Extraction
+    - -Build Psf Api Concept
+    - -Pyinthesky Imagecomb 2D
+    - -Modeling Use Case
+    - -Notebook-Examples-Of-Use-Cases
+    - -Psf Pyinthesky Api
+    - -Leaflet Image Viewer
+  Deploy Website:
+    jobs:
+    - -Leaflet Image Viewer:
+        requires:
+        - -Preimaging
+        - -Soss-Transit-Spectroscopy
+        - -Psf Photometry
+        - -Nircam Photometry
+        - -Asdf Example
+        - -Transit Spectroscopy Notebook
+        - -Background Estimation Imaging
+        - -Cube Fitting
+        - -Optimal Extraction
+        - -Miri Lrs Spectral Extraction
+        - -Example Notebook
+        - -Composite Model Fitting
+        - -Mrs Mstar Analysis
+        - -Niriss Wfss Postpipeline
+        - -Ifu Cube Continuum Fit
+        - -Mos-Spectroscopy
+        - -Nirspec Masterbackground
+        - -Example
+        - -Nircam
+        - -Asdf
+        - -Plotly Ipywidgets
+        - -Holoviews
+        - -Mos
+        - -Plotly Floatview
+        - -Calspec
+        - -Cubehack-Ipywidgets
+        - -Pyinthesky Specutils Fitting
+        - -Fractional Pixel Extraction
+        - -Build Psf Api Concept
+        - -Pyinthesky Imagecomb 2D
+        - -Modeling Use Case
+        - -Notebook-Examples-Of-Use-Cases
+        - -Psf Pyinthesky Api
+        - -Leaflet Image Viewer
   version: '2.1'

@@ -6,6 +6,7 @@ import logging
 import os
 import json
 import shutil
+import typing
 
 from builder.constants import ARTIFACT_DEST_DIR, ENCODING, BUILD_LOG_DIR, CIRCLE_CI_CONFIG_PATH
 from builder.github import scan_pull_requests_for_failures
@@ -191,9 +192,9 @@ def main(options: argparse.Namespace) -> None:
                 'Branch Build': {
                     'jobs': []
                 },
-                # 'Deploy Website': {
-                #     'jobs': []
-                # },
+                'Deploy Website': {
+                    'jobs': []
+                },
                 # 'PR Build': {
                 #     'jobs': []
                 # }
@@ -242,7 +243,7 @@ def main(options: argparse.Namespace) -> None:
                 {
                     'run': {
                         'name': 'Collect Artifacts',
-                        'command': 'python ./.circleci/builder/factory.py -o merge-artifacts',
+                        'command': 'python ./.circleci/builder/factory.py -o merge-artifacts -c jdat_notebooks',
                     }
                 }
             ]
@@ -252,6 +253,7 @@ def main(options: argparse.Namespace) -> None:
             formatted_cat_name = formatted_cat_name.title()
             formatted_col_name = ' '.join(build_job.collection.name.split('_'))
             formatted_col_name = formatted_col_name.title()
+
             job_name = '-'.join([formatted_col_name, formatted_cat_name])
             job = copy.deepcopy(job_template)
             job['steps'][2]['run']['command'] = f'python ./.circleci/builder/factory.py -o build-notebooks -c {build_job.collection.name} -n {build_job.category.name}'
@@ -259,10 +261,18 @@ def main(options: argparse.Namespace) -> None:
             config['jobs'][job_name] = job
             config['workflows']['Branch Build']['jobs'].append(job_name)
 
+        deploy_job_name = 'Deploy JDAT Notebooks'
+        deploy_job = copy.deepcopy(deploy_website_job)
+        config['jobs'][job_name] = deploy_job
+        config['workflows']['Deploy Website']['jobs'].append({job_name: {'requires': [k for k in config['jobs'].keys()]}})
+
         with open(CIRCLE_CI_CONFIG_PATH, 'wb') as stream:
             stream.write(yaml.dump(config).encode('utf-8'))
 
     elif options.operation is Operation.MergeArtifacts:
+        if options.notebook_collection_paths == '':
+            raise NotImplementedError
+
         import requests
         artifact_dest_dir = './pages'
         if os.path.exists(artifact_dest_dir):
@@ -294,18 +304,156 @@ def main(options: argparse.Namespace) -> None:
             resp = requests.get(url, auth=CircleAuth())
             artifact_urls.extend([a['url'] for a in resp.json() if not a['url'].endswith('index.html')])
 
+        class NotebookSource(typing.NamedTuple):
+            filename: str
+            filepath: str
+            category: str
+            collection: str
+            url: str
+            meta_file: bool
+
+        notebook_sources: typing.List[NotebookSource] = []
         for url in artifact_urls:
             filename = os.path.basename(url)
             filepath = os.path.join(artifact_dest_dir, filename)
+            file_category = os.path.dirname(url).rsplit('/', 1)[-1]
+            file_collection = os.path.dirname(url).rsplit('/', 2)[-2]
+            meta_file = filename.endswith('metadata.json')
             resp = requests.get(url, auth=CircleAuth(), stream=True)
             logger.info(f'Storing File[{filepath}]')
             with open(filepath, 'wb') as stream:
                 for content in resp.iter_content(chunk_size=1024):
                     stream.write(content)
 
+            notebook_sources.append(NotebookSource(filename, filepath, file_category, file_collection, url, meta_file))
 
-        import pdb; pdb.set_trace()
-        pass
+        # Find local-files
+        existing_categories = [item for item in set(['.'.join([nb.collection, nb.category]) for nb in notebook_sources])]
+        for job in filter(is_excluded, find_build_jobs(options.notebook_collection_paths, False)):
+            namespace = '.'.join([job.collection.name, job.category.name])
+            if namespace in existing_categories:
+                continue
+
+            import pdb; pdb.set_trace()
+            import sys; sys.exit(1)
+
+        collections = {}
+        for notebook in notebook_sources:
+            coll = collections.get(notebook.collection, [])
+            collections[notebook.collection] = coll
+            coll.append(notebook)
+
+        collection_categories = {}
+        for coll_name, coll_source in collections.items():
+            coll = collection_categories.get(coll_name, {})
+            for notebook in coll_source:
+                cat = coll.get(notebook.category, [])
+                coll[notebook.category] = cat
+                cat.append(notebook)
+
+            collection_categories[coll_name] = coll
+
+        class ArtifactNotebook(typing.NamedTuple):
+            title: str
+            metadata: typing.Dict[str, typing.Any]
+            filepath: str
+            filename: str
+
+        class ArtifactCategory(typing.NamedTuple):
+            name: str
+            notebooks: typing.List[ArtifactNotebook]
+
+        class ArtifactCollection(typing.NamedTuple):
+            name: str
+            categories: typing.List[ArtifactCategory]
+
+
+        artifact_collections = []
+        for coll_name, coll_source in collection_categories.items():
+            cats = []
+            for cat_name, cat_source in coll_source.items():
+                nbs = []
+                for idx, notebook in enumerate(cat_source[::2]):
+                    cat_source_idx = idx * 2 + 1
+                    with open(cat_source[cat_source_idx].filepath, 'rb') as stream:
+                        metadata = json.loads(stream.read().decode(ENCODING))
+
+                    metadata['title'] = metadata['title'].replace('%20', ' ')
+                    nbs.append(ArtifactNotebook(metadata['title'], metadata, notebook.filepath, notebook.filename))
+                cats.append(ArtifactCategory(cat_name, sorted(nbs)))
+
+            artifact_collections.append(ArtifactCollection(coll_name, sorted(cats)))
+
+        # Render Website
+        import jinja2
+        import toml
+        # import os
+
+        from datetime import datetime
+
+        from jinja2.environment import Template, Environment
+
+
+        ASSETS_DIR = os.path.join(os.getcwd(), '.circleci/builder-assets')
+        TEMPLATE_DIR = os.path.join(os.getcwd(), '.circleci/builder-template')
+        ENVIRONMENT_PATH = os.path.join(f'{TEMPLATE_DIR}/environment.toml')
+        SITE_DIR = os.path.join(os.getcwd(), 'site')
+        if os.path.exists(SITE_DIR):
+            shutil.rmtree(SITE_DIR)
+
+        os.makedirs(SITE_DIR)
+        def _add_jinja2_filters(environment: Environment) -> None:
+            def _render_human_datetime(datetime: datetime) -> str:
+                return datetime.strftime('%A, %d. %B %Y %I:%M%p')
+
+            def _render_machine_datetime(datetime: datetime) -> str:
+                return datetime.strftime('%Y-%m-%d')
+
+            def _render_machine_datetime_with_time(datetime: datetime) -> str:
+                return datetime.strftime('%Y-%m-%dT%H-%M-%S')
+
+            environment.filters['human_date'] = _render_human_datetime
+            environment.filters['machine_date'] = _render_machine_datetime
+            environment.filters['machine_date_with_time'] = _render_machine_datetime_with_time
+
+        def load_environment() -> typing.Dict[str, typing.Any]:
+            environment = {}
+            with open(ENVIRONMENT_PATH, 'r') as stream:
+                environment = toml.loads(stream.read())
+
+            environment['today'] = datetime.utcnow()
+            return environment
+
+        jinja2_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(TEMPLATE_DIR), undefined=jinja2.StrictUndefined)
+        _add_jinja2_filters(jinja2_environment)
+        index: Template = jinja2_environment.get_template('index.html')
+        environment = load_environment()
+        template_context = {
+            'page': {
+                'title': environment['index_title'],
+                'keywords': environment['keywords'],
+                'description': environment['description'],
+                'locale': environment['default_locale'],
+                'author': environment['author'],
+                'maintainer': environment['maintainer'],
+                'url': f'{environment["website_base_url"]}/index.html',
+            },
+            'static_url': 'static/',
+            'collections': artifact_collections,
+        }
+        index_filepath = os.path.join(SITE_DIR, 'index.html')
+        with open(index_filepath, 'wb') as stream:
+            stream.write(index.render(**template_context).encode(ENCODING))
+
+        for coll in artifact_collections:
+            for cat in coll.categories:
+                for notebook in cat.notebooks:
+                    dest_filepath = os.path.join(SITE_DIR, coll.name, cat.name, notebook.filename)
+                    dest_dirpath = os.path.dirname(dest_filepath)
+                    if not os.path.exists(dest_dirpath):
+                        os.makedirs(dest_dirpath)
+
+                    shutil.copyfile(notebook.filepath, dest_filepath)
 
     else:
         raise NotImplementedError
