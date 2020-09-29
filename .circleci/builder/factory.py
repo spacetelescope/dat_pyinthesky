@@ -267,7 +267,7 @@ def main(options: argparse.Namespace) -> None:
         deploy_job_name = 'Deploy JDAT Notebooks'
         deploy_job = copy.deepcopy(deploy_website_job)
         config['jobs'][job_name] = deploy_job
-        config['workflows']['Deploy Website']['jobs'].append({job_name: {'requires': [k for k in config['jobs'].keys()]}})
+        config['workflows']['Deploy Website']['jobs'].append({deploy_job_name: {'requires': [k for k in config['jobs'].keys()]}})
 
         with open(CIRCLE_CI_CONFIG_PATH, 'wb') as stream:
             stream.write(yaml.dump(config).encode('utf-8'))

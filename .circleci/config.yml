@@ -230,7 +230,7 @@ workflows:
     - Jdat Notebooks-Mos-Spectroscopy
   Deploy Website:
     jobs:
-    - Jdat Notebooks-Mos-Spectroscopy:
+    - Deploy JDAT Notebooks:
         requires:
         - Jdat Notebooks-Psf Photometry
         - Jdat Notebooks-Nircam Photometry
