@@ -173,6 +173,9 @@ def main(options: argparse.Namespace) -> None:
                 stream.write(output.encode(ENCODING))
 
     elif options.operation is Operation.MapNotebooks:
+        if options.notebook_collection_paths == '':
+            raise NotImplementedError
+
         import copy
         import yaml
         config = {
