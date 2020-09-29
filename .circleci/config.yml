@@ -5,15 +5,6 @@ executors:
     resource_class: medium
     working_directory: ~/repo
 jobs:
-  Deploy JDAT Notebooks:
-    environment:
-      PYTHONPATH: .circleci
-    executor: notebook-executor
-    steps:
-    - checkout
-    - run:
-        command: python ./.circleci/builder/factory.py -o merge-artifacts -c jdat_notebooks
-        name: Collect Artifacts
   Jdat Notebooks-Asdf Example:
     environment:
       PYTHONPATH: .circleci
@@ -249,17 +240,4 @@ workflows:
     - Jdat Notebooks-Mrs Mstar Analysis
     - Jdat Notebooks-Niriss Wfss Postpipeline
     - Jdat Notebooks-Mos-Spectroscopy
-    - Deploy JDAT Notebooks:
-        requires:
-        - Jdat Notebooks-Psf Photometry
-        - Jdat Notebooks-Nircam Photometry
-        - Jdat Notebooks-Asdf Example
-        - Jdat Notebooks-Transit Spectroscopy Notebook
-        - Jdat Notebooks-Background Estimation Imaging
-        - Jdat Notebooks-Cube Fitting
-        - Jdat Notebooks-Optimal Extraction
-        - Jdat Notebooks-Miri Lrs Spectral Extraction
-        - Jdat Notebooks-Mrs Mstar Analysis
-        - Jdat Notebooks-Niriss Wfss Postpipeline
-        - Jdat Notebooks-Mos-Spectroscopy
   version: '2.1'
