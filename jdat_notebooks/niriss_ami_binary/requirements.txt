@@ -1,0 +1,6 @@
+matplotlib==3.3.2
+healpy==1.12.5
+asdf==2.7.1
+jwst-gtvt
+git+https://github.com/spacetelescope/mirage.git@661add051a932a179e40ec552ddbb4ef4a110c2a
+git+https://github.com/spacetelescope/jwst#0.16.2
