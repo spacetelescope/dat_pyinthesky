@@ -5,6 +5,14 @@ executors:
     resource_class: medium
     working_directory: ~/repo
 jobs:
+  Deploy JDAT Notebooks:
+    environment:
+      PYTHONPATH: .circleci
+    executor: notebook-executor
+    steps:
+    - run:
+        command: python ./.circleci/builder/factory.py -o merge-artifacts -c jdat_notebooks
+        name: Collect Artifacts
   Jdat Notebooks-Asdf Example:
     environment:
       PYTHONPATH: .circleci
@@ -90,9 +98,21 @@ jobs:
       PYTHONPATH: .circleci
     executor: notebook-executor
     steps:
+    - checkout
     - run:
-        command: python ./.circleci/builder/factory.py -o merge-artifacts -c jdat_notebooks
-        name: Collect Artifacts
+        command: bash ./.circleci/setup_env.sh
+        name: Setup Environment
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
+          -n mos-spectroscopy
+        name: Build Notebook
+        no_output_timeout: 60m
+    - run:
+        command: python ./.circleci/builder/factory.py -o build-website -c jdat_notebooks
+          -n mos-spectroscopy
+        name: Build Website
+    - store_artifacts:
+        path: ./pages
   Jdat Notebooks-Mrs Mstar Analysis:
     environment:
       PYTHONPATH: .circleci
@@ -243,4 +263,5 @@ workflows:
         - Jdat Notebooks-Mrs Mstar Analysis
         - Jdat Notebooks-Niriss Wfss Postpipeline
         - Jdat Notebooks-Mos-Spectroscopy
+        - Deploy JDAT Notebooks
   version: '2.1'
