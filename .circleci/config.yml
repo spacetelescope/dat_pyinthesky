@@ -10,6 +10,7 @@ jobs:
       PYTHONPATH: .circleci
     executor: notebook-executor
     steps:
+    - checkout
     - run:
         command: python ./.circleci/builder/factory.py -o merge-artifacts -c jdat_notebooks
         name: Collect Artifacts

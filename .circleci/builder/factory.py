@@ -243,6 +243,7 @@ def main(options: argparse.Namespace) -> None:
                 'PYTHONPATH': '.circleci',
             },
             'steps': [
+                'checkout',
                 {
                     'run': {
                         'name': 'Collect Artifacts',
