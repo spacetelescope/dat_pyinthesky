@@ -250,18 +250,5 @@ workflows:
     - Jdat Notebooks-Mos-Spectroscopy
   Deploy Website:
     jobs:
-    - Deploy JDAT Notebooks:
-        requires:
-        - Jdat Notebooks-Psf Photometry
-        - Jdat Notebooks-Nircam Photometry
-        - Jdat Notebooks-Asdf Example
-        - Jdat Notebooks-Transit Spectroscopy Notebook
-        - Jdat Notebooks-Background Estimation Imaging
-        - Jdat Notebooks-Cube Fitting
-        - Jdat Notebooks-Optimal Extraction
-        - Jdat Notebooks-Miri Lrs Spectral Extraction
-        - Jdat Notebooks-Mrs Mstar Analysis
-        - Jdat Notebooks-Niriss Wfss Postpipeline
-        - Jdat Notebooks-Mos-Spectroscopy
-        - Deploy JDAT Notebooks
+    - Deploy JDAT Notebooks
   version: '2.1'
