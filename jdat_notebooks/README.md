@@ -1,12 +1,8 @@
 # James Webb Space Telescope Data Analysis Tool Notebooks (pyinthesky)
 
-.. note::
-
    ``jdat_notebooks`` are one component of STScI's larger `Data Analysis Tools Ecosystem <https://jwst-docs.stsci.edu/jwst-post-pipeline-data-analysis>`_.
 
-   .. note::
-
-   ``dat_pyinthesky`` is intended for the developer community wishing to contribute notebooks or technical expertise.  If you are part of the broader community wishing to use the finalized notebooks, we refer you to `jdat_notebooks <https://github.com/spacetelescope/jdat_notebooks>`_.
+   ``dat_pyinthesky`` is intended for the developer community wishing to contribute notebooks or technical expertise.  If you are part of the broader community wishing to use the finalized notebooks, we refer you to `jdat_notebooks <https://github.com/spacetelescope/jdat_notebooks>`_.  If you wish to contribute notebooks, please follow `contributing instructions <https://github.com/spacetelescope/jdat_notebooks/blob/master/contributing.md>`_.
 
 This repository contains Jupyter notebooks intended for the developer community wishing to contribute notebooks or technical expertise.  The notebooks illustrate workflows for post-pipeline analysis of JWST data. The notebooks are likely to be useful for analyzing data from other observatories as well.
 
