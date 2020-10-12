@@ -4,3 +4,4 @@ asdf==2.7.1
 jwst-gtvt
 git+https://github.com/spacetelescope/mirage.git@eaa39c4c872673f8509c89597d89fa3e07853f3c
 jwst
+pysiaf==0.9.0
