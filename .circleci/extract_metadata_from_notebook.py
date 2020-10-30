@@ -38,4 +38,3 @@ def extract_metadata(options: argparse.Namespace) -> typing.Dict[str, typing.Any
 if __name__ in ['__main__']:
     options = capture_options()
     extract_metadata(options)
-

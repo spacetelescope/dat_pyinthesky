@@ -165,7 +165,6 @@ def run_command(cmd: typing.Union[str, typing.List[str]], log_filename: str) -> 
     while proc.poll() is None:
         time.sleep(.1)
 
-
     if proc.poll() > 0:
         raise BuildError(f'Process Exit Code[{proc.poll()}]. CMD: [{" ".join(cmd)}]')
 

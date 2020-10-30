@@ -18,12 +18,12 @@ from nbpages import make_html_index
 logger = logging.getLogger(__file__)
 class Operation(enum.Enum):
     BuildNotebooks = 'build-notebooks'
-    BuildWebsite = 'build-website'
-    MultiBuild = 'multi-build'
-    SyncNotebooks = 'sync-notebooks'
-    ScanGithub = 'scan-github'
     MapNotebooks = 'map-notebooks'
+    BuildArtifacts = 'build-artifacts'
     MergeArtifacts = 'merge-artifacts'
+    ScanGithub = 'scan-github'
+    SyncNotebooks = 'sync-notebooks'
+    MultiBuild = 'multi-build'
 
 def obtain_options() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
@@ -130,7 +130,7 @@ def main(options: argparse.Namespace) -> None:
             proc.start()
             processes.append(proc)
 
-    elif options.operation is Operation.BuildWebsite:
+    elif options.operation is Operation.BuildArtifacts:
         artifact_dest_dir = 'pages'
         if os.path.exists(artifact_dest_dir):
             shutil.rmtree(artifact_dest_dir)
@@ -264,7 +264,7 @@ def main(options: argparse.Namespace) -> None:
             job_name = '-'.join([formatted_col_name, formatted_cat_name])
             job = copy.deepcopy(job_template)
             job['steps'][2]['run']['command'] = f'python ./.circleci/builder/factory.py -o build-notebooks -c {build_job.collection.name} -n {build_job.category.name}'
-            job['steps'][3]['run']['command'] = f'python ./.circleci/builder/factory.py -o build-website -c {build_job.collection.name} -n {build_job.category.name}'
+            job['steps'][3]['run']['command'] = f'python ./.circleci/builder/factory.py -o build-artifacts -c {build_job.collection.name} -n {build_job.category.name}'
             config['jobs'][job_name] = job
             config['workflows']['Branch Build']['jobs'].append(job_name)
 
@@ -387,6 +387,9 @@ def main(options: argparse.Namespace) -> None:
             categories: typing.List[ArtifactCategory]
 
 
+        NAME_ISSUES = [
+            ('%20', ' '),
+        ]
         artifact_collections = []
         for coll_name, coll_source in collection_categories.items():
             cats = []
@@ -397,9 +400,18 @@ def main(options: argparse.Namespace) -> None:
                     with open(cat_source[cat_source_idx].filepath, 'rb') as stream:
                         metadata = json.loads(stream.read().decode(ENCODING))
 
-                    metadata['title'] = metadata['title'].replace('%20', ' ')
+                    for find, replace in NAME_ISSUES:
+                        metadata['title'].replace(find, replace)
+
                     nbs.append(ArtifactNotebook(metadata['title'], metadata, notebook.filepath, notebook.filename))
+
+                for find, replace in NAME_ISSUES:
+                    cat_name = cat_name.replace(find, replace)
+
                 cats.append(ArtifactCategory(cat_name, sorted(nbs)))
+
+            for find, replace in NAME_ISSUES:
+                coll_name = coll_name.replace(find, replace)
 
             artifact_collections.append(ArtifactCollection(coll_name, sorted(cats)))
 
@@ -468,6 +480,9 @@ def main(options: argparse.Namespace) -> None:
             for cat in coll.categories:
                 for notebook in cat.notebooks:
                     dest_filepath = os.path.join(SITE_DIR, coll.name, cat.name, notebook.filename)
+                    for find, replace in NAME_ISSUES:
+                        dest_filepath = dest_filepath.replace(find, replace)
+
                     dest_dirpath = os.path.dirname(dest_filepath)
                     if not os.path.exists(dest_dirpath):
                         os.makedirs(dest_dirpath)
