@@ -16,7 +16,6 @@ This describes a transition plan to move `spectral-cube` functionality to `specu
 * `spectral_slab` - note however that this is another word for the existing spectral region machinery in `specutils.manipulation.extract_region`, just with slightly different syntax. So `spectral_slab` might just be an alternate name that would be adopted in a `RadioSpectrum1D` or similar.
 * Moment maps: Not this is already possible in `specutils`, particularly for first- (np.mean) and second- (line width) maps, but exposing a generic "nth moment" function is a good idea.
 * `minimal_subcube` (see spectral-cube docs), although this would need a different name in a `Spectrum1D` context (since it would also potentially mask off the spectral "edges"?)
-* Spectral extraction (based on astropy regions/photutils?)
 * `with_mask` convenience method (not mandatory, but spectral-cube demonstrates it's use as syntactic sugar?)
 * Lazy masking (may not be a requirement?)
 * Automatic (?) parallel processing of analysis functions across multiple spaxels.  If possible should depend on dask or similar wider ecosystem tools.
