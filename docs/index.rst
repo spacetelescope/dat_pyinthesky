@@ -4,9 +4,9 @@
 |
 |
 
-**********************************************
+----------------------------------------------
 JWST Data Analysis Tool Notebooks (pyinthesky)
-**********************************************
+----------------------------------------------
 
 `jdat_notebooks` are one component of STScI's larger
 `Data Analysis Tools Ecosystem <https://jwst-docs.stsci.edu/jwst-post-pipeline-data-analysis>`_.
