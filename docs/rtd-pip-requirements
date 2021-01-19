@@ -5,3 +5,4 @@ Cython
 astropy-helpers
 astropy
 sphinx-astropy
+Pillow
