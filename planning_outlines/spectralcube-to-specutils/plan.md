@@ -11,13 +11,18 @@ This describes a transition plan to move `spectral-cube` functionality to `specu
 
 # Needs Implementation in specutils
 
-* `NDCube` compatibility (although a proof-of-concept is here: https://github.com/astrofrog/nddata-experiments) - note this has the *highest* uncertainty.
+## Required for science goals
+
+* `NDCube` compatibility (although a proof-of-concept is here: https://github.com/astrofrog/nddata-experiments) or equivalent cube-aware functionality - note this has the *highest* uncertainty.
 * indexing via world coordinates.  This is already supported in `NDCube`, so re-using this functionality would be useful if possible.
 * `spectral_slab` - note however that this is another word for the existing spectral region machinery in `specutils.manipulation.extract_region`, just with slightly different syntax. So `spectral_slab` might just be an alternate name that would be adopted in a `RadioSpectrum1D` or similar.
 * Moment maps: Not this is already possible in `specutils`, particularly for first- (np.mean) and second- (line width) maps, but exposing a generic "nth moment" function is a good idea.
 * `minimal_subcube` (see spectral-cube docs), although this would need a different name in a `Spectrum1D` context (since it would also potentially mask off the spectral "edges"?)
+
+## Stretch-goals based on science cases at time of writing
+
 * `with_mask` convenience method (not mandatory, but spectral-cube demonstrates it's use as syntactic sugar?)
-* Lazy masking (may not be a requirement?)
+* Lazy masking 
 * Automatic (?) parallel processing of analysis functions across multiple spaxels.  If possible should depend on dask or similar wider ecosystem tools.
 * Automatic (?) parallel processing of fitting across multiple spaxels.  (May or may not be best implemented via Dask as the above, but less clear because models are sometimes inherently 3d.)
 
