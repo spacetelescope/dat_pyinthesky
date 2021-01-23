@@ -1,0 +1,251 @@
+executors:
+  nbcollection-builder:
+    docker:
+    - image: jbcurtin/nbcollection-builder
+    resource_class: medium
+    working_directory: ~/repo
+jobs:
+  Jdat Notebooks-Aperture Photometry:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names aperture_photometry
+        name: Build Jdat Notebooks-Aperture Photometry notebooks
+        no_output_timeout: 60m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Jdat Notebooks-Asdf Example:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names asdf_example
+        name: Build Jdat Notebooks-Asdf Example notebooks
+        no_output_timeout: 60m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Jdat Notebooks-Background Estimation Imaging:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names background_estimation_imaging
+        name: Build Jdat Notebooks-Background Estimation Imaging notebooks
+        no_output_timeout: 60m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Jdat Notebooks-Composite Model Fitting:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names composite_model_fitting
+        name: Build Jdat Notebooks-Composite Model Fitting notebooks
+        no_output_timeout: 60m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Jdat Notebooks-Cube Fitting:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names cube_fitting
+        name: Build Jdat Notebooks-Cube Fitting notebooks
+        no_output_timeout: 60m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Jdat Notebooks-Example Notebook:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names example_notebook
+        name: Build Jdat Notebooks-Example Notebook notebooks
+        no_output_timeout: 60m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Jdat Notebooks-Ifu Cube Continuum Fit:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names IFU_cube_continuum_fit
+        name: Build Jdat Notebooks-Ifu Cube Continuum Fit notebooks
+        no_output_timeout: 60m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Jdat Notebooks-Miri Ifu Ysos In The Lmc:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names MIRI_IFU_YSOs_in_the_LMC
+        name: Build Jdat Notebooks-Miri Ifu Ysos In The Lmc notebooks
+        no_output_timeout: 60m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Jdat Notebooks-Miri Lrs Spectral Extraction:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names MIRI_LRS_spectral_extraction
+        name: Build Jdat Notebooks-Miri Lrs Spectral Extraction notebooks
+        no_output_timeout: 60m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Jdat Notebooks-Mos-Spectroscopy:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names mos-spectroscopy
+        name: Build Jdat Notebooks-Mos-Spectroscopy notebooks
+        no_output_timeout: 60m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Jdat Notebooks-Mrs Mstar Analysis:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names MRS_Mstar_analysis
+        name: Build Jdat Notebooks-Mrs Mstar Analysis notebooks
+        no_output_timeout: 60m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Jdat Notebooks-Nircam Photometry:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names NIRCam_photometry
+        name: Build Jdat Notebooks-Nircam Photometry notebooks
+        no_output_timeout: 60m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Jdat Notebooks-Niriss Ami Binary:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names niriss_ami_binary
+        name: Build Jdat Notebooks-Niriss Ami Binary notebooks
+        no_output_timeout: 60m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Jdat Notebooks-Niriss Wfss Postpipeline:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names NIRISS_WFSS_postpipeline
+        name: Build Jdat Notebooks-Niriss Wfss Postpipeline notebooks
+        no_output_timeout: 60m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Jdat Notebooks-Optimal Extraction:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names optimal_extraction
+        name: Build Jdat Notebooks-Optimal Extraction notebooks
+        no_output_timeout: 60m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Jdat Notebooks-Preimaging:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names preimaging
+        name: Build Jdat Notebooks-Preimaging notebooks
+        no_output_timeout: 60m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Jdat Notebooks-Psf Photometry:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names psf_photometry
+        name: Build Jdat Notebooks-Psf Photometry notebooks
+        no_output_timeout: 60m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Jdat Notebooks-Soss-Transit-Spectroscopy:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names soss-transit-spectroscopy
+        name: Build Jdat Notebooks-Soss-Transit-Spectroscopy notebooks
+        no_output_timeout: 60m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Jdat Notebooks-Transit Spectroscopy Notebook:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names transit_spectroscopy_notebook
+        name: Build Jdat Notebooks-Transit Spectroscopy Notebook notebooks
+        no_output_timeout: 60m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Pull Request:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: nbcollection-ci pull-request -u $CI_PULL_REQUEST
+        name: Build Pull Request
+        no_output_timeout: 60m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+version: 2.1
+workflows:
+  Build Notebooks:
+    jobs:
+    - Jdat Notebooks-Composite Model Fitting
+    - Jdat Notebooks-Miri Lrs Spectral Extraction
+    - Jdat Notebooks-Transit Spectroscopy Notebook
+    - Jdat Notebooks-Cube Fitting
+    - Jdat Notebooks-Niriss Wfss Postpipeline
+    - Jdat Notebooks-Soss-Transit-Spectroscopy
+    - Jdat Notebooks-Asdf Example
+    - Jdat Notebooks-Preimaging
+    - Jdat Notebooks-Aperture Photometry
+    - Jdat Notebooks-Psf Photometry
+    - Jdat Notebooks-Example Notebook
+    - Jdat Notebooks-Miri Ifu Ysos In The Lmc
+    - Jdat Notebooks-Background Estimation Imaging
+    - Jdat Notebooks-Ifu Cube Continuum Fit
+    - Jdat Notebooks-Nircam Photometry
+    - Jdat Notebooks-Optimal Extraction
+    - Jdat Notebooks-Niriss Ami Binary
+    - Jdat Notebooks-Mos-Spectroscopy
+    - Jdat Notebooks-Mrs Mstar Analysis
+    - Pull Request
+  version: '2.1'
