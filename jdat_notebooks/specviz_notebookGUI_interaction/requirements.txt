@@ -1,0 +1,2 @@
+git+https://github.com/astropy/specutils.git
+git+https://github.com/spacetelescope/jdaviz.git
