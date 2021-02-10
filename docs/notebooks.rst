@@ -4,6 +4,11 @@ Jupyter Notebooks
 
 Please see the :ref:`Development Procedure` section for notebook development guidelines.
 
+.. seealso::
+
+    For detailed instructions on formatting notebook, please visit the
+    `STScI notebook style guide. <https://github.com/spacetelescope/style-guides/blob/master/guides/jupyter-notebooks.md>`_
+
 
 Installation
 ************

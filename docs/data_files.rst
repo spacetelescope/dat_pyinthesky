@@ -7,6 +7,12 @@ in the notebooks need to be easily downloadable. As such, the JDAT team at STScI
 distributing data products. For security reasons, we only support data files hosted on STScI's Box folder. Please follow
 the guideline below on uploading and integrating your data files.
 
+.. seealso::
+
+    For the most up to date information on data storage at STScI, please visit the
+    `STScI guidelines on data storage for notebooks. <https://github.com/spacetelescope/style-guides/blob/master/guides/where-to-put-your-data.md>`_.
+
+
 Uploading Data to Box
 *********************
 
@@ -15,7 +21,7 @@ Uploading Data to Box
     In order to submit your data files, you will need a Box account. Please see the
     `Box support page <https://support.box.com/hc/en-us/articles/360044196373-The-Basics-of-Box>`_ for instructions.
     Once you have your Box account setup, contact the JDAT team for an email invite to the STScI
-    `jwst-data_analysis_tools` folder.
+    `jwst-data_analysis_tools` folder. If you are not an STScI staff member, please request access in your pull request.
 
 .. tip::
 
@@ -132,7 +138,3 @@ Since how you zip your files determines the directory structure of the unzipped 
 please use your code to download the files and check to make sure the paths in your notebook match the file structure
 of your unzipped data.
 
-.. seealso::
-
-    For general information on data storage at STScI, please visit the
-    `STScI guidelines on data storage for notebooks <https://github.com/spacetelescope/style-guides/blob/master/guides/where-to-put-your-data.md>`_.
