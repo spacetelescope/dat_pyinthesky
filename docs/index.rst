@@ -75,10 +75,10 @@ Table of Contents
     :maxdepth: 3
 
     development_procedure
+    submitting_notebooks
     data_files
     notebooks
     requirements
-    submitting_notebooks
     useful_links
     developers_and_staff
 
