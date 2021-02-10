@@ -30,7 +30,7 @@ Start writing your notebook and think through the following.  Contact Cami or O
 - Break the notebook down into many, focused cells.  Follow the notebook style guide.
 - Consider making your science as generalized as possible.
 - If you get stuck, contact anyone above (step e) or use #jdadf_dev channel on slack.
-- Upload your notebook on dat_pyinthesky as soon as you feel comfortable doing so (instructions on how to fork and clone the repository are at the end of this page).
+- Upload your notebook on dat_pyinthesky as soon as you feel comfortable doing so.
 
 Join a Sprint
 *************
@@ -41,9 +41,9 @@ When you have completed your notebook draft, you are ready to join a developer s
 - Attend an Orientation Meeting the week before your Sprint is set to begin, including a live technical review to understand the process.
 - Prepare by bringing a list of developer notes and/or personal notes where you think your notebook could be improved with new functionality built into the tools.
 - Attend the kick-off meeting (usually Monday 2pm) where you will meet the team, learn about the Product Owners (POs), and be assigned a scientific reviewer and a technical reviewer (this part can also happen offline).  
-- Schedule a meeting with your technical reviewer.  Focus on utilizing the correct libraries and functionality.  Learn to turn your notes into Jira tickets and GitHub issues, as well as the process for having those tickets implemented and integrated back into your notebooks.
+- Schedule a meeting with your technical reviewer.mFocus on utilizing the correct libraries and functionality.  Learn to turn your notes into Jira tickets and GitHub issues, as well as the process for having those tickets implemented and integrated back into your notebooks.
 - Attend a couple tag-ups each week, which happen every morning at 10.30am via bluejeans;  this will provide you with an opportunity to focus on development of individual cells within a notebook
 - Attend the Viz Tool hack hour (typically the second Monday of the sprint at 11am) to focus on notebook workflow using the Viz Tools
 - If you get stuck, contact anyone above (step e) or use #jdadf_dev channel on slack.
 - Make sure parts of your code are devoted to science validation.
-- Attend the Review meeting (usually at the end of the sprint on Thursday at 1:30pm) and show your notebook (this is also an opportunity to give feedback on the process).
+- Attend the Review meeting (usually at the end of the sprint on Monday at 1:30pm) and show your notebook (this is also an opportunity to give feedback on the process).

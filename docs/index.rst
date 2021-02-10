@@ -22,7 +22,6 @@ The `Jdaviz` package includes the following visualization applications:
 =============== ===============
 **Application** **Description**
 --------------- ---------------
-`Imviz`         Visualization and interactive analysis tool for image data.
 `Specviz`       Visualization and quick-look analysis for 1D astronomical spectra.
 `Cubeviz`       Visualization and analysis tool for data cubes from integral field units (IFUs).
 `MOSviz`        Visualization and quick-look analysis tool for multi-object spectroscopy (MOS).
@@ -37,7 +36,7 @@ JDAT Notebooks
 **************
 
 The JDAT team is seeking help from the scientific community to develop example notebooks that outline scientific
-workflows utilizing the analysis and visualization tools developed by the team. These notebooks will eventually be
+workflows utilizing the analysis and visualization tools developed by the team. These notebooks will be
 made available to the public to serve as teaching resources and a form of interactive documentation of the analysis tools.
 
 The submitted notebooks should satisfy the following goals:
@@ -52,8 +51,6 @@ The submitted notebooks should satisfy the following goals:
     `jdat_notebooks <https://github.com/spacetelescope/jdat_notebooks>`_ repository.
     Development of new notebooks is facilitated through the
     `dat_pyinthesky <https://github.com/spacetelescope/dat_pyinthesky>`_ repository.
-    New notebooks should be submitted by making a PR in the
-    `dat_pyinthesky <https://github.com/spacetelescope/dat_pyinthesky>`_  repository.
 
 
 JDAT Development Sprints
