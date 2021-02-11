@@ -16,6 +16,7 @@ Packages that are native to Python, such as ``os`` or ``math``, should **not** b
     You can get a list of package versions by running ``conda list`` or ``pip list`` in your terminal.
 
 To specify a version of the package, you can use the ``==`` operator (for example ``astropy==4.1``).
+Please list all requirement versions to match the conda or pip environment you used to develop your notebooks.
 If you need to add a Python package only available on GitHub, you can list the module as follows:
 
 .. code:: bash
@@ -31,13 +32,12 @@ If you need to add a Python package only available on GitHub, you can list the m
 
 .. code-block:: text
 
-    numpy
-    jupyter
+    numpy==1.19.1
+    jupyter==1.0.0
     aplpy==2.0.3
     astrodendro==0.2.0
     astropy==4.0.1.post1
-    matplotlib
-    pandas
+    matplotlib==3.3.1
     photutils==0.7.2
     scipy==1.5.0
     specutils==1.0
