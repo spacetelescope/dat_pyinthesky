@@ -37,7 +37,7 @@ If you still can not find your branch, something probably went wrong in the :ref
 
 .. note::
 
-    Make sure the `base repository` (left side) is set to the `spacetelescope/dat_pyinthesky` and `master` branch.
+    Make sure the `base repository` (left side) is set to the `spacetelescope/dat_pyinthesky` and `main` branch.
 
 **Step 5: Write a Description and Create PR**
 

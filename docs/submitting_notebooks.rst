@@ -53,7 +53,7 @@ GitHub Submissions
 ******************
 
 :ref:`Science Notebooks <Jupyter Notebooks>` and :ref:`requirements files <Requirements File>` files should be submitted
-by making a pull request against the `master` branch of the STScI `dat_pyinthesky`_  repository. For instructions on
+by making a pull request against the `main` branch of the STScI `dat_pyinthesky`_  repository. For instructions on
 how to crate a GitHub pull request, please see the `GitHub Guidelines`_ section of this documentation.
 
 .. important::
