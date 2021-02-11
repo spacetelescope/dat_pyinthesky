@@ -100,12 +100,12 @@ it will stay on this branch until you manually change it or create a new one.
 
 **Step 5: Synchronize New Branch to STScI**
 
-You should update the branch to make sure its in sync with the STScI `master` branch. To do this, run:
+You should update the branch to make sure its in sync with the STScI `main` branch. To do this, run:
 
 .. code:: bash
 
     # Fetch changes
-    git fetch stsci master
+    git fetch stsci main
 
     # Pull (download) changes
-    git pull stsci master
+    git pull stsci main
