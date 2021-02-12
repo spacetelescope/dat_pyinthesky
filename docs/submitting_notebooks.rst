@@ -42,6 +42,11 @@ Before and after submitting your notebook, requirement files and data, please ma
         - [ ] Comments and unused lines of code are removed.
         - [ ] `requirements.txt` file is included.
 
+.. tip::
+
+    If you copy and paste this checklist into your PR as a comment or description, it will render as a checklist with
+    radio buttons you can toggle any time.
+
 Box Submissions
 ***************
 
