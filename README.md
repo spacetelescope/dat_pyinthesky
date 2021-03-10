@@ -3,6 +3,7 @@
 Welcome to `dat_pyinthesky`! This repository is a sandbox and drafting space for assorted efforts for STScI's data analysis tools. (Particularly, but not exclusively, for the Data Analysis Tools Branch.)
 
 For a detailed introduction and instructions, please visit the Read-the-Docs page for this project:
+
 https://dat-pyinthesky.readthedocs.io/en/latest/
 
 ## If you locally cloned this repo before 5 Feb 2021
