@@ -14,3 +14,8 @@ jupyter_platform/manga-7495-12704-LOGCUBE.fits*
 env
 pages
 site
+
+bin
+lib
+lib64
+pyvenv.cfg
