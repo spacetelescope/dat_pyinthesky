@@ -1,243 +1,248 @@
 executors:
-  notebook-executor:
+  nbcollection-builder:
     docker:
-    - image: continuumio/miniconda3
+    - image: continuumio/miniconda3:latest
     resource_class: medium
     working_directory: ~/repo
 jobs:
+  Jdat Notebooks-Aperture Photometry:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup-env.sh
+        name: Setup Environment
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names aperture_photometry
+        name: Build Jdat Notebooks-Aperture Photometry notebooks
+        no_output_timeout: 60m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
   Jdat Notebooks-Asdf Example:
-    environment:
-      PYTHONPATH: .circleci
-    executor: notebook-executor
+    executor: nbcollection-builder
     steps:
     - checkout
     - run:
-        command: bash ./.circleci/setup_env.sh
+        command: bash ./.circleci/setup-env.sh
         name: Setup Environment
     - run:
-        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
-          -n asdf_example
-        name: Build Notebook
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names asdf_example
+        name: Build Jdat Notebooks-Asdf Example notebooks
         no_output_timeout: 60m
-    - run:
-        command: python ./.circleci/builder/factory.py -o build-website -c jdat_notebooks
-          -n asdf_example
-        name: Build Website
     - store_artifacts:
-        path: ./pages
+        path: /tmp/nbcollection-ci-artifacts
   Jdat Notebooks-Background Estimation Imaging:
-    environment:
-      PYTHONPATH: .circleci
-    executor: notebook-executor
+    executor: nbcollection-builder
     steps:
     - checkout
     - run:
-        command: bash ./.circleci/setup_env.sh
+        command: bash ./.circleci/setup-env.sh
         name: Setup Environment
     - run:
-        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
-          -n background_estimation_imaging
-        name: Build Notebook
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names background_estimation_imaging
+        name: Build Jdat Notebooks-Background Estimation Imaging notebooks
         no_output_timeout: 60m
-    - run:
-        command: python ./.circleci/builder/factory.py -o build-website -c jdat_notebooks
-          -n background_estimation_imaging
-        name: Build Website
     - store_artifacts:
-        path: ./pages
+        path: /tmp/nbcollection-ci-artifacts
   Jdat Notebooks-Cube Fitting:
-    environment:
-      PYTHONPATH: .circleci
-    executor: notebook-executor
+    executor: nbcollection-builder
     steps:
     - checkout
     - run:
-        command: bash ./.circleci/setup_env.sh
+        command: bash ./.circleci/setup-env.sh
         name: Setup Environment
     - run:
-        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
-          -n cube_fitting
-        name: Build Notebook
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names cube_fitting
+        name: Build Jdat Notebooks-Cube Fitting notebooks
         no_output_timeout: 60m
-    - run:
-        command: python ./.circleci/builder/factory.py -o build-website -c jdat_notebooks
-          -n cube_fitting
-        name: Build Website
     - store_artifacts:
-        path: ./pages
+        path: /tmp/nbcollection-ci-artifacts
+  Jdat Notebooks-Ifu Optimal:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup-env.sh
+        name: Setup Environment
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names ifu_optimal
+        name: Build Jdat Notebooks-Ifu Optimal notebooks
+        no_output_timeout: 60m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Jdat Notebooks-Miri Ifu Ysos In The Lmc:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup-env.sh
+        name: Setup Environment
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names MIRI_IFU_YSOs_in_the_LMC
+        name: Build Jdat Notebooks-Miri Ifu Ysos In The Lmc notebooks
+        no_output_timeout: 60m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
   Jdat Notebooks-Miri Lrs Spectral Extraction:
-    environment:
-      PYTHONPATH: .circleci
-    executor: notebook-executor
+    executor: nbcollection-builder
     steps:
     - checkout
     - run:
-        command: bash ./.circleci/setup_env.sh
+        command: bash ./.circleci/setup-env.sh
         name: Setup Environment
     - run:
-        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
-          -n MIRI_LRS_spectral_extraction
-        name: Build Notebook
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names MIRI_LRS_spectral_extraction
+        name: Build Jdat Notebooks-Miri Lrs Spectral Extraction notebooks
         no_output_timeout: 60m
-    - run:
-        command: python ./.circleci/builder/factory.py -o build-website -c jdat_notebooks
-          -n MIRI_LRS_spectral_extraction
-        name: Build Website
     - store_artifacts:
-        path: ./pages
+        path: /tmp/nbcollection-ci-artifacts
   Jdat Notebooks-Mos-Spectroscopy:
-    environment:
-      PYTHONPATH: .circleci
-    executor: notebook-executor
+    executor: nbcollection-builder
     steps:
     - checkout
     - run:
-        command: bash ./.circleci/setup_env.sh
+        command: bash ./.circleci/setup-env.sh
         name: Setup Environment
     - run:
-        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
-          -n mos-spectroscopy
-        name: Build Notebook
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names mos-spectroscopy
+        name: Build Jdat Notebooks-Mos-Spectroscopy notebooks
         no_output_timeout: 60m
-    - run:
-        command: python ./.circleci/builder/factory.py -o build-website -c jdat_notebooks
-          -n mos-spectroscopy
-        name: Build Website
     - store_artifacts:
-        path: ./pages
+        path: /tmp/nbcollection-ci-artifacts
   Jdat Notebooks-Mrs Mstar Analysis:
-    environment:
-      PYTHONPATH: .circleci
-    executor: notebook-executor
+    executor: nbcollection-builder
     steps:
     - checkout
     - run:
-        command: bash ./.circleci/setup_env.sh
+        command: bash ./.circleci/setup-env.sh
         name: Setup Environment
     - run:
-        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
-          -n MRS_Mstar_analysis
-        name: Build Notebook
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names MRS_Mstar_analysis
+        name: Build Jdat Notebooks-Mrs Mstar Analysis notebooks
         no_output_timeout: 60m
-    - run:
-        command: python ./.circleci/builder/factory.py -o build-website -c jdat_notebooks
-          -n MRS_Mstar_analysis
-        name: Build Website
     - store_artifacts:
-        path: ./pages
+        path: /tmp/nbcollection-ci-artifacts
   Jdat Notebooks-Nircam Photometry:
-    environment:
-      PYTHONPATH: .circleci
-    executor: notebook-executor
+    executor: nbcollection-builder
     steps:
     - checkout
     - run:
-        command: bash ./.circleci/setup_env.sh
+        command: bash ./.circleci/setup-env.sh
         name: Setup Environment
     - run:
-        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
-          -n NIRCam_photometry
-        name: Build Notebook
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names NIRCam_photometry
+        name: Build Jdat Notebooks-Nircam Photometry notebooks
         no_output_timeout: 60m
-    - run:
-        command: python ./.circleci/builder/factory.py -o build-website -c jdat_notebooks
-          -n NIRCam_photometry
-        name: Build Website
     - store_artifacts:
-        path: ./pages
+        path: /tmp/nbcollection-ci-artifacts
+  Jdat Notebooks-Niriss Ami Binary:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup-env.sh
+        name: Setup Environment
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names niriss_ami_binary
+        name: Build Jdat Notebooks-Niriss Ami Binary notebooks
+        no_output_timeout: 60m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
   Jdat Notebooks-Niriss Wfss Postpipeline:
-    environment:
-      PYTHONPATH: .circleci
-    executor: notebook-executor
+    executor: nbcollection-builder
     steps:
     - checkout
     - run:
-        command: bash ./.circleci/setup_env.sh
+        command: bash ./.circleci/setup-env.sh
         name: Setup Environment
     - run:
-        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
-          -n NIRISS_WFSS_postpipeline
-        name: Build Notebook
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names NIRISS_WFSS_postpipeline
+        name: Build Jdat Notebooks-Niriss Wfss Postpipeline notebooks
         no_output_timeout: 60m
-    - run:
-        command: python ./.circleci/builder/factory.py -o build-website -c jdat_notebooks
-          -n NIRISS_WFSS_postpipeline
-        name: Build Website
     - store_artifacts:
-        path: ./pages
+        path: /tmp/nbcollection-ci-artifacts
   Jdat Notebooks-Optimal Extraction:
-    environment:
-      PYTHONPATH: .circleci
-    executor: notebook-executor
+    executor: nbcollection-builder
     steps:
     - checkout
     - run:
-        command: bash ./.circleci/setup_env.sh
+        command: bash ./.circleci/setup-env.sh
         name: Setup Environment
     - run:
-        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
-          -n optimal_extraction
-        name: Build Notebook
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names optimal_extraction
+        name: Build Jdat Notebooks-Optimal Extraction notebooks
         no_output_timeout: 60m
-    - run:
-        command: python ./.circleci/builder/factory.py -o build-website -c jdat_notebooks
-          -n optimal_extraction
-        name: Build Website
     - store_artifacts:
-        path: ./pages
+        path: /tmp/nbcollection-ci-artifacts
   Jdat Notebooks-Psf Photometry:
-    environment:
-      PYTHONPATH: .circleci
-    executor: notebook-executor
+    executor: nbcollection-builder
     steps:
     - checkout
     - run:
-        command: bash ./.circleci/setup_env.sh
+        command: bash ./.circleci/setup-env.sh
         name: Setup Environment
     - run:
-        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
-          -n psf_photometry
-        name: Build Notebook
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names psf_photometry
+        name: Build Jdat Notebooks-Psf Photometry notebooks
         no_output_timeout: 60m
-    - run:
-        command: python ./.circleci/builder/factory.py -o build-website -c jdat_notebooks
-          -n psf_photometry
-        name: Build Website
     - store_artifacts:
-        path: ./pages
+        path: /tmp/nbcollection-ci-artifacts
   Jdat Notebooks-Transit Spectroscopy Notebook:
-    environment:
-      PYTHONPATH: .circleci
-    executor: notebook-executor
+    executor: nbcollection-builder
     steps:
     - checkout
     - run:
-        command: bash ./.circleci/setup_env.sh
+        command: bash ./.circleci/setup-env.sh
         name: Setup Environment
     - run:
-        command: python ./.circleci/builder/factory.py -o build-notebooks -c jdat_notebooks
-          -n transit_spectroscopy_notebook
-        name: Build Notebook
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names transit_spectroscopy_notebook
+        name: Build Jdat Notebooks-Transit Spectroscopy Notebook notebooks
         no_output_timeout: 60m
-    - run:
-        command: python ./.circleci/builder/factory.py -o build-website -c jdat_notebooks
-          -n transit_spectroscopy_notebook
-        name: Build Website
     - store_artifacts:
-        path: ./pages
+        path: /tmp/nbcollection-ci-artifacts
+  Pull Request:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: nbcollection-ci pull-request -u $CIRCLE_PULL_REQUEST
+        name: Build Pull Request
+        no_output_timeout: 60m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
 version: 2.1
 workflows:
-  Branch Build:
+  Build Notebooks:
     jobs:
-    - Jdat Notebooks-Psf Photometry
-    - Jdat Notebooks-Nircam Photometry
-    - Jdat Notebooks-Asdf Example
-    - Jdat Notebooks-Transit Spectroscopy Notebook
-    - Jdat Notebooks-Background Estimation Imaging
-    - Jdat Notebooks-Cube Fitting
-    - Jdat Notebooks-Optimal Extraction
-    - Jdat Notebooks-Miri Lrs Spectral Extraction
-    - Jdat Notebooks-Mrs Mstar Analysis
     - Jdat Notebooks-Niriss Wfss Postpipeline
     - Jdat Notebooks-Mos-Spectroscopy
+    - Jdat Notebooks-Mrs Mstar Analysis
+    - Jdat Notebooks-Cube Fitting
+    - Jdat Notebooks-Miri Ifu Ysos In The Lmc
+    - Jdat Notebooks-Optimal Extraction
+    - Jdat Notebooks-Ifu Optimal
+    - Jdat Notebooks-Background Estimation Imaging
+    - Jdat Notebooks-Psf Photometry
+    - Jdat Notebooks-Asdf Example
+    - Jdat Notebooks-Niriss Ami Binary
+    - Jdat Notebooks-Aperture Photometry
+    - Jdat Notebooks-Miri Lrs Spectral Extraction
+    - Jdat Notebooks-Transit Spectroscopy Notebook
+    - Jdat Notebooks-Nircam Photometry
+    - Pull Request
   version: '2.1'
