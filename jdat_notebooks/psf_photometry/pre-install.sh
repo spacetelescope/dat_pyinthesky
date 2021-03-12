@@ -19,6 +19,8 @@ wget -qO- https://ssb.stsci.edu/trds/tarfiles/synphot1.tar.gz | tar xvz
 wget -qO- https://ssb.stsci.edu/trds/tarfiles/synphot2.tar.gz | tar xvz
 wget -qO- https://ssb.stsci.edu/trds/tarfiles/synphot5.tar.gz | tar xvz
 wget -qO- https://ssb.stsci.edu/trds/tarfiles/synphot6.tar.gz | tar xvz
-export PYSYN_CDBS=./hst/cdbs
+
+echo "synphot test 1"
+ls
 
 exit 0
