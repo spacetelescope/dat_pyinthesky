@@ -18,8 +18,8 @@ fi
 
 if [ ! -f "grp" ]; then
 
-    curl -OL http://ssb.stsci.edu/trds/tarfiles/synphot3.tar.gz
-    tar -xf synphot3.tar.gz
+    curl -OL http://ssb.stsci.edu/trds/tarfiles/synphot5.tar.gz
+    tar -xf synphot5.tar.gz
 
 fi
 
