@@ -15,6 +15,5 @@ git checkout 7b6ba8e5785bc86cd6ef582df7c9cdfcae9df1d5
 pip install -U pip setuptools
 pip install -r ci_requirements.txt
 python setup.py install
-pip uninstall wheel
-pip install wheel
+pip install wheel>=3.6
 cd -
