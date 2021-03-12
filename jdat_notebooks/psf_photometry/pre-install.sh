@@ -14,4 +14,11 @@ if [ ! -f "$filepath" ]; then
     tar -xf $filename
     cd -
 fi
+
+wget -qO- https://ssb.stsci.edu/trds/tarfiles/synphot1.tar.gz | tar xvz
+wget -qO- https://ssb.stsci.edu/trds/tarfiles/synphot2.tar.gz | tar xvz
+wget -qO- https://ssb.stsci.edu/trds/tarfiles/synphot5.tar.gz | tar xvz
+wget -qO- https://ssb.stsci.edu/trds/tarfiles/synphot6.tar.gz | tar xvz
+export PYSYN_CDBS=./hst/cdbs
+
 exit 0
