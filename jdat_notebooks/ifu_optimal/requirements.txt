@@ -8,7 +8,7 @@ glue-core==1.0.0
 glue-jupyter==0.2.1
 glue-vispy-viewers==1.0.1
 jdaviz==1.0.3
-regions
+git+https://github.com/astropy/regions.git
 photutils==1.0.1
 astropy==4.2
 matplotlib==3.3.2
