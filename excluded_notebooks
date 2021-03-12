@@ -3,3 +3,4 @@ jdat_notebooks:composite_model_fitting
 jdat_notebooks:example_notebook
 jdat_notebooks:IFU_cube_continuum_fit
 jdat_notebooks:soss-transit-spectroscopy
+jdat_notebooks:niriss_ami_binary
