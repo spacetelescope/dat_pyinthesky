@@ -21,3 +21,5 @@ lib64
 pyvenv.cfg
 share
 __MACOSX
+
+*.fits
