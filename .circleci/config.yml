@@ -173,6 +173,20 @@ jobs:
         no_output_timeout: 60m
     - store_artifacts:
         path: /tmp/nbcollection-ci-artifacts
+  Jdat Notebooks-Nirspec Mast Query:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup-env.sh
+        name: Setup Environment
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names NIRSpec_MAST_Query
+        name: Build Jdat Notebooks-Nirspec Mast Query notebooks
+        no_output_timeout: 60m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
   Jdat Notebooks-Optimal Extraction:
     executor: nbcollection-builder
     steps:
@@ -198,6 +212,20 @@ jobs:
         command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
           --category-names psf_photometry
         name: Build Jdat Notebooks-Psf Photometry notebooks
+        no_output_timeout: 60m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Jdat Notebooks-Specviz Notebookgui Interaction:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup-env.sh
+        name: Setup Environment
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names specviz_notebookGUI_interaction
+        name: Build Jdat Notebooks-Specviz Notebookgui Interaction notebooks
         no_output_timeout: 60m
     - store_artifacts:
         path: /tmp/nbcollection-ci-artifacts
@@ -242,8 +270,10 @@ workflows:
     - Jdat Notebooks-Ifu Optimal
     - Jdat Notebooks-Background Estimation Imaging
     - Jdat Notebooks-Psf Photometry
+    - Jdat Notebooks-Specviz Notebookgui Interaction
     - Jdat Notebooks-Asdf Example
     - Jdat Notebooks-Aperture Photometry
+    - Jdat Notebooks-Nirspec Mast Query
     - Jdat Notebooks-Miri Lrs Spectral Extraction
     - Jdat Notebooks-Transit Spectroscopy Notebook
     - Jdat Notebooks-Nircam Photometry
