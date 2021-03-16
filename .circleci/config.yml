@@ -61,20 +61,6 @@ jobs:
         no_output_timeout: 60m
     - store_artifacts:
         path: /tmp/nbcollection-ci-artifacts
-  Jdat Notebooks-Ifu Cube Continuum Fit:
-    executor: nbcollection-builder
-    steps:
-    - checkout
-    - run:
-        command: bash ./.circleci/setup-env.sh
-        name: Setup Environment
-    - run:
-        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
-          --category-names IFU_cube_continuum_fit
-        name: Build Jdat Notebooks-Ifu Cube Continuum Fit notebooks
-        no_output_timeout: 60m
-    - store_artifacts:
-        path: /tmp/nbcollection-ci-artifacts
   Jdat Notebooks-Ifu Optimal:
     executor: nbcollection-builder
     steps:
@@ -215,20 +201,6 @@ jobs:
         no_output_timeout: 60m
     - store_artifacts:
         path: /tmp/nbcollection-ci-artifacts
-  Jdat Notebooks-Soss-Transit-Spectroscopy:
-    executor: nbcollection-builder
-    steps:
-    - checkout
-    - run:
-        command: bash ./.circleci/setup-env.sh
-        name: Setup Environment
-    - run:
-        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
-          --category-names soss-transit-spectroscopy
-        name: Build Jdat Notebooks-Soss-Transit-Spectroscopy notebooks
-        no_output_timeout: 60m
-    - store_artifacts:
-        path: /tmp/nbcollection-ci-artifacts
   Jdat Notebooks-Specviz Notebookgui Interaction:
     executor: nbcollection-builder
     steps:
@@ -278,12 +250,10 @@ workflows:
     - Jdat Notebooks-Mos-Spectroscopy
     - Jdat Notebooks-Mrs Mstar Analysis
     - Jdat Notebooks-Cube Fitting
-    - Jdat Notebooks-Ifu Cube Continuum Fit
     - Jdat Notebooks-Miri Ifu Ysos In The Lmc
     - Jdat Notebooks-Optimal Extraction
     - Jdat Notebooks-Ifu Optimal
     - Jdat Notebooks-Background Estimation Imaging
-    - Jdat Notebooks-Soss-Transit-Spectroscopy
     - Jdat Notebooks-Psf Photometry
     - Jdat Notebooks-Specviz Notebookgui Interaction
     - Jdat Notebooks-Asdf Example
