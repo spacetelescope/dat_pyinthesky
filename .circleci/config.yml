@@ -215,6 +215,20 @@ jobs:
         no_output_timeout: 60m
     - store_artifacts:
         path: /tmp/nbcollection-ci-artifacts
+  Jdat Notebooks-Optimal Extraction Dynamic:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup-env.sh
+        name: Setup Environment
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
+          --category-names optimal_extraction_dynamic
+        name: Build Jdat Notebooks-Optimal Extraction Dynamic notebooks
+        no_output_timeout: 60m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
   Jdat Notebooks-Psf Photometry:
     executor: nbcollection-builder
     steps:
@@ -292,5 +306,6 @@ workflows:
     - Jdat Notebooks-Miri Lrs Spectral Extraction
     - Jdat Notebooks-Transit Spectroscopy Notebook
     - Jdat Notebooks-Nircam Photometry
+    - Jdat Notebooks-Optimal Extraction Dynamic
     - Pull Request
   version: '2.1'
