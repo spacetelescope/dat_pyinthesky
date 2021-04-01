@@ -308,7 +308,6 @@ workflows:
     - Jdat Notebooks-Nircam Photometry
     - Jdat Notebooks-Optimal Extraction Dynamic
     - Pull Request
-  nightly:
     triggers:
     - schedule:
         cron: 30 8 * * *
