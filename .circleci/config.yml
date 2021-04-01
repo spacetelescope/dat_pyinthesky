@@ -16,7 +16,7 @@ jobs:
         command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
           --category-names aperture_photometry
         name: Build Jdat Notebooks-Aperture Photometry notebooks
-        no_output_timeout: 60m
+        no_output_timeout: 120m
     - store_artifacts:
         path: /tmp/nbcollection-ci-artifacts
   Jdat Notebooks-Asdf Example:
@@ -30,7 +30,7 @@ jobs:
         command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
           --category-names asdf_example
         name: Build Jdat Notebooks-Asdf Example notebooks
-        no_output_timeout: 60m
+        no_output_timeout: 120m
     - store_artifacts:
         path: /tmp/nbcollection-ci-artifacts
   Jdat Notebooks-Background Estimation Imaging:
@@ -44,7 +44,7 @@ jobs:
         command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
           --category-names background_estimation_imaging
         name: Build Jdat Notebooks-Background Estimation Imaging notebooks
-        no_output_timeout: 60m
+        no_output_timeout: 120m
     - store_artifacts:
         path: /tmp/nbcollection-ci-artifacts
   Jdat Notebooks-Cube Fitting:
@@ -58,7 +58,7 @@ jobs:
         command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
           --category-names cube_fitting
         name: Build Jdat Notebooks-Cube Fitting notebooks
-        no_output_timeout: 60m
+        no_output_timeout: 120m
     - store_artifacts:
         path: /tmp/nbcollection-ci-artifacts
   Jdat Notebooks-Ifu Cube Continuum Fit:
@@ -72,7 +72,7 @@ jobs:
         command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
           --category-names IFU_cube_continuum_fit
         name: Build Jdat Notebooks-Ifu Cube Continuum Fit notebooks
-        no_output_timeout: 60m
+        no_output_timeout: 120m
     - store_artifacts:
         path: /tmp/nbcollection-ci-artifacts
   Jdat Notebooks-Ifu Optimal:
@@ -86,7 +86,7 @@ jobs:
         command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
           --category-names ifu_optimal
         name: Build Jdat Notebooks-Ifu Optimal notebooks
-        no_output_timeout: 60m
+        no_output_timeout: 120m
     - store_artifacts:
         path: /tmp/nbcollection-ci-artifacts
   Jdat Notebooks-Miri Ifu Ysos In The Lmc:
@@ -100,7 +100,7 @@ jobs:
         command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
           --category-names MIRI_IFU_YSOs_in_the_LMC
         name: Build Jdat Notebooks-Miri Ifu Ysos In The Lmc notebooks
-        no_output_timeout: 60m
+        no_output_timeout: 120m
     - store_artifacts:
         path: /tmp/nbcollection-ci-artifacts
   Jdat Notebooks-Miri Lrs Spectral Extraction:
@@ -114,7 +114,7 @@ jobs:
         command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
           --category-names MIRI_LRS_spectral_extraction
         name: Build Jdat Notebooks-Miri Lrs Spectral Extraction notebooks
-        no_output_timeout: 60m
+        no_output_timeout: 120m
     - store_artifacts:
         path: /tmp/nbcollection-ci-artifacts
   Jdat Notebooks-Mos-Spectroscopy:
@@ -128,7 +128,7 @@ jobs:
         command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
           --category-names mos-spectroscopy
         name: Build Jdat Notebooks-Mos-Spectroscopy notebooks
-        no_output_timeout: 60m
+        no_output_timeout: 120m
     - store_artifacts:
         path: /tmp/nbcollection-ci-artifacts
   Jdat Notebooks-Mrs Mstar Analysis:
@@ -142,7 +142,7 @@ jobs:
         command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
           --category-names MRS_Mstar_analysis
         name: Build Jdat Notebooks-Mrs Mstar Analysis notebooks
-        no_output_timeout: 60m
+        no_output_timeout: 120m
     - store_artifacts:
         path: /tmp/nbcollection-ci-artifacts
   Jdat Notebooks-Nircam Photometry:
@@ -156,7 +156,7 @@ jobs:
         command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
           --category-names NIRCam_photometry
         name: Build Jdat Notebooks-Nircam Photometry notebooks
-        no_output_timeout: 60m
+        no_output_timeout: 120m
     - store_artifacts:
         path: /tmp/nbcollection-ci-artifacts
   Jdat Notebooks-Nircam Psf-Matched Photometry:
@@ -170,7 +170,7 @@ jobs:
         command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
           --category-names NIRCam_PSF-matched_photometry
         name: Build Jdat Notebooks-Nircam Psf-Matched Photometry notebooks
-        no_output_timeout: 60m
+        no_output_timeout: 120m
     - store_artifacts:
         path: /tmp/nbcollection-ci-artifacts
   Jdat Notebooks-Niriss Wfss Postpipeline:
@@ -184,7 +184,7 @@ jobs:
         command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
           --category-names NIRISS_WFSS_postpipeline
         name: Build Jdat Notebooks-Niriss Wfss Postpipeline notebooks
-        no_output_timeout: 60m
+        no_output_timeout: 120m
     - store_artifacts:
         path: /tmp/nbcollection-ci-artifacts
   Jdat Notebooks-Nirspec Mast Query:
@@ -198,7 +198,7 @@ jobs:
         command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
           --category-names NIRSpec_MAST_Query
         name: Build Jdat Notebooks-Nirspec Mast Query notebooks
-        no_output_timeout: 60m
+        no_output_timeout: 120m
     - store_artifacts:
         path: /tmp/nbcollection-ci-artifacts
   Jdat Notebooks-Optimal Extraction:
@@ -212,7 +212,7 @@ jobs:
         command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
           --category-names optimal_extraction
         name: Build Jdat Notebooks-Optimal Extraction notebooks
-        no_output_timeout: 60m
+        no_output_timeout: 120m
     - store_artifacts:
         path: /tmp/nbcollection-ci-artifacts
   Jdat Notebooks-Optimal Extraction Dynamic:
@@ -226,7 +226,7 @@ jobs:
         command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
           --category-names optimal_extraction_dynamic
         name: Build Jdat Notebooks-Optimal Extraction Dynamic notebooks
-        no_output_timeout: 60m
+        no_output_timeout: 120m
     - store_artifacts:
         path: /tmp/nbcollection-ci-artifacts
   Jdat Notebooks-Psf Photometry:
@@ -240,7 +240,7 @@ jobs:
         command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
           --category-names psf_photometry
         name: Build Jdat Notebooks-Psf Photometry notebooks
-        no_output_timeout: 60m
+        no_output_timeout: 120m
     - store_artifacts:
         path: /tmp/nbcollection-ci-artifacts
   Jdat Notebooks-Specviz Notebookgui Interaction:
@@ -254,7 +254,7 @@ jobs:
         command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
           --category-names specviz_notebookGUI_interaction
         name: Build Jdat Notebooks-Specviz Notebookgui Interaction notebooks
-        no_output_timeout: 60m
+        no_output_timeout: 120m
     - store_artifacts:
         path: /tmp/nbcollection-ci-artifacts
   Jdat Notebooks-Transit Spectroscopy Notebook:
@@ -268,7 +268,7 @@ jobs:
         command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
           --category-names transit_spectroscopy_notebook
         name: Build Jdat Notebooks-Transit Spectroscopy Notebook notebooks
-        no_output_timeout: 60m
+        no_output_timeout: 120m
     - store_artifacts:
         path: /tmp/nbcollection-ci-artifacts
   Pull Request:
@@ -281,31 +281,16 @@ jobs:
     - run:
         command: bash ./.circleci/build-pull-request.sh
         name: Build Pull Request
-        no_output_timeout: 60m
+        no_output_timeout: 120m
     - store_artifacts:
         path: /tmp/nbcollection-ci-artifacts
 version: 2.1
 workflows:
-  Build Notebooks:
-    jobs:
-    - Jdat Notebooks-Niriss Wfss Postpipeline
-    - Jdat Notebooks-Mos-Spectroscopy
-    - Jdat Notebooks-Mrs Mstar Analysis
-    - Jdat Notebooks-Cube Fitting
-    - Jdat Notebooks-Ifu Cube Continuum Fit
-    - Jdat Notebooks-Nircam Psf-Matched Photometry
-    - Jdat Notebooks-Miri Ifu Ysos In The Lmc
-    - Jdat Notebooks-Optimal Extraction
-    - Jdat Notebooks-Ifu Optimal
-    - Jdat Notebooks-Background Estimation Imaging
-    - Jdat Notebooks-Psf Photometry
-    - Jdat Notebooks-Specviz Notebookgui Interaction
-    - Jdat Notebooks-Asdf Example
-    - Jdat Notebooks-Aperture Photometry
-    - Jdat Notebooks-Nirspec Mast Query
-    - Jdat Notebooks-Miri Lrs Spectral Extraction
-    - Jdat Notebooks-Transit Spectroscopy Notebook
-    - Jdat Notebooks-Nircam Photometry
-    - Jdat Notebooks-Optimal Extraction Dynamic
-    - Pull Request
-  version: '2.1'
+  nightly:
+    triggers:
+    - schedule:
+        cron: 30 8 * * *
+        filters:
+          branches:
+            only:
+            - main
