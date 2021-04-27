@@ -320,7 +320,7 @@ workflows:
     - Jdat Notebooks-Specviz Notebookgui Interaction
     - Jdat Notebooks-Asdf Example
     - Jdat Notebooks-Aperture Photometry
-   # - Jdat Notebooks-Nirspec Mast Query
+    - Jdat Notebooks-Nirspec Mast Query
     - Jdat Notebooks-Miri Lrs Spectral Extraction
     - Jdat Notebooks-Transit Spectroscopy Notebook
     - Jdat Notebooks-Nircam Photometry
@@ -342,7 +342,7 @@ workflows:
         - Jdat Notebooks-Specviz Notebookgui Interaction
         - Jdat Notebooks-Asdf Example
         - Jdat Notebooks-Aperture Photometry
-   #     - Jdat Notebooks-Nirspec Mast Query
+        - Jdat Notebooks-Nirspec Mast Query
         - Jdat Notebooks-Miri Lrs Spectral Extraction
         - Jdat Notebooks-Transit Spectroscopy Notebook
         - Jdat Notebooks-Nircam Photometry
