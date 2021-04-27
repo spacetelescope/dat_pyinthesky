@@ -323,7 +323,7 @@ workflows:
  #   - Jdat Notebooks-Nirspec Mast Query
  #   - Jdat Notebooks-Miri Lrs Spectral Extraction
  #   - Jdat Notebooks-Transit Spectroscopy Notebook
-    - Jdat Notebooks-Nircam Photometry
+ #   - Jdat Notebooks-Nircam Photometry
     - Jdat Notebooks-Optimal Extraction Dynamic
     - Pull Request
     - Publish Website:
@@ -345,6 +345,6 @@ workflows:
   #      - Jdat Notebooks-Nirspec Mast Query
    #     - Jdat Notebooks-Miri Lrs Spectral Extraction
    #     - Jdat Notebooks-Transit Spectroscopy Notebook
-        - Jdat Notebooks-Nircam Photometry
+   #     - Jdat Notebooks-Nircam Photometry
         - Jdat Notebooks-Optimal Extraction Dynamic
   version: '2.1'
