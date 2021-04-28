@@ -331,7 +331,7 @@ workflows:
         - Jdat Notebooks-Niriss Wfss Postpipeline
         - Jdat Notebooks-Mos-Spectroscopy
         - Jdat Notebooks-Mrs Mstar Analysis
-       - Jdat Notebooks-Cube Fitting
+        - Jdat Notebooks-Cube Fitting
         - Jdat Notebooks-Ifu Cube Continuum Fit
         - Jdat Notebooks-Nircam Psf-Matched Photometry
         - Jdat Notebooks-Miri Ifu Ysos In The Lmc
