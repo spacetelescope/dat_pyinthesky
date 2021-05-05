@@ -5,6 +5,132 @@ executors:
     resource_class: medium
     working_directory: ~/repo
 jobs:
+  Concept Apis-Build Psf Api Concept:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup-env.sh
+        name: Setup Environment
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names concept_APIs --category-names
+          build_PSF_API_concept
+        name: Build Concept Apis-Build Psf Api Concept notebooks
+        no_output_timeout: 120m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Concept Apis-Fractional Pixel Extraction:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup-env.sh
+        name: Setup Environment
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names concept_APIs --category-names
+          fractional_pixel_extraction
+        name: Build Concept Apis-Fractional Pixel Extraction notebooks
+        no_output_timeout: 120m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Concept Apis-Leaflet Image Viewer:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup-env.sh
+        name: Setup Environment
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names concept_APIs --category-names
+          Leaflet_image_viewer
+        name: Build Concept Apis-Leaflet Image Viewer notebooks
+        no_output_timeout: 120m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Concept Apis-Modeling Use Case:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup-env.sh
+        name: Setup Environment
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names concept_APIs --category-names
+          modeling_use_case
+        name: Build Concept Apis-Modeling Use Case notebooks
+        no_output_timeout: 120m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Concept Apis-Notebook-Examples-Of-Use-Cases:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup-env.sh
+        name: Setup Environment
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names concept_APIs --category-names
+          Notebook-Examples-of-Use-Cases
+        name: Build Concept Apis-Notebook-Examples-Of-Use-Cases notebooks
+        no_output_timeout: 120m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Concept Apis-Psf Pyinthesky Api:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup-env.sh
+        name: Setup Environment
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names concept_APIs --category-names
+          PSF_pyinthesky_API
+        name: Build Concept Apis-Psf Pyinthesky Api notebooks
+        no_output_timeout: 120m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Concept Apis-Pyinthesky Imagecomb 2D:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup-env.sh
+        name: Setup Environment
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names concept_APIs --category-names
+          pyinthesky_imagecomb_2d
+        name: Build Concept Apis-Pyinthesky Imagecomb 2D notebooks
+        no_output_timeout: 120m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Concept Apis-Pyinthesky Specutils Fitting:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup-env.sh
+        name: Setup Environment
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names concept_APIs --category-names
+          pyinthesky_specutils_fitting
+        name: Build Concept Apis-Pyinthesky Specutils Fitting notebooks
+        no_output_timeout: 120m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Hst Nb Viz-Tweakreg Match:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup-env.sh
+        name: Setup Environment
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names hst_nb_viz --category-names
+          tweakreg_match
+        name: Build Hst Nb Viz-Tweakreg Match notebooks
+        no_output_timeout: 120m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
   Jdat Notebooks-Aperture Photometry:
     executor: nbcollection-builder
     steps:
@@ -271,24 +397,244 @@ jobs:
         no_output_timeout: 120m
     - store_artifacts:
         path: /tmp/nbcollection-ci-artifacts
-  Publish Website:
+  Jupyter Platform-Cubeviz Glupyter Prototype 1:
     executor: nbcollection-builder
     steps:
     - checkout
     - run:
         command: bash ./.circleci/setup-env.sh
         name: Setup Environment
-        no_output_timeout: 120m
     - run:
-        command: nbcollection-ci merge-artifacts -c jdat_notebooks -o $CIRCLE_PROJECT_USERNAME
-          -r $CIRCLE_PROJECT_REPONAME
-        name: Publish Website
+        command: nbcollection-ci build-notebooks --collection-names jupyter_platform
+          --category-names cubeviz_glupyter_prototype_1
+        name: Build Jupyter Platform-Cubeviz Glupyter Prototype 1 notebooks
         no_output_timeout: 120m
-    - add_ssh_keys
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Jupyter Platform-Cubeviz Glupyter Prototype 1 Voila:
+    executor: nbcollection-builder
+    steps:
+    - checkout
     - run:
-        command: nbcollection-ci site-deployment -r origin -b gh-pages
-        name: Deploy Website
+        command: bash ./.circleci/setup-env.sh
+        name: Setup Environment
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jupyter_platform
+          --category-names cubeviz_glupyter_prototype_1_voila
+        name: Build Jupyter Platform-Cubeviz Glupyter Prototype 1 Voila notebooks
         no_output_timeout: 120m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Jupyter Platform-Cubeviz Leaflet Prototype 1:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup-env.sh
+        name: Setup Environment
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jupyter_platform
+          --category-names cubeviz_leaflet_prototype_1
+        name: Build Jupyter Platform-Cubeviz Leaflet Prototype 1 notebooks
+        no_output_timeout: 120m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Jupyter Platform-Html View Into Leaflet:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup-env.sh
+        name: Setup Environment
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jupyter_platform
+          --category-names html_view_into_leaflet
+        name: Build Jupyter Platform-Html View Into Leaflet notebooks
+        no_output_timeout: 120m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Jupyter Platform-Jupytext Example:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup-env.sh
+        name: Setup Environment
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jupyter_platform
+          --category-names jupytext_example
+        name: Build Jupyter Platform-Jupytext Example notebooks
+        no_output_timeout: 120m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Jupyter Platform-Minimal Voila:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup-env.sh
+        name: Setup Environment
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jupyter_platform
+          --category-names minimal_voila
+        name: Build Jupyter Platform-Minimal Voila notebooks
+        no_output_timeout: 120m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Jupyter Platform-Voilable Astrowidgets:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup-env.sh
+        name: Setup Environment
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jupyter_platform
+          --category-names voilable_astrowidgets
+        name: Build Jupyter Platform-Voilable Astrowidgets notebooks
+        no_output_timeout: 120m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Jwst Nb Viz-Asdf:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup-env.sh
+        name: Setup Environment
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jwst_nb_viz --category-names
+          asdf
+        name: Build Jwst Nb Viz-Asdf notebooks
+        no_output_timeout: 120m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Jwst Nb Viz-Calspec:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup-env.sh
+        name: Setup Environment
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jwst_nb_viz --category-names
+          calspec
+        name: Build Jwst Nb Viz-Calspec notebooks
+        no_output_timeout: 120m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Jwst Nb Viz-Cubehack-Ipywidgets:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup-env.sh
+        name: Setup Environment
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jwst_nb_viz --category-names
+          cubehack-ipywidgets
+        name: Build Jwst Nb Viz-Cubehack-Ipywidgets notebooks
+        no_output_timeout: 120m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Jwst Nb Viz-Example:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup-env.sh
+        name: Setup Environment
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jwst_nb_viz --category-names
+          example
+        name: Build Jwst Nb Viz-Example notebooks
+        no_output_timeout: 120m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Jwst Nb Viz-Holoviews:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup-env.sh
+        name: Setup Environment
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jwst_nb_viz --category-names
+          holoviews
+        name: Build Jwst Nb Viz-Holoviews notebooks
+        no_output_timeout: 120m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Jwst Nb Viz-Mos:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup-env.sh
+        name: Setup Environment
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jwst_nb_viz --category-names
+          mos
+        name: Build Jwst Nb Viz-Mos notebooks
+        no_output_timeout: 120m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Jwst Nb Viz-Nircam:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup-env.sh
+        name: Setup Environment
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jwst_nb_viz --category-names
+          NIRCam
+        name: Build Jwst Nb Viz-Nircam notebooks
+        no_output_timeout: 120m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Jwst Nb Viz-Nirspec Masterbackground:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup-env.sh
+        name: Setup Environment
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jwst_nb_viz --category-names
+          nirspec_masterbackground
+        name: Build Jwst Nb Viz-Nirspec Masterbackground notebooks
+        no_output_timeout: 120m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Jwst Nb Viz-Plotly Floatview:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup-env.sh
+        name: Setup Environment
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jwst_nb_viz --category-names
+          plotly_floatview
+        name: Build Jwst Nb Viz-Plotly Floatview notebooks
+        no_output_timeout: 120m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
+  Jwst Nb Viz-Plotly Ipywidgets:
+    executor: nbcollection-builder
+    steps:
+    - checkout
+    - run:
+        command: bash ./.circleci/setup-env.sh
+        name: Setup Environment
+    - run:
+        command: nbcollection-ci build-notebooks --collection-names jwst_nb_viz --category-names
+          plotly_ipywidgets
+        name: Build Jwst Nb Viz-Plotly Ipywidgets notebooks
+        no_output_timeout: 120m
+    - store_artifacts:
+        path: /tmp/nbcollection-ci-artifacts
   Pull Request:
     executor: nbcollection-builder
     steps:
@@ -306,6 +652,7 @@ version: 2.1
 workflows:
   Build Notebooks:
     jobs:
+    - Hst Nb Viz-Tweakreg Match
     - Jdat Notebooks-Niriss Wfss Postpipeline
     - Jdat Notebooks-Mos-Spectroscopy
     - Jdat Notebooks-Mrs Mstar Analysis
@@ -325,26 +672,30 @@ workflows:
     - Jdat Notebooks-Transit Spectroscopy Notebook
     - Jdat Notebooks-Nircam Photometry
     - Jdat Notebooks-Optimal Extraction Dynamic
+    - Jupyter Platform-Jupytext Example
+    - Jupyter Platform-Minimal Voila
+    - Jupyter Platform-Cubeviz Glupyter Prototype 1
+    - Jupyter Platform-Cubeviz Glupyter Prototype 1 Voila
+    - Jupyter Platform-Voilable Astrowidgets
+    - Jupyter Platform-Cubeviz Leaflet Prototype 1
+    - Jupyter Platform-Html View Into Leaflet
+    - Concept Apis-Psf Pyinthesky Api
+    - Concept Apis-Pyinthesky Imagecomb 2D
+    - Concept Apis-Notebook-Examples-Of-Use-Cases
+    - Concept Apis-Leaflet Image Viewer
+    - Concept Apis-Modeling Use Case
+    - Concept Apis-Fractional Pixel Extraction
+    - Concept Apis-Build Psf Api Concept
+    - Concept Apis-Pyinthesky Specutils Fitting
+    - Jwst Nb Viz-Asdf
+    - Jwst Nb Viz-Example
+    - Jwst Nb Viz-Calspec
+    - Jwst Nb Viz-Plotly Ipywidgets
+    - Jwst Nb Viz-Mos
+    - Jwst Nb Viz-Plotly Floatview
+    - Jwst Nb Viz-Nircam
+    - Jwst Nb Viz-Nirspec Masterbackground
+    - Jwst Nb Viz-Holoviews
+    - Jwst Nb Viz-Cubehack-Ipywidgets
     - Pull Request
-    - Publish Website:
-        requires:
-        - Jdat Notebooks-Niriss Wfss Postpipeline
-        - Jdat Notebooks-Mos-Spectroscopy
-        - Jdat Notebooks-Mrs Mstar Analysis
-        - Jdat Notebooks-Cube Fitting
-        - Jdat Notebooks-Ifu Cube Continuum Fit
-        - Jdat Notebooks-Nircam Psf-Matched Photometry
-        - Jdat Notebooks-Miri Ifu Ysos In The Lmc
-        - Jdat Notebooks-Optimal Extraction
-        - Jdat Notebooks-Ifu Optimal
-        - Jdat Notebooks-Background Estimation Imaging
-        - Jdat Notebooks-Psf Photometry
-        - Jdat Notebooks-Specviz Notebookgui Interaction
-        - Jdat Notebooks-Asdf Example
-        - Jdat Notebooks-Aperture Photometry
-        - Jdat Notebooks-Nirspec Mast Query
-        - Jdat Notebooks-Miri Lrs Spectral Extraction
-        - Jdat Notebooks-Transit Spectroscopy Notebook
-        - Jdat Notebooks-Nircam Photometry
-        - Jdat Notebooks-Optimal Extraction Dynamic
   version: '2.1'
