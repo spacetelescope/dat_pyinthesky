@@ -2,7 +2,6 @@
 <html lang=en>
 <head>
 <meta charset=utf-8>
-
 <title>
     JWST Data Analysis Tools Notebooks
   </title>
