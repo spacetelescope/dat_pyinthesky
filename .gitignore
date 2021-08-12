@@ -1,4 +1,4 @@
-__pycache__/
+
 .DS_Store
 .ipynb_checkpoints
 .toload_astrowidgets
@@ -20,3 +20,7 @@ lib
 lib64
 pyvenv.cfg
 share
+__MACOSX
+
+*.fits
+*.pkl

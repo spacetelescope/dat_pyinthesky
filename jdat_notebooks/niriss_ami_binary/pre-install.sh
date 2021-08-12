@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
-set -e
 source bin/activate
-pip install pyfits==3.1.6
+pip install numpy
+pip install d2to1
+pip install stsci.distutils
+pip install pyfits
