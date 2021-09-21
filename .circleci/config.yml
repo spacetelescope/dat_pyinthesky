@@ -131,20 +131,6 @@ jobs:
         no_output_timeout: 120m
     - store_artifacts:
         path: /tmp/nbcollection-ci-artifacts
-  Jdat Notebooks-Mrs Mstar Analysis:
-    executor: nbcollection-builder
-    steps:
-    - checkout
-    - run:
-        command: bash ./.circleci/setup-env.sh
-        name: Setup Environment
-    - run:
-        command: nbcollection-ci build-notebooks --collection-names jdat_notebooks
-          --category-names MRS_Mstar_analysis
-        name: Build Jdat Notebooks-Mrs Mstar Analysis notebooks
-        no_output_timeout: 120m
-    - store_artifacts:
-        path: /tmp/nbcollection-ci-artifacts
   Jdat Notebooks-Nircam Photometry:
     executor: nbcollection-builder
     steps:
@@ -290,7 +276,6 @@ workflows:
     jobs:
     - Jdat Notebooks-Niriss Wfss Postpipeline
     - Jdat Notebooks-Mos-Spectroscopy
-    - Jdat Notebooks-Mrs Mstar Analysis
     - Jdat Notebooks-Cube Fitting
     - Jdat Notebooks-Ifu Cube Continuum Fit
     - Jdat Notebooks-Nircam Psf-Matched Photometry
