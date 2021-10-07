@@ -11,3 +11,4 @@ munch
 astroquery
 termcolor
 git+https://github.com/SydneyAstrophotonicInstrumentationLab/AMICAL.git@781f73ddbc230d76f46717d48e2f9471e8b60842
+stdatamodels==0.2.4
