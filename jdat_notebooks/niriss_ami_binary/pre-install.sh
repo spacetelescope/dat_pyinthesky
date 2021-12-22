@@ -5,3 +5,4 @@ pip install numpy
 pip install d2to1
 pip install stsci.distutils
 pip install pyfits
+pip install astropy
