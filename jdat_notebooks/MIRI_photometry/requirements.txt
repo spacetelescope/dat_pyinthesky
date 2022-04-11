@@ -8,3 +8,4 @@ pandas >= 1.4.2
 jwst >= 1.4.6
 webbpsf >= 1.0.0
 pysynphot >= 2.0.0
+jdaviz >= 2.4.0
