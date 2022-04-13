@@ -1,0 +1,10 @@
+https://github.com/spacetelescope/jdat_notebooks
+git clone https://github.com/spacetelescope/dat_pyinthesky.git
+cd dat_pyinthesky
+git fetch -q https://github.com/spacetelescope/dat_pyinthesky.git refs/pull/164/head:miriphot
+git checkout miriphot
+conda create -n hackphot python=3.8.10
+conda activate hackphot
+cd jdat_notebooks/MIRI_photometry
+bash webbpsf_install.sh
+pip install -r requirements.txt
