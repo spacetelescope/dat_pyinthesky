@@ -1,10 +1,10 @@
 scipy >= 1.8.0
-astropy >= 5.0.1
+git+https://github.com/astropy/astropy
 matplotlib == 3.5.1
 specutils >= 1.7.0
 jupyter >= 1.0.0
 pandas >= 1.4.2
-jwst >= 1.4.6
+git+https://github.com/spacetelescope/jwst
 webbpsf >= 1.0.0
 pysynphot >= 2.0.0
-jdaviz >= 2.4.0
+git+https://github.com/spacetelescope/jdaviz
