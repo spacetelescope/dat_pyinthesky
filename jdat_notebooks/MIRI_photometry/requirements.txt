@@ -1,4 +1,5 @@
 scipy >= 1.8.0
+astropy >= 5.0.4
 git+https://github.com/astropy/astropy
 matplotlib == 3.5.1
 specutils >= 1.7.0
