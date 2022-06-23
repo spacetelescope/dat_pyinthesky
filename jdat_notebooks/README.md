@@ -1,10 +1,10 @@
 # James Webb Space Telescope Data Analysis Tool Notebooks (pyinthesky)
 
-🟥 As of 06/15/2022: Please note that ``dat_pyinthesky`` is in the process of being archived. We refer all users to [``jdat_notebooks``](https://github.com/spacetelescope/jdat_notebooks), where support and functionality for contributing authors is now being supported by the implementation of development branches for newer notebooks, while finalized notebooks are maintained in Main. 🟥
+🟥 As of 06/15/2022: Please note that ``dat_pyinthesky`` is in the process of being archived. We refer all users to [``jdat_notebooks``](https://github.com/spacetelescope/jdat_notebooks), where documentation and instructions to contribute notebooks will be updated soon. 🟥
 
 ---------------
 
-### Old Instruction Before 06/15/2022
+### Old Instruction (Before 06/15/2022)
 
 ``jdat_notebooks`` are one component of STScI's larger [Data Analysis Tools Ecosystem](https://jwst-docs.stsci.edu/jwst-post-pipeline-data-analysis).
 
